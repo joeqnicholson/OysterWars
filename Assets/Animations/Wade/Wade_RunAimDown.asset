@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: Wade_RunAimDown
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: 6550245560569227577, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  - {fileID: -785861348441434877, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  - {fileID: 8255974951899757358, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  - {fileID: 82066086191042439, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  - {fileID: 1524526544678195758, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  - {fileID: -4653757196428671877, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  imageIndex: 0
+  currentImage: {fileID: 6550245560569227577, guid: ac58fabc4084b4feba07f40a4c4d4012, type: 3}
+  framesPerSecond: 6
+  loop: 1

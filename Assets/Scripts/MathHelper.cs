@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MathHelper : MonoBehaviour
+{
+    public static float[] Angles45 = new float[] { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f };
+    public static float[] Angles22 = new float[] { 0f, 22.5f, 45f, 67.5f, 90f, 112.5f, 135f, 157.5f, 180f, 202.5f, 225f, 247.5f, 270f, 292.5f, 315f, 337.5f, 360f };
+
+    public static float RegulateAngle(float initial, float[] values)
+    {
+        
+        float x = 0;
+
+        foreach(float value in values)
+        {
+            if(Mathf.Abs(initial - value) < Mathf.Abs(initial - x))
+            {
+                x = value;
+            }
+        }
+        return x;
+    }
+
+}

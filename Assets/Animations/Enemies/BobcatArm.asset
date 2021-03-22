@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: BobcatArm
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -3152243351391812913, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -3967624876494884882, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -8817685315575445559, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -2069802898637523835, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -1661348166102057288, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: 3749378240370640030, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -8366084526031066823, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  - {fileID: -3322773560198985173, guid: 8658e46c18c7543ff84c8666566e072e, type: 3}
+  imageIndex: 0
+  framesPerSecond: 0
+  loop: 0
+  totalFrames: 8

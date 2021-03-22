@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d04e2ddc45a96439044d120fea6e64, type: 3}
+  m_Name: Weird
+  m_EditorClassIdentifier: 
+  horizontalMovementData:
+    baseSpeed: 5
+    groundedStartDuration: 0
+    groundedStopDuration: 0
+    notGroundedStartDuration: 0.01
+    notGroundedStopDuration: 0.01
+    entrySpeedMultiplier: 1
+  verticalMovementData:
+    jumpDuration: 0.15
+    jumpHeight: 2.5
+    entrySpeedMultiplier: 0.05
+    descendingGravityMultiplier: 1
+    availableNotGroundedJumps: 1
+    cancelOnRelease: 1
+    cancelJumpMinTime: 0.1
+    cancelJumpMaxTime: 0.2
+    cancelJumpFactor: 0.5
+    jumpOnlyOnStableGround: 0
