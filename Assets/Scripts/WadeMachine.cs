@@ -24,7 +24,7 @@ public class WadeMachine : MonoBehaviour
     private bool canFlip;
     private float spriteLerp;
     private ObjectSprite sprite;
-    private float directionInt;
+    public float directionInt;
     private float shotTimer;
     public CameraBox currentCameraBox;
     private bool crouching;
@@ -35,9 +35,10 @@ public class WadeMachine : MonoBehaviour
     private float jumpGraceTimer = 0;
     private float jumpGraceTime = 0.1f;
     [SerializeField] private int health;
-    
+    public bool canOpenChest;
+    private float hInputTimer =0;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,12 @@ public class WadeMachine : MonoBehaviour
        
         
         jumpGraceTimer += Time.deltaTime;
-        
+        hInputTimer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            hInputTimer = 0;
+
+        }
 
         UpdateSprite();
 
@@ -101,9 +107,9 @@ public class WadeMachine : MonoBehaviour
             Speed.y = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.K)) { jumpGraceTimer = 0f; }
+        if (Input.GetKeyDown(KeyCode.J)) { jumpGraceTimer = 0f; }
 
-        if (motor.IsGrounded && jumpGraceTimer < jumpGraceTime || !motor.IsGrounded && airTimer < jumpGraceTime && Input.GetKeyDown(KeyCode.K))
+        if (motor.IsGrounded && jumpGraceTimer < jumpGraceTime || !motor.IsGrounded && airTimer < jumpGraceTime && Input.GetKeyDown(KeyCode.J))
         {
             sprite.scale = new Vector3(0.6f, 1.4f, 1);
             varJumpTimer = varJumpTime;
@@ -115,14 +121,14 @@ public class WadeMachine : MonoBehaviour
         {
             airTimer += Time.deltaTime;
 
-            float mult = (Mathf.Abs(Speed.y) < halfGravThreshold && Input.GetKey(KeyCode.K)) ? .75f : 1f;
+            float mult = (Mathf.Abs(Speed.y) < halfGravThreshold && Input.GetKey(KeyCode.J)) ? .75f : 1f;
 
             Speed.y = Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
         }
 
         if (varJumpTimer > 0)
         {
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKey(KeyCode.J))
             {
                 Speed.y = jumpSpeed;
             }
@@ -134,8 +140,13 @@ public class WadeMachine : MonoBehaviour
                 
         }
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("newty");
+        }
 
-        if(moveX == 0)
+
+        if (moveX == 0)
         {
             Speed.x = Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
         }
@@ -245,7 +256,7 @@ public class WadeMachine : MonoBehaviour
   
         shootPoint = new Vector2(x,y);
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("youshot");
             Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
@@ -368,5 +379,29 @@ public class WadeMachine : MonoBehaviour
     }
 
     
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Chest chest = collision.gameObject.GetComponent<Chest>();
+
+        if (chest)
+        {
+            if(motor.IsGrounded && Mathf.Sign(chest.transform.localScale.x) == Mathf.Sign(directionInt) && hInputTimer < .2f)
+            {
+                chest.open = true;
+            }
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        canOpenChest = false;
+    }
+
+    public bool IsGrounded()
+    {
+        return motor.IsGrounded;
+    }
 
 }

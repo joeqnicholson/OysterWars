@@ -53,6 +53,7 @@ public class GameData : MonoBehaviour
         return MathHelper.RegulateAngle(WadeAngle(position, directionInt), MathHelper.Angles45);
     }
 
+    
 
 
 }

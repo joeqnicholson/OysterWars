@@ -14,12 +14,11 @@ public class CameraMachine : MonoBehaviour
         machine = GameData.Instance.machine;
     }
 
-    void Update()
+    
+    void FixedUpdate()
     {
         currentCameraBox = machine.currentCameraBox;
         boxTransform = currentCameraBox.transform;
-
-        
 
         if (machine.currentCameraBox)
         {
@@ -33,25 +32,29 @@ public class CameraMachine : MonoBehaviour
                     );
 
             Target.x = Mathf.Clamp(
-            Target.x,
-            boxTransform.position.x - (boxTransform.localScale.x / 2f) +240,
-            boxTransform.position.x + (boxTransform.localScale.x / 2f) -240 
-        );
+                Target.x,
+                boxTransform.position.x - (boxTransform.localScale.x / 2f) +240,
+                boxTransform.position.x + (boxTransform.localScale.x / 2f) -240
+            );
+
 
             Target.y = Mathf.Clamp(
                 Target.y,
                 boxTransform.position.y - (boxTransform.localScale.y / 2f) + 135f,
                 boxTransform.position.y + (boxTransform.localScale.y / 2f) - 135f
             );
+            
       
         }
-        transform.position = Vector3.Lerp(transform.position, Target, 4 * Time.deltaTime);
+
+        
+
 
     }
 
     void LateUpdate()
     {
-        
+        transform.position = Vector3.Lerp(transform.position, Target, 4 * Time.deltaTime);
     }
 
     public void ChangeTarget(CameraBox currentCamera)

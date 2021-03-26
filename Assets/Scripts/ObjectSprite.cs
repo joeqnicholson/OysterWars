@@ -30,11 +30,11 @@ public class ObjectSprite : MonoBehaviour
     public SpriteAnimation JumpAimDUp;
     public SpriteAnimation JumpAimUp;
     public SpriteAnimation JumpAimForward;
+    public SpriteAnimationController controller;
 
     private void Start()
     {
         currentSprite = Idle;
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         direction = Mathf.Sign(transform.localScale.x);
     }
@@ -42,14 +42,12 @@ public class ObjectSprite : MonoBehaviour
     private void Update()
     {
         transform.localScale = new Vector3(scale.x * direction, scale.y, 1);
-
         Animate();
         spriteRenderer.sprite = currentImage;
     }
 
     public void Play(SpriteAnimation nextAnimation, bool reset = true)
     {
-     
         if (currentSprite != nextAnimation)
         {
             if (reset)
@@ -60,7 +58,6 @@ public class ObjectSprite : MonoBehaviour
             }
         }
             currentSprite = nextAnimation;
-
     }
 
     public void Animate()
