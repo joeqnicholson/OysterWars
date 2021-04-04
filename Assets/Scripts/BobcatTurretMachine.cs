@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BobcatTurretMachine : Enemy
 {
+
+   
+
     private void Update()
     {
-        
+
         
         
     }

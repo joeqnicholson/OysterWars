@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: BozuAimUp
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -6182364603028530873, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  - {fileID: 5584827812982251229, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  - {fileID: 4546718036136609725, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  - {fileID: -2873959484463629969, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  - {fileID: 3326840680808673374, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  - {fileID: -2180797802809421534, guid: 00a4bbd669d33498ca6f822a34894f3b, type: 3}
+  imageIndex: 0
+  framesPerSecond: 6
+  loop: 1
+  totalFrames: 6

@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 484018842060161819}
   - component: {fileID: 484018842060161818}
   - component: {fileID: 484018842060161820}
-  - component: {fileID: 484018842060161821}
-  - component: {fileID: 484018842060161817}
   m_Layer: 0
   m_Name: Bobcat
   m_TagString: Untagged
@@ -48,37 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa71890d14b534da0b14d4aa706e026b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
---- !u!114 &484018842060161820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484018842060161822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010f8acf87e3baa4ca6148edc165a6a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawBodyShapeGizmo: 1
-  gizmosColor: {r: 0.52, g: 1, b: 0.24, a: 1}
-  width: 45
-  height: 32
-  depth: 1
-  stepOffset: 0.25
---- !u!114 &484018842060161821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484018842060161822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700ec2fdd675cc143a1636dbdd8f6c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   debugSettings:
     drawGizmos: 1
     drawGroundMovementGizmos: 1
@@ -86,7 +53,7 @@ MonoBehaviour:
     drawGroundAlignmentGizmos: 1
     drawVerticalAlignmentGizmos: 1
   layerMaskSettings:
-    profile: {fileID: 0}
+    profile: {fileID: 11400000, guid: be2a8cf0e47be4067b08a8a4541647dd, type: 2}
   groundSettings:
     alwaysNotGrounded: 0
     maxSlopeAngle: 55
@@ -108,7 +75,9 @@ MonoBehaviour:
     unstableToNotGroundedContinuity: 1
   depenetrationSettings:
     isEnabled: 1
---- !u!114 &484018842060161817
+  startHealth: 10
+  boxCollider: {fileID: 0}
+--- !u!114 &484018842060161820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,11 +86,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 484018842060161822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b332f2548894094bf028e2eeb196d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 010f8acf87e3baa4ca6148edc165a6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MyObject: {fileID: 484018842060161822}
-  m_MyOtherObject: {fileID: 0}
+  drawBodyShapeGizmo: 1
+  gizmosColor: {r: 0.52, g: 1, b: 0.24, a: 1}
+  width: 45
+  height: 32
+  depth: 1
+  stepOffset: 0.25
 --- !u!1 &484018843855616528
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +168,7 @@ SpriteRenderer:
   m_SortingOrder: 13
   m_Sprite: {fileID: -2495032952293323396, guid: 74c5e1c0871dd4e4bbc2758d10585219, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 80, y: 80}

@@ -29,5 +29,5 @@ public class AngleTest : MonoBehaviour
         m_Angle = Vector2.Angle(m_MyFirstVector, m_MySecondVector);
     }
 
-    
+     
 }

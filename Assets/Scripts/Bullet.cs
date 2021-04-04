@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
         lastPosition = transform.position;
         transform.Translate(moveDirection * speed * Time.deltaTime);
 
+        if(!GameData.Instance.IsOnScreen(transform.position, Vector2.one)) { Destroy(gameObject); }
 
         RaycastHit2D hitInfo = Physics2D.Linecast(lastPosition, transform.position);
 
@@ -42,8 +43,11 @@ public class Bullet : MonoBehaviour
                 Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>();
                 if (enemy)
                 {
-                    enemy.TakeDamage();
-                    Destroy(gameObject);
+                    if (enemy.IsOnScreen())
+                    {
+                        enemy.TakeDamage();
+                        Destroy(gameObject);
+                    }
                 }
             }
 

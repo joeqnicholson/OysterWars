@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lightbug.Kinematic2D.Core;
 
-public class Enemy : MonoBehaviour
+
+public class Enemy : CharacterMotor
 {
     private GameData gameData;
-    [SerializeField] private int health;
+    [SerializeField] private int startHealth;
+    private int health;
     private int damage = 1;
-    private BoxCollider2D boxCollider;
-    private int directionInt = 1;
+    public BoxCollider2D boxCollider;
+    
+   
 
     
 
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        health = startHealth;
         gameData = GameData.Instance;
         boxCollider = GetComponent<BoxCollider2D>();
 
@@ -24,12 +30,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        if(health <= 0) { Debug.Log(gameObject.name + "IsNowDead"); }
+        if(health <= 0) { Destroy(gameObject); }
     }
 
-    void OnGUI()
+    public bool IsOnScreen()
     {
-        //Output the angle found above
-        GUI.Label(new Rect(25, 25, 200, 40), "Angle Between Objects" + gameData.RegulatedWadeAngle(transform.position, 1));
+        return GameData.Instance.IsOnScreen(transform.position, boxCollider.size);
     }
+
 }

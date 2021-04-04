@@ -5,7 +5,7 @@ using Lightbug.Kinematic2D.Core;
 
 
 
-public class WadeMachine : MonoBehaviour
+public class WadeMachine : CharacterMotor
 {
     private CharacterBody2D body;
     private CharacterMotor motor;
@@ -34,19 +34,22 @@ public class WadeMachine : MonoBehaviour
     private float airTimer = 0;
     private float jumpGraceTimer = 0;
     private float jumpGraceTime = 0.1f;
-    [SerializeField] private int health;
+    private int health;
+    private int startHealth = 3;
     public bool canOpenChest;
     private float hInputTimer =0;
 
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        health = startHealth;
+        base.Start();
         sprite = GetComponentInChildren<ObjectSprite>();
         body = GetComponent<CharacterBody2D>();
         motor = GetComponent<CharacterMotor>();
-        motor.enabled = true;
+        enabled = true;
     }
 
     // Update is called once per frame
@@ -56,7 +59,7 @@ public class WadeMachine : MonoBehaviour
         moveY = Input.GetAxisRaw("Vertical");
         shotTimer += Time.deltaTime;
 
-       
+        OnGroundCollision += WadeGroundedFlag;
         
         jumpGraceTimer += Time.deltaTime;
         hInputTimer += Time.deltaTime;
@@ -76,7 +79,7 @@ public class WadeMachine : MonoBehaviour
         
         ShootStuff();
 
-        if (motor.IsGrounded)
+        if (IsGrounded)
         {
 
             if (!crouching)
@@ -98,32 +101,25 @@ public class WadeMachine : MonoBehaviour
             }
         }
 
-        if (motor.IsGrounded && Speed.y < 0)
-        {
-            airTimer = 0;
-            float squish = Mathf.Min(Speed.y / maxFall, 1);
-            sprite.scale.x = Approach(1, 1.4f, squish);
-            sprite.scale.y = Approach(1, .6f, squish);
-            Speed.y = 0;
-        }
 
         if (Input.GetKeyDown(KeyCode.J)) { jumpGraceTimer = 0f; }
 
-        if (motor.IsGrounded && jumpGraceTimer < jumpGraceTime || !motor.IsGrounded && airTimer < jumpGraceTime && Input.GetKeyDown(KeyCode.J))
+        if (IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && Input.GetKeyDown(KeyCode.J))
         {
             sprite.scale = new Vector3(0.6f, 1.4f, 1);
             varJumpTimer = varJumpTime;
-            motor.ForceNotGroundedState();
+            ForceNotGroundedState();
             Speed.y = jumpSpeed;
+            
         }
 
-        if (!motor.IsGrounded)
+        if (!IsGrounded)
         {
             airTimer += Time.deltaTime;
 
             float mult = (Mathf.Abs(Speed.y) < halfGravThreshold && Input.GetKey(KeyCode.J)) ? .75f : 1f;
 
-            Speed.y = Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
+            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
         }
 
         if (varJumpTimer > 0)
@@ -132,7 +128,6 @@ public class WadeMachine : MonoBehaviour
             {
                 Speed.y = jumpSpeed;
             }
-
             else
             {
                 varJumpTimer = 0;
@@ -148,25 +143,22 @@ public class WadeMachine : MonoBehaviour
 
         if (moveX == 0)
         {
-            Speed.x = Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
         }
         else
         {
-            Speed.x = Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
         }
+       
         
-        
-        motor.SetVelocity(Speed);
+        SetVelocity(Speed);
     }
 
-    float Approach(float val, float target, float maxMove)
-    {
-        return val > target ? Mathf.Max(val - maxMove, target) : Mathf.Min(val + maxMove, target);
-    }
+    
 
     float AccelMultipler()
     {
-        float airMult = motor.IsGrounded ? 1 : .65f;
+        float airMult = IsGrounded ? 1 : .65f;
 
         if (moveX != 0)
         {
@@ -223,7 +215,7 @@ public class WadeMachine : MonoBehaviour
         {
             if(moveY == -1)
             {
-                if (motor.IsGrounded)
+                if (IsGrounded)
                 {
                     x = 19;
                     y = 8;
@@ -273,15 +265,17 @@ public class WadeMachine : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        if(health <= 0) { Debug.Log("wadeIsNowDead"); }
+        Debug.Log("wadeIsHit");
+        if (health <= 0) { transform.position = new Vector3(-277,-233,0); health = startHealth; }
+        
     }
 
     void UpdateSprite()
     {
-        sprite.scale.x = Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
-        sprite.scale.y = Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
+        sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
+        sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
 
-        if (!motor.IsGrounded)
+        if (!IsGrounded)
         {
             if (moveY > 0)
             {
@@ -321,7 +315,7 @@ public class WadeMachine : MonoBehaviour
                 
         }
 
-        if (motor.IsGrounded)
+        if (IsGrounded)
         {
             if(Mathf.Abs(moveX) > 0)
             {
@@ -386,11 +380,19 @@ public class WadeMachine : MonoBehaviour
 
         if (chest)
         {
-            if(motor.IsGrounded && Mathf.Sign(chest.transform.localScale.x) == Mathf.Sign(directionInt) && hInputTimer < .2f)
+            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == Mathf.Sign(directionInt) && hInputTimer < .2f)
             {
                 chest.open = true;
             }
             
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<Enemy>())
+        {
+            TakeDamage();
         }
     }
 
@@ -399,9 +401,20 @@ public class WadeMachine : MonoBehaviour
         canOpenChest = false;
     }
 
-    public bool IsGrounded()
+
+    public void WadeGroundedFlag()
     {
-        return motor.IsGrounded;
+        airTimer = 0;
+        float squish = Mathf.Min(Speed.y / maxFall, 1);
+        sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
+        sprite.scale.y = MathHelper.Approach(1, .6f, squish);
+        Speed.y = 0;
+    }
+
+    void OnGUI()
+    {
+        //Output the angle found above
+        GUI.Label(new Rect(25, 25, 200, 40), "wades health is" + health);
     }
 
 }

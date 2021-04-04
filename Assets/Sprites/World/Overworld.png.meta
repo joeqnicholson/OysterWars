@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -2671460228953875570
     second: Overworld_0
+  - first:
+      213: -2689026045669087484
+    second: Overworld_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -132,7 +135,7 @@ TextureImporter:
         serializedVersion: 2
         x: 133
         y: 194
-        width: 64
+        width: 32
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -151,9 +154,9 @@ TextureImporter:
       name: WadeIdle_2
       rect:
         serializedVersion: 2
-        x: 3
+        x: 35
         y: 194
-        width: 64
+        width: 32
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -258,7 +261,7 @@ TextureImporter:
         serializedVersion: 2
         x: 68
         y: 194
-        width: 64
+        width: 32
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -269,6 +272,27 @@ TextureImporter:
       bones: []
       spriteID: e8bde9563111dead0800000000000000
       internalID: -2671460228953875570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overworld_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 194
+        width: 32
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407ee1cfe09aeaad0800000000000000
+      internalID: -2689026045669087484
       vertices: []
       indices: 
       edges: []
