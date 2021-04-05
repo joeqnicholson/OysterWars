@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     private Vector3 lastPosition;
     public bool enemyBullet;
     [SerializeField] private float damage;
-    float speed = 450;
+    float speed = 350;
     void Start()
     {
         
@@ -51,8 +51,10 @@ public class Bullet : MonoBehaviour
                 }
             }
 
+            
 
-            if (hitInfo.collider.gameObject.layer != 6)
+
+            if (hitInfo.collider.gameObject.layer != 6 && !hitInfo.collider.GetComponent<DestructableTiles>())
             {
                 Destroy(gameObject);
             }
