@@ -18,8 +18,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: -0.38
   contrast:
-    m_OverrideState: 0
-    m_Value: -9
+    m_OverrideState: 1
+    m_Value: 54.73
     min: -100
     max: 100
   colorFilter:
@@ -29,13 +29,13 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 1
   hueShift:
-    m_OverrideState: 1
-    m_Value: 0
+    m_OverrideState: 0
+    m_Value: -160.56
     min: -180
     max: 180
   saturation:
-    m_OverrideState: 1
-    m_Value: -8
+    m_OverrideState: 0
+    m_Value: 41.37
     min: -100
     max: 100
 --- !u!114 &-1444108261903312065
@@ -50,15 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   threshold:
-    m_OverrideState: 1
-    m_Value: 0.65
+    m_OverrideState: 0
+    m_Value: 0.96
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.88
+    m_Value: 0
     min: 0
   scatter:
     m_OverrideState: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     min: 0
   tint:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.123398006, g: 0.15770058, b: 0.5566038, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   type:
     m_OverrideState: 1
@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1

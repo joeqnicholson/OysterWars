@@ -13,6 +13,7 @@ public class CameraMachine : MonoBehaviour
     public float rightSide;
     public float bottomSide;
     public float topSide;
+    public Vector3 shakeVector;
 
     private void Start()
     {
@@ -58,7 +59,7 @@ public class CameraMachine : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, Target, 4 * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Target, 4 * Time.deltaTime) + shakeVector;
     }
 
     public void ChangeTarget(CameraBox currentCamera)
@@ -72,6 +73,23 @@ public class CameraMachine : MonoBehaviour
         bottomSide = transform.position.y - 135;
         rightSide = transform.position.x + 240;
         leftSide = transform.position.x - 240;
+    }
+
+    public IEnumerator CameraShake(float magnitude, float duration)
+    {
+        float elapsed = 0;
+        print("camershake");
+        while(elapsed < duration)
+        {
+            shakeVector = Vector3.Lerp(shakeVector,new Vector3(Random.Range(-magnitude, magnitude), Random.Range(-magnitude, magnitude), 0),3 * Time.deltaTime);
+            print(shakeVector);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        shakeVector = Vector3.zero;
+
+
+        
     }
 
 }

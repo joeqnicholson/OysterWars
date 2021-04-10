@@ -33,8 +33,7 @@ public class Bullet : MonoBehaviour
                 WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
                 if (wade)
                 {
-                    wade.TakeDamage();
-                    Destroy(gameObject);
+                    wade.TakeDamage(Mathf.Sign(moveDirection.x), gameObject);
                 }
             }
 
@@ -54,7 +53,7 @@ public class Bullet : MonoBehaviour
             
 
 
-            if (hitInfo.collider.gameObject.layer != 6 && !hitInfo.collider.GetComponent<DestructableTiles>())
+            if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
             {
                 Destroy(gameObject);
             }

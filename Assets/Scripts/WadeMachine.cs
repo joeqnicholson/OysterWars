@@ -5,7 +5,8 @@ using Lightbug.Kinematic2D.Core;
 
 
 
-public class WadeMachine : CharacterMotor
+
+public partial class WadeMachine : CharacterMotor
 {
     private CharacterBody2D body;
     private CharacterMotor motor;
@@ -14,12 +15,12 @@ public class WadeMachine : CharacterMotor
     private float walkAcceleration = 1600f;
     private float walkDeceleration = 1000f;
     private float jumpSpeed = 210f;
-    private float maxFall = -320f;
-    private float gravity = 1500f;
+    private float maxFall = -290f;
+    private float gravity = 900f;
     private float moveX;
     private float moveY;
     private Vector2 Speed;
-    private float varJumpTime = .26f;
+    private float varJumpTime = .28f;
     private float varJumpTimer = 0;
     private bool canFlip;
     private float spriteLerp;
@@ -38,13 +39,18 @@ public class WadeMachine : CharacterMotor
     private int startHealth = 3;
     public bool canOpenChest;
     private float hInputTimer =0;
+    private float invincibiltyTimer = 0;
+    private float invincibiltyTime = 1;
     float jumpDownDistance = 0.08f;
     private WadeInputs inputs;
+    
+    
 
 
     // Start is called before the first frame update
     protected override void Start()
     {
+        CurrentWadeState = StNormal;
         OnGroundCollision += WadeGroundedFlag;
         inputs = GetComponent<WadeInputs>();
         health = startHealth;
@@ -56,33 +62,69 @@ public class WadeMachine : CharacterMotor
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+
         moveX = inputs.moveInput.x;
+
         moveY = inputs.moveInput.y;
+
         shotTimer += Time.deltaTime;
 
+
         jumpGraceTimer += Time.deltaTime;
+
         hInputTimer += Time.deltaTime;
+
+        if(invincibiltyTimer <= invincibiltyTime)
+        {
+            invincibiltyTimer += Time.deltaTime;
+        }
+        
+
+        
+
+        if (varJumpTimer > 0) { varJumpTimer -= Time.deltaTime; }
+
+        UpdateSprite();
+
+        CharacterFlip();
+
+        if (inputs.jumpPress) { jumpGraceTimer = 0f; }
+
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             hInputTimer = 0;
 
         }
 
-        UpdateSprite();
+        if(CurrentWadeState == StNormal)
+        {
+            NormalUpdate();
+        }
 
+        if(CurrentWadeState == StHit)
+        {
+            HitUpdate();
+        }
+
+
+        SetVelocity(Speed);
+
+    }
+
+    void NormalUpdate()
+    {
+
+  
         canFlip = true;
 
-        if (varJumpTimer > 0) { varJumpTimer -= Time.deltaTime; }
-
-        CharacterFlip();
         
         ShootStuff();
 
         if (IsGrounded)
         {
-
             if (!crouching)
             {
                 if (moveY == -1 && moveX == 0)
@@ -99,10 +141,6 @@ public class WadeMachine : CharacterMotor
                 crouching = false;
             }
         }
-
-        
-
-        if (inputs.jumpPress) { jumpGraceTimer = 0f; }
 
         if (IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress)
         {
@@ -174,9 +212,19 @@ public class WadeMachine : CharacterMotor
             }
         }
 
-        SetVelocity(Speed);
+        
     }
 
+
+    void HitUpdate()
+    {
+        Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * Time.timeScale / 4);
+        
+        Speed.x = MathHelper.Approach(Speed.x, 0, 400 * Time.deltaTime);
+        if (Time.timeScale >= 1) { TransitionToState(StNormal); }
+        invincibiltyTimer = 0;
+
+    }
     
 
     float AccelMultipler()
@@ -195,7 +243,7 @@ public class WadeMachine : CharacterMotor
 
     public void CharacterFlip()
     {
-        if (canFlip)
+        if (CurrentWadeState.canFlip)
         {
             if(moveX != 0)
             {
@@ -285,114 +333,133 @@ public class WadeMachine : CharacterMotor
         // ddown = 12,2 dup = 12, 22 airdown = 0,0 up = 0, 27 forward = 17, 13 crouch 8, 13
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float recoilDirection, GameObject projectile = null)
     {
-        health -= 1;
-        Debug.Log("wadeIsHit");
-        if (health <= 0) { transform.position = new Vector3(-277,-233,0); health = startHealth; }
         
+       
+        if (invincibiltyTimer >= invincibiltyTime)
+        {
+            StartCoroutine(GameData.Instance.cameraMachine.CameraShake(10, .2f));
+            directionInt = -recoilDirection;
+            TransitionToState(StHit);
+            Debug.Log("wadeIsHit");
+            if (projectile) { Destroy(projectile); }
+            if (health <= 0) { transform.position = new Vector3(-277, -233, 0); health = startHealth; }
+        }
     }
 
     void UpdateSprite()
     {
-        sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
-        sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
 
-        if (!IsGrounded)
+        if (CurrentWadeState == StNormal)
         {
-            if (moveY > 0)
+            if (!IsGrounded)
             {
-                if(Mathf.Abs(moveX) > 0)
-                {
-                    sprite.Play(sprite.JumpAimDUp);
-                }
-                else
-                {
-                    sprite.Play(sprite.JumpAimUp);
-                }
-
-            }
-            else if(moveY < 0)
-            {
-                if (Mathf.Abs(moveX) > 0)
-                {
-                    sprite.Play(sprite.JumpAimDDown);
-                }
-                else
-                {
-                    sprite.Play(sprite.JumpAimDown);
-                }
-            }
-            else
-            {
-                if (shotTimer > 6)
-                {
-                    sprite.Play(sprite.JumpRegular, true);
-                }
-                else
-                {
-                    sprite.Play(sprite.JumpAimForward, true);
-                }
-            }
-
-                
-        }
-
-        if (IsGrounded)
-        {
-            if(Mathf.Abs(moveX) > 0)
-            {
-
                 if (moveY > 0)
                 {
-                    sprite.Play(sprite.RunAimUp);
-                }
-                else if(moveY < 0)
-                {
-                    sprite.Play(sprite.RunAimDown);
-                }
-                else
-                {
-                    if(shotTimer > 6)
+                    if (Mathf.Abs(moveX) > 0)
                     {
-                        sprite.Play(sprite.RunRegular, true);
+                        sprite.Play(sprite.JumpAimDUp);
                     }
                     else
                     {
-                        sprite.Play(sprite.RunAimForward, true);
+                        sprite.Play(sprite.JumpAimUp);
                     }
 
-       
-                }
-
-                
-            }
-            else
-            {
-                if(moveY > 0)
-                {
-                    sprite.Play(sprite.AimUp, true);
                 }
                 else if (moveY < 0)
                 {
-                    sprite.Play(sprite.Crouch, true);
-                    
-                }
-                else
-                {
-                    if(shotTimer > 6)
+                    if (Mathf.Abs(moveX) > 0)
                     {
-                        sprite.Play(sprite.Idle, true);
+                        sprite.Play(sprite.JumpAimDDown);
                     }
                     else
                     {
-                        sprite.Play(sprite.IdleShoot, true);
+                        sprite.Play(sprite.JumpAimDown);
                     }
                 }
-                
+                else
+                {
+                    if (shotTimer > 6)
+                    {
+                        sprite.Play(sprite.JumpRegular, true);
+                    }
+                    else
+                    {
+                        sprite.Play(sprite.JumpAimForward, true);
+                    }
+                }
+
+
             }
-            
+
+            if (IsGrounded)
+            {
+                if (Mathf.Abs(moveX) > 0)
+                {
+
+                    if (moveY > 0)
+                    {
+                        sprite.Play(sprite.RunAimUp);
+                    }
+                    else if (moveY < 0)
+                    {
+                        sprite.Play(sprite.RunAimDown);
+                    }
+                    else
+                    {
+                        if (shotTimer > 6)
+                        {
+                            sprite.Play(sprite.RunRegular, true);
+                        }
+                        else
+                        {
+                            sprite.Play(sprite.RunAimForward, true);
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    if (moveY > 0)
+                    {
+                        sprite.Play(sprite.AimUp, true);
+                    }
+                    else if (moveY < 0)
+                    {
+                        sprite.Play(sprite.Crouch, true);
+
+                    }
+                    else
+                    {
+                        if (shotTimer > 6)
+                        {
+                            sprite.Play(sprite.Idle, true);
+                        }
+                        else
+                        {
+                            sprite.Play(sprite.IdleShoot, true);
+                        }
+                    }
+
+                }
+            }
         }
+
+        if (CurrentWadeState == StHit)
+        {
+                sprite.Play(sprite.Hit, true);
+        }
+
+        
+
+        sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
+        sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
+
+        
         
     }
 
@@ -416,7 +483,7 @@ public class WadeMachine : CharacterMotor
     {
         if (collision.GetComponentInParent<Enemy>())
         {
-            TakeDamage();
+            TakeDamage(-directionInt);
         }
     }
 

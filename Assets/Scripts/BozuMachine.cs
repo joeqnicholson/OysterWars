@@ -166,6 +166,10 @@ public class BozuMachine : Enemy
             {
                 Jump(.2f);
             }
+            else if(!IsGrounded && !Physics2D.Linecast(transform.position, transform.position + Vector3.down * 50, jumpLayerMask) && groundInFront)
+            {
+                Jump(.2f);
+            }
             else if (!IsGrounded
                 && !Physics2D.Linecast(transform.position, transform.position + Vector3.down * 50, jumpLayerMask)
                 && !deepGroundInFront
@@ -224,7 +228,7 @@ public class BozuMachine : Enemy
                         case 0:
                             {
                                 x = 17;
-                                y = 11;
+                                y = 13;
                                 sprite.Play(BozuAimIdle);
                                 break;
                             }
