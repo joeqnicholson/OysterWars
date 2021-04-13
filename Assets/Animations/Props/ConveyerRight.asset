@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
-  m_Name: Wade_Hit
+  m_Name: ConveyerRight
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: -7665864133399572281, guid: e583efd9f91fd4a3abc076965353a3c4, type: 3}
+  - {fileID: -8818517006422743206, guid: 1cf040d55af1a4419834d3956f2aeb68, type: 3}
+  - {fileID: 1139677993894001336, guid: 1cf040d55af1a4419834d3956f2aeb68, type: 3}
+  - {fileID: 3047268354854293870, guid: 1cf040d55af1a4419834d3956f2aeb68, type: 3}
+  - {fileID: -1360731108114453027, guid: 1cf040d55af1a4419834d3956f2aeb68, type: 3}
   imageIndex: 0
-  framesPerSecond: 1
+  framesPerSecond: 20
   loop: 1
-  totalFrames: 1
+  totalFrames: 4

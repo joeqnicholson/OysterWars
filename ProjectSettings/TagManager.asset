@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Wade
+    uniqueID: 3673015479
+    locked: 0
+  - name: OverlayColour
+    uniqueID: 2772100401
+    locked: 0
   - name: Props
     uniqueID: 2945453375
     locked: 0

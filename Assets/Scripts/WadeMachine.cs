@@ -22,7 +22,6 @@ public partial class WadeMachine : CharacterMotor
     private Vector2 Speed;
     private float varJumpTime = .28f;
     private float varJumpTimer = 0;
-    private bool canFlip;
     private float spriteLerp;
     private ObjectSprite sprite;
     public float directionInt;
@@ -38,12 +37,13 @@ public partial class WadeMachine : CharacterMotor
     private int health;
     private int startHealth = 3;
     public bool canOpenChest;
+    [SerializeField] private float conveyerAddition;
     private float hInputTimer =0;
     private float invincibiltyTimer = 0;
     private float invincibiltyTime = 1;
     float jumpDownDistance = 0.08f;
     private WadeInputs inputs;
-    
+    [SerializeField] bool canHopDown;
     
 
 
@@ -64,13 +64,14 @@ public partial class WadeMachine : CharacterMotor
     // Update is called once per frame
     private void Update()
     {
-
+        canHopDown = CanHopDown();
         moveX = inputs.moveInput.x;
 
         moveY = inputs.moveInput.y;
 
         shotTimer += Time.deltaTime;
 
+        
 
         jumpGraceTimer += Time.deltaTime;
 
@@ -96,7 +97,7 @@ public partial class WadeMachine : CharacterMotor
         if (Input.GetKeyDown(KeyCode.H))
         {
             hInputTimer = 0;
-
+            
         }
 
         if(CurrentWadeState == StNormal)
@@ -116,15 +117,20 @@ public partial class WadeMachine : CharacterMotor
 
     void NormalUpdate()
     {
-
-  
-        canFlip = true;
-
         
+
         ShootStuff();
 
         if (IsGrounded)
         {
+
+            if(jumpGraceTimer > jumpGraceTime)
+            {
+                conveyerAddition = Mathf.Lerp(conveyerAddition, TakeConveyerSpeed(), 200 * Time.deltaTime);
+            }
+        
+
+
             if (!crouching)
             {
                 if (moveY == -1 && moveX == 0)
@@ -144,14 +150,18 @@ public partial class WadeMachine : CharacterMotor
 
         if (IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress)
         {
-            if(!CanHopDown())
+            if(!canHopDown)
             {
                 sprite.scale = new Vector3(0.6f, 1.4f, 1);
                 varJumpTimer = varJumpTime;
                 ForceNotGroundedState();
+                if(Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && Mathf.Abs(Speed.x) > Mathf.Abs(conveyerAddition) && conveyerAddition != 0)
+                {
+                    conveyerAddition = conveyerAddition * 2;
+                }
                 Speed.y = jumpSpeed;
             }
-            if (CanHopDown())
+            else
             {
                 Vector3 deltaPosition = -transform.up * (2 * CharacterConstants.SkinWidth + jumpDownDistance);
                 varJumpTimer = 0;
@@ -161,6 +171,16 @@ public partial class WadeMachine : CharacterMotor
 
         if (!IsGrounded)
         {
+
+            if(airTimer > jumpGraceTime)
+            {
+                conveyerAddition = Mathf.Lerp(conveyerAddition, TakeConveyerSpeed(), 2 * Time.deltaTime);
+            }
+            
+
+
+          
+
             airTimer += Time.deltaTime;
 
             float mult = (Mathf.Abs(Speed.y) < halfGravThreshold && inputs.jumpHeld) ? .75f : 1f;
@@ -189,11 +209,11 @@ public partial class WadeMachine : CharacterMotor
 
         if (moveX == 0)
         {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkAcceleration * AccelMultipler() * Time.deltaTime);
         }
         else
         {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkDeceleration * AccelMultipler() * Time.deltaTime);
         }
 
 
@@ -212,16 +232,22 @@ public partial class WadeMachine : CharacterMotor
             }
         }
 
+
+        
         
     }
 
 
     void HitUpdate()
     {
-        Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * Time.timeScale / 4);
+        
+
+
+        Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * 18 * Time.deltaTime);
         
         Speed.x = MathHelper.Approach(Speed.x, 0, 400 * Time.deltaTime);
-        if (Time.timeScale >= 1) { TransitionToState(StNormal); }
+        Speed.y = MathHelper.Approach(Speed.y, 0, 400 * Time.deltaTime);
+        if (Time.timeScale >= .7) { TransitionToState(StNormal); }
         invincibiltyTimer = 0;
 
     }
@@ -454,13 +480,8 @@ public partial class WadeMachine : CharacterMotor
                 sprite.Play(sprite.Hit, true);
         }
 
-        
-
         sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
         sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
-
-        
-        
     }
 
     
@@ -525,4 +546,49 @@ public partial class WadeMachine : CharacterMotor
         return false;
     }
 
+    RaycastHit2D RightBottomHit()
+    {
+        int obstacles = layerMaskSettings.profile.obstacles;
+        
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles); 
+        return hitInfo;
+    }
+
+    RaycastHit2D LeftBottomHit()
+    {
+        int obstacles = layerMaskSettings.profile.obstacles;
+
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomLeft(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
+        return hitInfo;
+    }
+
+    RaycastHit2D MiddleBottomHit()
+    {
+        int obstacles = layerMaskSettings.profile.obstacles;
+
+        RaycastHit2D hitInfo = Physics2D.Linecast(transform.position, transform.position + Vector3.down, obstacles);
+        return hitInfo;
+    }
+
+    float TakeConveyerSpeed()
+    {
+        if (LeftBottomHit())
+        {
+            ConveyerBelt conveyerLeft = LeftBottomHit().collider.GetComponent<ConveyerBelt>();
+            if (conveyerLeft) { return conveyerLeft.Speed(); }
+        }
+        else if (RightBottomHit())
+        {
+            ConveyerBelt conveyerRight = RightBottomHit().collider.GetComponent<ConveyerBelt>();
+            if (conveyerRight) { return conveyerRight.Speed(); }
+        }
+        else
+        {
+            return 0;
+        }
+
+        return 0;
+
+
+    }
 }
