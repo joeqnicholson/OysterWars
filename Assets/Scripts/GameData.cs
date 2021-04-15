@@ -31,6 +31,7 @@ public class GameData : MonoBehaviour
     public CameraMachine cameraMachine;
     private Vector3 cameraPosition;
 
+
     private void OnEnable()
     {
         cameraMachine = Camera.main.gameObject.GetComponent<CameraMachine>();

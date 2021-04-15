@@ -28,6 +28,12 @@ public class Bullet : MonoBehaviour
 
         if(hitInfo)
         {
+
+            if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
+            {
+                Destroy(gameObject);
+            }
+
             if (enemyBullet)
             {
                 WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
@@ -51,16 +57,16 @@ public class Bullet : MonoBehaviour
             }
 
             
-
-
-            if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
+            if (hitInfo.collider.GetComponent<ConveyerSwitch>())
             {
+                hitInfo.collider.GetComponent<ConveyerSwitch>().SwitchDirection();
                 Destroy(gameObject);
             }
             
+
+            
         }
             
-
 
     }
 

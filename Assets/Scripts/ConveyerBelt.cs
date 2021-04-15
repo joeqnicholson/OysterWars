@@ -15,6 +15,7 @@ public class ConveyerBelt : MonoBehaviour
 
     private void Start()
     {
+        right = true;
         sprite = GetComponent<SpriteAnimationController>();
     }
     // Update is called once per frame

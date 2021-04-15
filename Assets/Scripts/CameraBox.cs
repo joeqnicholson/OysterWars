@@ -15,11 +15,18 @@ public class CameraBox : MonoBehaviour
 
 
 
-    private void Start()
+    private void OnEnable()
     {
         GetComponent<MeshRenderer>().enabled = false;
         xSize = transform.localScale.x/2;
         ySize = transform.localScale.y/2;
+        wadeX = GameData.Instance.wadePosition.x;
+        wadeY = GameData.Instance.wadePosition.y;
+        if (Mathf.Abs(transform.position.x - wadeX) < xSize && Mathf.Abs(transform.position.y - wadeY) < ySize)
+        {
+            GameData.Instance.machine.currentCameraBox = this;
+        }
+
     }
 
     private void Update()

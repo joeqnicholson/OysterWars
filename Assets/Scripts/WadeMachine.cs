@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Kinematic2D.Core;
-
-
-
+using System;
 
 public partial class WadeMachine : CharacterMotor
 {
@@ -15,12 +13,15 @@ public partial class WadeMachine : CharacterMotor
     private float walkAcceleration = 1600f;
     private float walkDeceleration = 1000f;
     private float jumpSpeed = 210f;
+    private float wallJumpHSpeed = 60;
+    private float conveyerJumpHSpeed = 50;
     private float maxFall = -290f;
-    private float gravity = 900f;
+    private float gravity = 1200f;
     private float moveX;
     private float moveY;
+    private float aimX;
     private Vector2 Speed;
-    private float varJumpTime = .28f;
+    private float varJumpTime = .22f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private ObjectSprite sprite;
@@ -44,6 +45,11 @@ public partial class WadeMachine : CharacterMotor
     float jumpDownDistance = 0.08f;
     private WadeInputs inputs;
     [SerializeField] bool canHopDown;
+    private float forceMoveXTimer = 0;
+    private float forceMoveXDirection = 0; 
+    private float WallJumpForceTime = .32f;
+
+    
     
 
 
@@ -65,7 +71,20 @@ public partial class WadeMachine : CharacterMotor
     private void Update()
     {
         canHopDown = CanHopDown();
-        moveX = inputs.moveInput.x;
+
+        aimX = inputs.moveInput.x;
+
+        if (forceMoveXTimer > 0)
+        {
+            forceMoveXTimer -= Time.deltaTime;
+            moveX = forceMoveXDirection;
+        }
+        else
+        {
+            moveX = inputs.moveInput.x;
+        }
+
+        
 
         moveY = inputs.moveInput.y;
 
@@ -126,11 +145,9 @@ public partial class WadeMachine : CharacterMotor
 
             if(jumpGraceTimer > jumpGraceTime)
             {
-                conveyerAddition = Mathf.Lerp(conveyerAddition, TakeConveyerSpeed(), 200 * Time.deltaTime);
+                conveyerAddition = TakeConveyerSpeed();
             }
         
-
-
             if (!crouching)
             {
                 if (moveY == -1 && moveX == 0)
@@ -152,17 +169,12 @@ public partial class WadeMachine : CharacterMotor
         {
             if(!canHopDown)
             {
-                sprite.scale = new Vector3(0.6f, 1.4f, 1);
-                varJumpTimer = varJumpTime;
-                ForceNotGroundedState();
-                if(Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && Mathf.Abs(Speed.x) > Mathf.Abs(conveyerAddition) && conveyerAddition != 0)
-                {
-                    conveyerAddition = conveyerAddition * 2;
-                }
-                Speed.y = jumpSpeed;
+                Jump();
             }
             else
             {
+                ForceNotGroundedState();
+                print("bigdaddyFall");
                 Vector3 deltaPosition = -transform.up * (2 * CharacterConstants.SkinWidth + jumpDownDistance);
                 varJumpTimer = 0;
                 Teleport(body.RigidbodyComponent.Position + deltaPosition, transform.rotation);
@@ -171,15 +183,14 @@ public partial class WadeMachine : CharacterMotor
 
         if (!IsGrounded)
         {
+            float conveyerMultiplier = forceMoveXTimer > 0 ? 0f : 1;
 
-            if(airTimer > jumpGraceTime)
+            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 4 * conveyerMultiplier * Time.deltaTime);
+
+            if ((IsAgainstLeftWall || IsAgainstRightWall) && jumpGraceTimer < jumpGraceTime)
             {
-                conveyerAddition = Mathf.Lerp(conveyerAddition, TakeConveyerSpeed(), 2 * Time.deltaTime);
+                WallJump(IsAgainstRightWall);
             }
-            
-
-
-          
 
             airTimer += Time.deltaTime;
 
@@ -187,6 +198,8 @@ public partial class WadeMachine : CharacterMotor
 
             Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
         }
+
+
 
         if (varJumpTimer > 0)
         {
@@ -201,11 +214,6 @@ public partial class WadeMachine : CharacterMotor
                 
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log("newty");
-        }
-
 
         if (moveX == 0)
         {
@@ -215,6 +223,8 @@ public partial class WadeMachine : CharacterMotor
         {
             Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkDeceleration * AccelMultipler() * Time.deltaTime);
         }
+
+
 
 
         if (crouching)
@@ -232,11 +242,44 @@ public partial class WadeMachine : CharacterMotor
             }
         }
 
-
-        
-        
     }
 
+    private void Jump()
+    {
+        sprite.scale = new Vector3(0.6f, 1.4f, 1);
+        jumpGraceTimer = Mathf.Infinity;
+        varJumpTimer = varJumpTime;
+        ForceNotGroundedState();
+        if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && Mathf.Abs(Speed.x) > Mathf.Abs(conveyerAddition) && conveyerAddition != 0)
+        {
+            
+            forceMoveXDirection = sprite.direction;
+            forceMoveXTimer = .4f;
+            conveyerAddition = 200 * forceMoveXDirection;
+            Speed.x = walkSpeed + conveyerJumpHSpeed * sprite.direction;
+            varJumpTimer = varJumpTime * .5f;
+        }
+        Speed.y = jumpSpeed;
+    }
+
+    private void WallJump(bool rightCollision)
+    {
+        float moveDirection = rightCollision ? -1 : 1;
+     
+        jumpGraceTimer = Mathf.Infinity;
+        sprite.scale = new Vector3(0.6f, 1.4f, 1);
+        varJumpTimer = varJumpTime / 2f;
+        forceMoveXDirection = moveDirection;
+        forceMoveXTimer = WallJumpForceTime;
+        Speed.x = (walkSpeed + wallJumpHSpeed) * forceMoveXDirection;
+        Speed.y = jumpSpeed;
+
+
+        print(Speed.x);
+        print(forceMoveXDirection);
+        print(forceMoveXTimer);
+
+    }
 
     void HitUpdate()
     {
@@ -287,7 +330,7 @@ public partial class WadeMachine : CharacterMotor
         float y = 10;
         
 
-        if(moveX != 0)
+        if(aimX != 0)
         {
             if (moveY > 0)
             {
@@ -308,7 +351,7 @@ public partial class WadeMachine : CharacterMotor
                 shootDirection = Vector2.right * directionInt;
             }
         }
-        else if(moveX == 0 && moveY != 0)
+        else if(aimX == 0 && moveY != 0)
         {
             if(moveY == -1)
             {
@@ -361,8 +404,6 @@ public partial class WadeMachine : CharacterMotor
 
     public void TakeDamage(float recoilDirection, GameObject projectile = null)
     {
-        
-       
         if (invincibiltyTimer >= invincibiltyTime)
         {
             StartCoroutine(GameData.Instance.cameraMachine.CameraShake(10, .2f));
@@ -383,7 +424,7 @@ public partial class WadeMachine : CharacterMotor
             {
                 if (moveY > 0)
                 {
-                    if (Mathf.Abs(moveX) > 0)
+                    if (Mathf.Abs(aimX) > 0)
                     {
                         sprite.Play(sprite.JumpAimDUp);
                     }
@@ -395,7 +436,7 @@ public partial class WadeMachine : CharacterMotor
                 }
                 else if (moveY < 0)
                 {
-                    if (Mathf.Abs(moveX) > 0)
+                    if (Mathf.Abs(aimX) > 0)
                     {
                         sprite.Play(sprite.JumpAimDDown);
                     }
@@ -489,6 +530,7 @@ public partial class WadeMachine : CharacterMotor
     private void OnTriggerStay2D(Collider2D collision)
     {
         Chest chest = collision.gameObject.GetComponent<Chest>();
+        LockedDoor lockedDoor = collision.gameObject.GetComponent<LockedDoor>();
 
         if (chest)
         {
@@ -496,7 +538,14 @@ public partial class WadeMachine : CharacterMotor
             {
                 chest.open = true;
             }
-            
+        }
+
+        if (lockedDoor)
+        {
+            if (IsGrounded && hInputTimer < .2f)
+            {
+                lockedDoor.Unlock();
+            }
         }
     }
 
@@ -517,6 +566,7 @@ public partial class WadeMachine : CharacterMotor
     public void WadeGroundedFlag()
     {
         airTimer = 0;
+        forceMoveXTimer = 0;
         float squish = Mathf.Min(Speed.y / maxFall, 1);
         sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
         sprite.scale.y = MathHelper.Approach(1, .6f, squish);
