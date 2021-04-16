@@ -17,6 +17,7 @@ public class SpriteAnimationController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        direction = Mathf.Sign(transform.localScale.x);
     }
 
     // Update is called once per frame

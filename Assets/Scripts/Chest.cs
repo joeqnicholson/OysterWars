@@ -6,16 +6,23 @@ public class Chest : MonoBehaviour
 {
     [SerializeField] SpriteAnimation ChestClosed;
     [SerializeField] SpriteAnimation ChestOpen;
-    [SerializeField] GameObject item;
+    [SerializeField] GameObject itemObject;
+    private SpriteAnimationController itemSprite;
+    [SerializeField] Item item;
     private SpriteAnimationController animator;
     public bool open = false;
     public Vector3 itemPosition;
+    public Vector3 wadeToPosition;
 
 
     void Start()
     {
         animator = GetComponent<SpriteAnimationController>();
-        itemPosition = item.transform.position + Vector3.up * 20;
+        itemSprite = transform.GetChild(1).GetComponent<SpriteAnimationController>();
+        itemObject = transform.GetChild(1).gameObject;
+        wadeToPosition = transform.position + Vector3.right * 25 * Mathf.Sign(transform.localScale.x);
+        itemObject.transform.position = wadeToPosition;
+        
     }
 
     // Update is called once per frame
@@ -28,16 +35,25 @@ public class Chest : MonoBehaviour
         else
         {
             animator.Play(ChestOpen);
-            RaiseItem();
-        }
+            transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f,5);
+            transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(25, 10);
+            GetComponent<BoxCollider2D>().enabled = false;
 
-        
+            if (itemSprite.imageIndex == itemSprite.currentSprite.totalFrames - 1)
+            {
+                GameData.Instance.machine.Inventory.PickupItem(item);
+                print("jimbo");
+
+                enabled = false;
+            }
+        }
 
     }
 
-    void RaiseItem()
+    public void OpenChest()
     {
-        item.transform.position = Vector3.Lerp(item.transform.position, itemPosition, 2 * Time.deltaTime);
+        open = true;
+        itemSprite.Play(item.ChestAnimation);
     }
 
     

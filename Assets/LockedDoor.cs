@@ -9,6 +9,7 @@ public class LockedDoor : MonoBehaviour
     private BoxCollider2D collision;
     SpriteAnimationController sprite;
     private bool open;
+    [SerializeField] private Item Key;
 
 
 
@@ -43,9 +44,12 @@ public class LockedDoor : MonoBehaviour
         }
     }
 
-    public void Unlock()
+    public void Unlock(WadeInventory inventory)
     {
-        open = true;
-        GetComponent<BoxCollider2D>().enabled = false;
+        if(inventory.TakeNeededItem(Key, 1))
+        {
+            open = true;
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 }

@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+public class Item : ScriptableObject
 {
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
+    public SpriteAnimation ChestAnimation;
+    public SpriteAnimation WorldAnimation;
+    public SpriteAnimation MenuIcon;
 }

@@ -31,6 +31,7 @@ public class ObjectSprite : MonoBehaviour
     public SpriteAnimation JumpAimUp;
     public SpriteAnimation JumpAimForward;
     public SpriteAnimation Hit;
+    public SpriteAnimation SmallChest;
     public SpriteAnimationController controller;
 
     private void Start()

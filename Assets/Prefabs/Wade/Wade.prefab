@@ -119,6 +119,7 @@ MonoBehaviour:
   JumpAimUp: {fileID: 11400000, guid: 17f398e864c9b449bba5cc88a2fe100e, type: 2}
   JumpAimForward: {fileID: 11400000, guid: 1c9b125fc39cb467995e2a6f604cfb56, type: 2}
   Hit: {fileID: 11400000, guid: f9536dc6c832e4120ac8ca661bc4af14, type: 2}
+  SmallChest: {fileID: 11400000, guid: d1cff1cc6c6f94fbc9820e3da5986238, type: 2}
   controller: {fileID: 0}
 --- !u!114 &3044800117318140734
 MonoBehaviour:
@@ -225,6 +226,7 @@ GameObject:
   - component: {fileID: 3044800118309256013}
   - component: {fileID: 3044800118309256014}
   - component: {fileID: 3044800118309256011}
+  - component: {fileID: 4304662242337593227}
   m_Layer: 8
   m_Name: Wade
   m_TagString: Untagged
@@ -307,6 +309,7 @@ MonoBehaviour:
     unstableToNotGroundedContinuity: 1
   depenetrationSettings:
     isEnabled: 1
+  Inventory: {fileID: 0}
   directionInt: 0
   currentCameraBox: {fileID: 0}
   currentBullet: {fileID: 4658799744597204573, guid: 3c53bef4b563f45d6a420399cebafbf8, type: 3}
@@ -440,3 +443,17 @@ MonoBehaviour:
   jumpHeld: 0
   shootPress: 0
   shootHeld: 0
+--- !u!114 &4304662242337593227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044800118309256008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9918ce6f513442b3a78d7fcb752f67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: {fileID: 11400000, guid: 7a6cd971b402440f0948b3f6760e5ce7, type: 2}
+  keys: 0

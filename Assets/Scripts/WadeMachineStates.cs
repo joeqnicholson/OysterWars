@@ -16,6 +16,8 @@ public partial class WadeMachine : CharacterMotor
 
     private WadeState StNormal = new WadeState { canGetHit = true };
 
+    private WadeState StChest = new WadeState { canGetHit = false };
+
     private WadeState StHit = new WadeState { canGetHit = true, canFlip = false };
 
 
@@ -45,6 +47,13 @@ public partial class WadeMachine : CharacterMotor
             Speed.y = 70;
             Time.timeScale = .1f;
         }
+
+        if (toState == StChest)
+        {
+            Speed.x = 0;
+            Speed.y = 0;
+        }
+
     }
 
     void OnStateExit(WadeState fromState, WadeState toState)

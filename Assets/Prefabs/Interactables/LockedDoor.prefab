@@ -106,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Closed: {fileID: 11400000, guid: 0b7453368a5ce4ab7973f0d5120cbab7, type: 2}
   Open: {fileID: 11400000, guid: d81d514ecf58249229556b91cdcea605, type: 2}
+  Key: {fileID: 11400000, guid: 7a6cd971b402440f0948b3f6760e5ce7, type: 2}
 --- !u!212 &7920691731761411226
 SpriteRenderer:
   m_ObjectHideFlags: 0

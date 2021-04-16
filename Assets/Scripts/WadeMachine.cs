@@ -6,17 +6,18 @@ using System;
 
 public partial class WadeMachine : CharacterMotor
 {
+    public WadeInventory Inventory;
     private CharacterBody2D body;
     private CharacterMotor motor;
     private float walkSpeed = 105f;
     private float halfGravThreshold = -25;
     private float walkAcceleration = 1600f;
     private float walkDeceleration = 1000f;
-    private float jumpSpeed = 210f;
+    private float jumpSpeed = 250f;
     private float wallJumpHSpeed = 60;
-    private float conveyerJumpHSpeed = 50;
-    private float maxFall = -290f;
-    private float gravity = 1200f;
+    private float conveyerJumpHSpeed = 450;
+    private float maxFall = -310f;
+    private float gravity = 1300f;
     private float moveX;
     private float moveY;
     private float aimX;
@@ -48,6 +49,7 @@ public partial class WadeMachine : CharacterMotor
     private float forceMoveXTimer = 0;
     private float forceMoveXDirection = 0; 
     private float WallJumpForceTime = .32f;
+    private Vector3 forceToVector;
 
     
     
@@ -56,6 +58,7 @@ public partial class WadeMachine : CharacterMotor
     // Start is called before the first frame update
     protected override void Start()
     {
+        Inventory = GetComponent<WadeInventory>();
         CurrentWadeState = StNormal;
         OnGroundCollision += WadeGroundedFlag;
         inputs = GetComponent<WadeInputs>();
@@ -129,6 +132,10 @@ public partial class WadeMachine : CharacterMotor
             HitUpdate();
         }
 
+        if(CurrentWadeState == StChest)
+        {
+            ChestUpdate();
+        }
 
         SetVelocity(Speed);
 
@@ -183,9 +190,8 @@ public partial class WadeMachine : CharacterMotor
 
         if (!IsGrounded)
         {
-            float conveyerMultiplier = forceMoveXTimer > 0 ? 0f : 1;
-
-            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 4 * conveyerMultiplier * Time.deltaTime);
+            
+            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
 
             if ((IsAgainstLeftWall || IsAgainstRightWall) && jumpGraceTimer < jumpGraceTime)
             {
@@ -250,13 +256,10 @@ public partial class WadeMachine : CharacterMotor
         jumpGraceTimer = Mathf.Infinity;
         varJumpTimer = varJumpTime;
         ForceNotGroundedState();
-        if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && Mathf.Abs(Speed.x) > Mathf.Abs(conveyerAddition) && conveyerAddition != 0)
+        if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && conveyerAddition != 0)
         {
-            
-            forceMoveXDirection = sprite.direction;
-            forceMoveXTimer = .4f;
-            conveyerAddition = 200 * forceMoveXDirection;
-            Speed.x = walkSpeed + conveyerJumpHSpeed * sprite.direction;
+
+            Speed.x = (walkSpeed + conveyerJumpHSpeed + conveyerAddition) * sprite.direction;
             varJumpTimer = varJumpTime * .5f;
         }
         Speed.y = jumpSpeed;
@@ -292,6 +295,22 @@ public partial class WadeMachine : CharacterMotor
         Speed.y = MathHelper.Approach(Speed.y, 0, 400 * Time.deltaTime);
         if (Time.timeScale >= .7) { TransitionToState(StNormal); }
         invincibiltyTimer = 0;
+
+    }
+
+    void ChestUpdate()
+    {
+        Teleport(forceToVector, transform.rotation);
+
+        sprite.Play(sprite.SmallChest);
+        if(sprite.imageIndex == sprite.SmallChest.totalFrames - 1)
+        {
+            WadeGroundedFlag();
+            float squish = Mathf.Min(maxFall / maxFall, 1);
+            sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
+            sprite.scale.y = MathHelper.Approach(1, .6f, squish);
+            TransitionToState(StNormal);
+        }
 
     }
     
@@ -534,17 +553,22 @@ public partial class WadeMachine : CharacterMotor
 
         if (chest)
         {
-            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == Mathf.Sign(directionInt) && hInputTimer < .2f)
+            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == -Mathf.Sign(directionInt) && hInputTimer < .2f)
             {
-                chest.open = true;
+                chest.OpenChest();
+                forceToVector = chest.wadeToPosition;
+                TransitionToState(StChest);
             }
+
+
+
         }
 
         if (lockedDoor)
         {
             if (IsGrounded && hInputTimer < .2f)
             {
-                lockedDoor.Unlock();
+                lockedDoor.Unlock(Inventory);
             }
         }
     }
