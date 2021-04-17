@@ -101,7 +101,7 @@ public class BobcatArm : MonoBehaviour
                 shootDirection = Vector2.ClampMagnitude(shootDirection, 1);
                 shootPoint = transform.position + new Vector3(x, y, 0);
                 Bullet newBullet = Instantiate(currentBullet, shootPoint, Quaternion.identity).GetComponent<Bullet>();
-                newBullet.GetComponent<Bullet>().moveDirection = shootDirection;
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 shotTimer = 0;
 

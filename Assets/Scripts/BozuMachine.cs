@@ -103,7 +103,7 @@ public class BozuMachine : Enemy
                     {
                         print("bozuShoot");
                         Bullet newBullet = Instantiate(currentBullet, shootTransform.position, Quaternion.identity).GetComponent<Bullet>();
-                        newBullet.GetComponent<Bullet>().moveDirection = bulletDirection;
+                        newBullet.GetComponent<Bullet>().ChangeMoveDirection(bulletDirection);
                         newBullet.GetComponent<Bullet>().enemyBullet = true;
                         shotTimer = 0;
                     }

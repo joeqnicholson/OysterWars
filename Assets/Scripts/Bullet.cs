@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Vector3 moveDirection;
+    private float SpeedX;
+    private float SpeedY;
     private Vector3 lastPosition;
+    private float grav = 1000;
     public bool enemyBullet;
     [SerializeField] private float damage;
     float speed = 350;
+
+
+
     void Start()
     {
         
@@ -20,7 +25,10 @@ public class Bullet : MonoBehaviour
         RaycastHit2D hit;
 
         lastPosition = transform.position;
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+
+        SpeedY -= grav * Time.deltaTime;
+
+        transform.Translate(new Vector3(SpeedX,SpeedY,0) * Time.deltaTime);
 
         if(!GameData.Instance.IsOnScreen(transform.position, Vector2.one)) { Destroy(gameObject); }
 
@@ -39,7 +47,7 @@ public class Bullet : MonoBehaviour
                 WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
                 if (wade)
                 {
-                    wade.TakeDamage(Mathf.Sign(moveDirection.x), gameObject);
+                    wade.TakeDamage(Mathf.Sign(SpeedX), gameObject);
                 }
             }
 
@@ -68,6 +76,12 @@ public class Bullet : MonoBehaviour
         }
             
 
+    }
+
+    public void ChangeMoveDirection(Vector3 newDirection)
+    {
+        SpeedX = newDirection.x * speed;
+        SpeedY = newDirection.y * speed;
     }
 
     

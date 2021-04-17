@@ -9,7 +9,7 @@ public partial class WadeMachine : CharacterMotor
     public WadeInventory Inventory;
     private CharacterBody2D body;
     private CharacterMotor motor;
-    private float walkSpeed = 105f;
+    private float walkSpeed = 125f;
     private float halfGravThreshold = -25;
     private float walkAcceleration = 1600f;
     private float walkDeceleration = 1000f;
@@ -21,7 +21,7 @@ public partial class WadeMachine : CharacterMotor
     private float moveX;
     private float moveY;
     private float aimX;
-    private Vector2 Speed;
+    public Vector2 Speed;
     private float varJumpTime = .22f;
     private float varJumpTimer = 0;
     private float spriteLerp;
@@ -256,10 +256,10 @@ public partial class WadeMachine : CharacterMotor
         jumpGraceTimer = Mathf.Infinity;
         varJumpTimer = varJumpTime;
         ForceNotGroundedState();
-        if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && conveyerAddition != 0)
+        if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && conveyerAddition != 0 && moveX != 0)
         {
-
-            Speed.x = (walkSpeed + conveyerJumpHSpeed + conveyerAddition) * sprite.direction;
+            Speed.x = (walkSpeed + conveyerJumpHSpeed) * sprite.direction;
+            print(Speed.x);
             varJumpTimer = varJumpTime * .5f;
         }
         Speed.y = jumpSpeed;
@@ -411,7 +411,7 @@ public partial class WadeMachine : CharacterMotor
         {
             Debug.Log("youshot");
             Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
-            newBullet.GetComponent<Bullet>().moveDirection = shootDirection;
+            newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
             shotTimer = 0;
         }
 
