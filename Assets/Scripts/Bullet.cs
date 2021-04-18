@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour
     private float SpeedX;
     private float SpeedY;
     private Vector3 lastPosition;
-    private float grav = 1000;
+    private float grav = 0;
+    private const float Gravity = 1000;
     public bool enemyBullet;
     [SerializeField] private float damage;
     float speed = 350;
@@ -84,6 +85,10 @@ public class Bullet : MonoBehaviour
         SpeedY = newDirection.y * speed;
     }
 
+    public void MakeLob()
+    {
+        grav = Gravity;
+    }
     
 
 }

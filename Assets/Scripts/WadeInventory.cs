@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class WadeInventory : MonoBehaviour
 {
-    [SerializeField] private Item Key;
+    [SerializeField] public Item Key;
+    [SerializeField] public  Item LobShot;
     public int keys;
 
     
@@ -16,12 +17,13 @@ public class WadeInventory : MonoBehaviour
     void Start()
     {
         itemCount.Add(Key, 0);
+        itemCount.Add(LobShot, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        keys = (int)itemCount[Key];
+        keys = (int)itemCount[LobShot];
     }
 
     public void PickupItem(Item item)

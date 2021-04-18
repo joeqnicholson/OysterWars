@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: LobShotChest
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -8597013034570510628, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 6101009253524436691, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: -6582168249168642332, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: -5105511909685468369, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: -2865758842821575617, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 1218702364385993965, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: -2945966739071312593, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 4652404048803360846, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: -6715058051110878846, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 1484907148771215726, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 1355019390362314501, guid: 43c5352b48b574541afabe8c41dcf766, type: 3}
+  - {fileID: 8084455383870525233, guid: 3a5a6768ade3740a99d40c6d0a10ee28, type: 3}
+  imageIndex: 0
+  framesPerSecond: 10
+  loop: 0
+  totalFrames: 12

@@ -9,7 +9,6 @@ public partial class WadeMachine : CharacterMotor
     {
         public bool canGetHit;
         public bool canFlip = true;
-        
     }
 
     public WadeState CurrentWadeState;

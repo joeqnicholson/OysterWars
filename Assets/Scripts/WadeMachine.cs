@@ -415,7 +415,16 @@ public partial class WadeMachine : CharacterMotor
             shotTimer = 0;
         }
 
-        
+        if (inputs.item1Press && (int)Inventory.itemCount[Inventory.LobShot] > 0)
+        {
+            Debug.Log("youshot");
+            Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
+            newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
+            newBullet.GetComponent<Bullet>().MakeLob();
+            shotTimer = 0;
+        }
+
+
 
 
         // ddown = 12,2 dup = 12, 22 airdown = 0,0 up = 0, 27 forward = 17, 13 crouch 8, 13

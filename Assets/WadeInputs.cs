@@ -14,7 +14,8 @@ public class WadeInputs : MonoBehaviour
     public bool jumpHeld;
     public bool shootPress;
     public bool shootHeld;
-    
+    public bool item1Press;
+    public bool item1Held;
 
 
     // Use this for initialization
@@ -69,6 +70,8 @@ public class WadeInputs : MonoBehaviour
             jumpPress = keyboard.jKey.wasPressedThisFrame;
             shootHeld = keyboard.kKey.isPressed;
             shootPress = keyboard.kKey.wasPressedThisFrame;
+            item1Held = keyboard.nKey.isPressed;
+            item1Press = keyboard.nKey.wasPressedThisFrame;
         }
         else if (keyboard == null && gamepad != null)
         {
@@ -76,6 +79,8 @@ public class WadeInputs : MonoBehaviour
             jumpPress = gamepad.buttonSouth.wasPressedThisFrame;
             shootHeld = gamepad.buttonWest.isPressed;
             shootPress = gamepad.buttonWest.wasPressedThisFrame;
+            item1Held = gamepad.buttonNorth.isPressed;
+            item1Press = gamepad.buttonNorth.wasPressedThisFrame;
         }
         else
         {
@@ -83,6 +88,8 @@ public class WadeInputs : MonoBehaviour
             jumpPress = gamepad.buttonSouth.wasPressedThisFrame || keyboard.jKey.wasPressedThisFrame;
             shootHeld = gamepad.buttonWest.isPressed || keyboard.kKey.isPressed;
             shootPress = gamepad.buttonWest.wasPressedThisFrame || keyboard.kKey.wasPressedThisFrame;
+            item1Held = keyboard.nKey.isPressed || gamepad.buttonNorth.isPressed;
+            item1Press = keyboard.nKey.wasPressedThisFrame || gamepad.buttonNorth.wasPressedThisFrame;
         }
 
     }
