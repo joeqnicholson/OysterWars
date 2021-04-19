@@ -310,6 +310,7 @@ MonoBehaviour:
   depenetrationSettings:
     isEnabled: 1
   Inventory: {fileID: 0}
+  Speed: {x: 0, y: 0}
   directionInt: 0
   currentCameraBox: {fileID: 0}
   currentBullet: {fileID: 4658799744597204573, guid: 3c53bef4b563f45d6a420399cebafbf8, type: 3}
@@ -443,6 +444,8 @@ MonoBehaviour:
   jumpHeld: 0
   shootPress: 0
   shootHeld: 0
+  item1Press: 0
+  item1Held: 0
 --- !u!114 &4304662242337593227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,4 +459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Key: {fileID: 11400000, guid: 7a6cd971b402440f0948b3f6760e5ce7, type: 2}
+  LobShot: {fileID: 11400000, guid: 99e591b46ede24e7e8ebde81a725482b, type: 2}
+  KeyCard: {fileID: 11400000, guid: 7464a82a1828b4a039473e7a43f7fcc5, type: 2}
   keys: 0

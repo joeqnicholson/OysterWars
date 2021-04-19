@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: BossDoorOpen
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: 6034755106238789113, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 7778102119440135104, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -6877416527097752869, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -7143687899325420617, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -5061746547624992867, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -1122118285904227469, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 1932409275546981651, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -6095353930959920364, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 7829643009000809032, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -4570767753863684750, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 9109010278754041183, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -4446779973170154591, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -6796997150575272500, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -8321336653613565934, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -321414419669799134, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -3867403724455199886, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 7797040891586531904, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: 3041605949474293293, guid: 974b60cb658b84d1babf7ff2be187dd7, type: 3}
+  imageIndex: 0
+  framesPerSecond: 10
+  loop: 0
+  totalFrames: 18

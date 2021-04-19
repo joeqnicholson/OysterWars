@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: KeyCardChest
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -1000848794208038445, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 1929221007548338069, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 2482809585585671093, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: -5639969471596961081, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: -1821052461760270734, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 5095346950588495539, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: -2126922209466182434, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 2710099026113467342, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: -5685131708059114487, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 2453031220102456095, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: -996232939624282173, guid: 0b6b0d1690c4b4fdcbdd460cf1389837, type: 3}
+  - {fileID: 8084455383870525233, guid: 3a5a6768ade3740a99d40c6d0a10ee28, type: 3}
+  imageIndex: 0
+  framesPerSecond: 10
+  loop: 0
+  totalFrames: 12

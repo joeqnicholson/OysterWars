@@ -13,7 +13,7 @@ public class Chest : MonoBehaviour
     public bool open = false;
     public Vector3 itemPosition;
     public Vector3 wadeToPosition;
-
+    [SerializeField] bool bigChest = false;
 
     void Start()
     {
@@ -35,8 +35,8 @@ public class Chest : MonoBehaviour
         else
         {
             animator.Play(ChestOpen);
-            transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f,5);
-            transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(25, 10);
+            transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f, bigChest ? 9:5);
+            transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(25, bigChest? 18:10);
             GetComponent<BoxCollider2D>().enabled = false;
 
             if (itemSprite.imageIndex == itemSprite.currentSprite.totalFrames - 1)

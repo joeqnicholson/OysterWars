@@ -8,6 +8,7 @@ public class WadeInventory : MonoBehaviour
 {
     [SerializeField] public Item Key;
     [SerializeField] public  Item LobShot;
+    [SerializeField] public  Item KeyCard;
     public int keys;
 
     
@@ -18,6 +19,7 @@ public class WadeInventory : MonoBehaviour
     {
         itemCount.Add(Key, 0);
         itemCount.Add(LobShot, 0);
+        itemCount.Add(KeyCard, 0);
     }
 
     // Update is called once per frame
