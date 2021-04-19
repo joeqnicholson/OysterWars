@@ -173,9 +173,9 @@ public partial class WadeMachine : CharacterMotor
             }
         }
 
-        if (IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress)
+        if ((IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress) && !canInteract)
         {
-            if(!canHopDown && !canInteract)
+            if(!canHopDown)
             {
                 Jump();
             }
@@ -599,7 +599,7 @@ public partial class WadeMachine : CharacterMotor
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        canOpenChest = false;
+        canInteract = false;
     }
 
 
