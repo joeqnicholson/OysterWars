@@ -17,7 +17,7 @@ public partial class WadeMachine : CharacterMotor
 
     private WadeState StChest = new WadeState { canGetHit = false };
 
-    private WadeState StHit = new WadeState { canGetHit = true, canFlip = false };
+    private WadeState StHit = new WadeState { canGetHit = false, canFlip = false };
 
 
 
@@ -41,6 +41,7 @@ public partial class WadeMachine : CharacterMotor
 
         if(toState == StHit)
         {
+            StartCoroutine(GameData.Instance.cameraMachine.CameraShake(10, .2f));
             ForceNotGroundedState();
             Speed.x = 100 * -directionInt;
             Speed.y = 70;
@@ -64,6 +65,14 @@ public partial class WadeMachine : CharacterMotor
 
         if (fromState == StHit)
         {
+
+            print("jimbodangobongo");
+
+            if (teleportHit)
+            {
+                transform.position = currentCameraBox.SpawnPoint;
+            }
+            teleportHit = false;
             invincibiltyTimer = 0;
             Time.timeScale = 1;
         }

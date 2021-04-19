@@ -11,6 +11,7 @@ public class CameraBox : MonoBehaviour
     private float wadeY;
     public bool onTrackX;
     public bool onTrackY;
+    public Vector3 SpawnPoint;
     
 
 

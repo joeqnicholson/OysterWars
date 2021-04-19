@@ -41,6 +41,7 @@ public partial class WadeMachine : CharacterMotor
     public bool canOpenChest;
     [SerializeField] private float conveyerAddition;
     private float hInputTimer =0;
+    private bool teleportHit;
     private float invincibiltyTimer = 0;
     private float invincibiltyTime = 1;
     float jumpDownDistance = 0.08f;
@@ -290,7 +291,7 @@ public partial class WadeMachine : CharacterMotor
         
 
 
-        Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * 18 * Time.deltaTime);
+        Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * 15 * Time.deltaTime);
         
         Speed.x = MathHelper.Approach(Speed.x, 0, 400 * Time.deltaTime);
         Speed.y = MathHelper.Approach(Speed.y, 0, 400 * Time.deltaTime);
@@ -435,7 +436,7 @@ public partial class WadeMachine : CharacterMotor
     {
         if (invincibiltyTimer >= invincibiltyTime)
         {
-            StartCoroutine(GameData.Instance.cameraMachine.CameraShake(10, .2f));
+            
             directionInt = -recoilDirection;
             TransitionToState(StHit);
             Debug.Log("wadeIsHit");
@@ -591,9 +592,15 @@ public partial class WadeMachine : CharacterMotor
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.GetComponentInParent<Enemy>())
+        if (collision.GetComponentInParent<Enemy>() && CurrentWadeState.canGetHit)
         {
             TakeDamage(-directionInt);
+        }
+
+        if(collision.gameObject.layer == 10 && CurrentWadeState.canGetHit)
+        {
+            TransitionToState(StHit);
+            teleportHit = true;
         }
     }
 
