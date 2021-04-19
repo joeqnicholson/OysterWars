@@ -67,6 +67,11 @@ public partial class WadeMachine : CharacterMotor
             invincibiltyTimer = 0;
             Time.timeScale = 1;
         }
+
+        if(fromState == StChest)
+        {
+            canInteract = false;
+        }
     }
 
 }

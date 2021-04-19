@@ -50,9 +50,10 @@ public partial class WadeMachine : CharacterMotor
     private float forceMoveXDirection = 0; 
     private float WallJumpForceTime = .32f;
     private Vector3 forceToVector;
+    private bool canInteract;
 
-    
-    
+
+
 
 
     // Start is called before the first frame update
@@ -174,7 +175,7 @@ public partial class WadeMachine : CharacterMotor
 
         if (IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress)
         {
-            if(!canHopDown)
+            if(!canHopDown && !canInteract)
             {
                 Jump();
             }
@@ -562,7 +563,8 @@ public partial class WadeMachine : CharacterMotor
 
         if (chest)
         {
-            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == -Mathf.Sign(directionInt) && hInputTimer < .2f)
+            canInteract = true;
+            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == -Mathf.Sign(directionInt) && jumpGraceTimer < .2f)
             {
                 chest.OpenChest();
                 forceToVector = chest.wadeToPosition;
@@ -575,15 +577,20 @@ public partial class WadeMachine : CharacterMotor
 
         if (lockedDoor)
         {
-            if (IsGrounded && hInputTimer < .2f)
+            canInteract = true;
+            if (IsGrounded && jumpGraceTimer < .2f)
             {
                 lockedDoor.Unlock(Inventory);
+                jumpGraceTimer = Mathf.Infinity;
+                canInteract = false;
+              
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.GetComponentInParent<Enemy>())
         {
             TakeDamage(-directionInt);

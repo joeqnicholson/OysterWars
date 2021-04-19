@@ -33,6 +33,10 @@ public class WadeInventory : MonoBehaviour
         int currentValue = (int) itemCount[item];
         int nextValue = currentValue += 1;
         itemCount[item] = nextValue;
+
+
+        Texture2D jimbo;
+        
     }
 
     public bool TakeNeededItem (Item item, int times)
