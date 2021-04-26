@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: Wade_JumpRegular
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: -5923028570945957142, guid: 51f6b7e01a72e451abfdd11768854780, type: 3}
-  - {fileID: 6223359156349620531, guid: 51f6b7e01a72e451abfdd11768854780, type: 3}
-  - {fileID: 5749089512275690863, guid: 51f6b7e01a72e451abfdd11768854780, type: 3}
-  - {fileID: -4054327993108108419, guid: 51f6b7e01a72e451abfdd11768854780, type: 3}
+  - {fileID: 21300000, guid: da41a58aba84e4c71b2def4e60e93421, type: 3}
   imageIndex: 0
-  currentImage: {fileID: -5923028570945957142, guid: 51f6b7e01a72e451abfdd11768854780, type: 3}
   framesPerSecond: 4
   loop: 0
+  totalFrames: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 1
   dynamicGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   oneWayPlatforms:
     serializedVersion: 2
-    m_Bits: 80
+    m_Bits: 64

@@ -43,7 +43,7 @@ public class ObjectSprite : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = new Vector3(scale.x * direction, scale.y, 1);
+        transform.localScale = new Vector3(scale.x  * direction, scale.y, 1);
         Animate();
         spriteRenderer.sprite = currentImage;
     }
