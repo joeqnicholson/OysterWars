@@ -8,6 +8,7 @@ public class WadeSound : MonoBehaviour
 
     [SerializeField] private AudioClip footStep;
     [SerializeField] private AudioClip birdChirp;
+    [SerializeField] private AudioClip[] gunShots = new AudioClip[10];
 
     private AudioSource audioSource;
 
@@ -20,20 +21,12 @@ public class WadeSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PlayAudio(footStep);
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            PlayAudio(birdChirp);
-        }
+        
     }
 
-    public void PlayAudio (AudioClip audioClip)
+    public void PlayGunShot ()
     {
-        audioSource.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(gunShots[Random.Range(0, gunShots.Length - 1)]);
     }
 
 }

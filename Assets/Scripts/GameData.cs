@@ -88,4 +88,9 @@ public class GameData : MonoBehaviour
         return false;
     }
 
+    public bool OnRightSide(float xPos)
+    {
+        return cameraMachine.transform.position.x < xPos;
+    }
+
 }

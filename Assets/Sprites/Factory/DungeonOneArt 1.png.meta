@@ -1,0 +1,2511 @@
+fileFormatVersion: 2
+guid: 3357d842bea694ea3a8d0df29ddccbb5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8544732241345334031
+    second: DungeonOneArt_0
+  - first:
+      213: -6392467341267625433
+    second: DungeonOneArt_1
+  - first:
+      213: 1598698574537472965
+    second: DungeonOneArt_2
+  - first:
+      213: 2749175572346233107
+    second: DungeonOneArt_3
+  - first:
+      213: -7978815772680701669
+    second: DungeonOneArt_4
+  - first:
+      213: 8632434014190674229
+    second: DungeonOneArt_5
+  - first:
+      213: -3744097302366145407
+    second: DungeonOneArt_6
+  - first:
+      213: 8647106706001860833
+    second: DungeonOneArt_7
+  - first:
+      213: 5569135231791212661
+    second: DungeonOneArt_8
+  - first:
+      213: -1689285301384357504
+    second: DungeonOneArt_9
+  - first:
+      213: 7927524757387271410
+    second: DungeonOneArt_10
+  - first:
+      213: -5009071821104740306
+    second: DungeonOneArt_11
+  - first:
+      213: 7060711642922322894
+    second: DungeonOneArt_12
+  - first:
+      213: 8857123549713896433
+    second: DungeonOneArt_13
+  - first:
+      213: -29568933784185910
+    second: DungeonOneArt_14
+  - first:
+      213: 7613798132873829989
+    second: DungeonOneArt_15
+  - first:
+      213: 3519380315154733581
+    second: DungeonOneArt_16
+  - first:
+      213: -7980509092727460866
+    second: DungeonOneArt_17
+  - first:
+      213: -116058218724710228
+    second: DungeonOneArt_18
+  - first:
+      213: -7808892274568608079
+    second: DungeonOneArt_19
+  - first:
+      213: -8808888972289239698
+    second: DungeonOneArt_20
+  - first:
+      213: -6226506610435801775
+    second: DungeonOneArt_21
+  - first:
+      213: 4376778858759098824
+    second: DungeonOneArt_22
+  - first:
+      213: 66625829217398
+    second: DungeonOneArt_23
+  - first:
+      213: 802341758695144240
+    second: DungeonOneArt_24
+  - first:
+      213: -7900701792731411093
+    second: DungeonOneArt_25
+  - first:
+      213: -1252982626186518415
+    second: DungeonOneArt_26
+  - first:
+      213: -7271583627559539283
+    second: DungeonOneArt_27
+  - first:
+      213: 2677800563268805698
+    second: DungeonOneArt_28
+  - first:
+      213: 7253057756276262396
+    second: DungeonOneArt_29
+  - first:
+      213: 3896513061623892937
+    second: DungeonOneArt_30
+  - first:
+      213: -424491271117946045
+    second: DungeonOneArt_31
+  - first:
+      213: -2816887215355813439
+    second: DungeonOneArt_32
+  - first:
+      213: -10702980552337439
+    second: DungeonOneArt_33
+  - first:
+      213: -4241656645761239023
+    second: DungeonOneArt_34
+  - first:
+      213: 4726748077633434306
+    second: DungeonOneArt_35
+  - first:
+      213: 6993459066761155234
+    second: DungeonOneArt_36
+  - first:
+      213: 5857716444057849120
+    second: DungeonOneArt_37
+  - first:
+      213: 2089826733861292996
+    second: DungeonOneArt_38
+  - first:
+      213: -4952040241498958349
+    second: DungeonOneArt_39
+  - first:
+      213: 7064037394645032087
+    second: DungeonOneArt_40
+  - first:
+      213: 2938608170962447559
+    second: DungeonOneArt_41
+  - first:
+      213: 2061920454095889641
+    second: DungeonOneArt_42
+  - first:
+      213: -2802744539491461190
+    second: DungeonOneArt_43
+  - first:
+      213: 7022249847201926812
+    second: DungeonOneArt_44
+  - first:
+      213: -1463866006872402232
+    second: DungeonOneArt_45
+  - first:
+      213: 4455128977235302456
+    second: DungeonOneArt_46
+  - first:
+      213: -1706497281593801743
+    second: DungeonOneArt_47
+  - first:
+      213: 6368852809242963137
+    second: DungeonOneArt_48
+  - first:
+      213: -8436726500435760506
+    second: DungeonOneArt_49
+  - first:
+      213: -1206770209730474552
+    second: DungeonOneArt_50
+  - first:
+      213: -7477510557879741724
+    second: DungeonOneArt_51
+  - first:
+      213: 3872745849907587318
+    second: DungeonOneArt_52
+  - first:
+      213: 5561341179561065912
+    second: DungeonOneArt_53
+  - first:
+      213: -6376789232684727505
+    second: DungeonOneArt_54
+  - first:
+      213: -13719288169726435
+    second: DungeonOneArt_55
+  - first:
+      213: 1073713837897654266
+    second: DungeonOneArt_56
+  - first:
+      213: -7157049590726647113
+    second: DungeonOneArt_57
+  - first:
+      213: 7100321897048846285
+    second: DungeonOneArt_58
+  - first:
+      213: 6181174536997993797
+    second: DungeonOneArt_59
+  - first:
+      213: 6614302465947137297
+    second: DungeonOneArt_60
+  - first:
+      213: -7282617893033867433
+    second: DungeonOneArt_61
+  - first:
+      213: 9092344988214930637
+    second: DungeonOneArt_62
+  - first:
+      213: 2297953759110606399
+    second: DungeonOneArt_63
+  - first:
+      213: -1371722743541102426
+    second: DungeonOneArt_64
+  - first:
+      213: -6440907166889386023
+    second: DungeonOneArt_65
+  - first:
+      213: -1717077811031850345
+    second: DungeonOneArt_66
+  - first:
+      213: -8953772419859869678
+    second: DungeonOneArt_67
+  - first:
+      213: -5871870972094898444
+    second: DungeonOneArt_68
+  - first:
+      213: 2249264480146251924
+    second: DungeonOneArt_69
+  - first:
+      213: -2608391888558390472
+    second: DungeonOneArt_70
+  - first:
+      213: -7084140149160763714
+    second: DungeonOneArt_71
+  - first:
+      213: -3656424803885973947
+    second: DungeonOneArt_72
+  - first:
+      213: 2735565809466141936
+    second: DungeonOneArt_73
+  - first:
+      213: 3007958095243793654
+    second: DungeonOneArt_74
+  - first:
+      213: -8397938131489825149
+    second: DungeonOneArt_75
+  - first:
+      213: 6750376232555152480
+    second: DungeonOneArt_76
+  - first:
+      213: -4413093826984156639
+    second: DungeonOneArt_77
+  - first:
+      213: -6827729883132474440
+    second: DungeonOneArt_78
+  - first:
+      213: -1017571172908682773
+    second: DungeonOneArt_79
+  - first:
+      213: 7387314861286798183
+    second: DungeonOneArt_80
+  - first:
+      213: -3307341359465141490
+    second: DungeonOneArt_81
+  - first:
+      213: -6892364678443088284
+    second: DungeonOneArt_82
+  - first:
+      213: -6655000622696659098
+    second: DungeonOneArt_83
+  - first:
+      213: -4402032911925904042
+    second: DungeonOneArt_84
+  - first:
+      213: 3421597790954548628
+    second: DungeonOneArt_85
+  - first:
+      213: -4612920975448423284
+    second: DungeonOneArt_86
+  - first:
+      213: 8691615823378463754
+    second: DungeonOneArt_87
+  - first:
+      213: -2009359414662817246
+    second: DungeonOneArt_88
+  - first:
+      213: -8181363677737517184
+    second: DungeonOneArt_89
+  - first:
+      213: 1882736271605420075
+    second: DungeonOneArt_90
+  - first:
+      213: 8352319332523167288
+    second: DungeonOneArt_91
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DungeonOneArt_0
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 266
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b473a93bcf49670800000000000000
+      internalID: 8544732241345334031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_1
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 266
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a157562d46947a0800000000000000
+      internalID: -6392467341267625433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 225
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cbba3e12e7bf2610800000000000000
+      internalID: 1598698574537472965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_3
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 225
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 311e0e60e98072620800000000000000
+      internalID: 2749175572346233107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_4
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 194
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19351d045d854190800000000000000
+      internalID: -7978815772680701669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_5
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 241
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531a5d2dff09cc770800000000000000
+      internalID: 8632434014190674229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_6
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 243
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 184b7ff275b4a0cc0800000000000000
+      internalID: -3744097302366145407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 238
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8932a1cb1b00870800000000000000
+      internalID: 8647106706001860833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_8
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 210
+        width: 32
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 578270d9cfa894d40800000000000000
+      internalID: 5569135231791212661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_9
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 226
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08952b6f7f37e88e0800000000000000
+      internalID: -1689285301384357504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_10
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 219
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fcde28d3c9340e60800000000000000
+      internalID: 7927524757387271410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_11
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 218
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2802a8c7b33c7ab0800000000000000
+      internalID: -5009071821104740306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_12
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 184
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb89d974dfacf160800000000000000
+      internalID: 7060711642922322894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_13
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 184
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f3917001f2daea70800000000000000
+      internalID: 8857123549713896433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_14
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 212
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3186d1633f69ff0800000000000000
+      internalID: -29568933784185910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_15
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 214
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e1a7def05a9a960800000000000000
+      internalID: 7613798132873829989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_16
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 193
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0adc4a00c957d030800000000000000
+      internalID: 3519380315154733581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_17
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 173
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb643143498f3190800000000000000
+      internalID: -7980509092727460866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_18
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 177
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca826ab3aada36ef0800000000000000
+      internalID: -116058218724710228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_19
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 170
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6cb0d79dd31a390800000000000000
+      internalID: -7808892274568608079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_20
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 165
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6518d4b62a80c580800000000000000
+      internalID: -8808888972289239698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_21
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 142
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d3a5d2a310799a0800000000000000
+      internalID: -6226506610435801775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_22
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 150
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c196c0de217dbc30800000000000000
+      internalID: 4376778858759098824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_23
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 108
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67422e8889c300000800000000000000
+      internalID: 66625829217398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_24
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 129
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b7c7b149d722b00800000000000000
+      internalID: 802341758695144240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_25
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 129
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6dc3f744911b5290800000000000000
+      internalID: -7900701792731411093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_26
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 128
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170aa68a0f28c9ee0800000000000000
+      internalID: -1252982626186518415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_27
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 126
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: dad64cc9735261b90800000000000000
+      internalID: -7271583627559539283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_28
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 126
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2446af8bc65792520800000000000000
+      internalID: 2677800563268805698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_29
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 107
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf50d3ad99908a460800000000000000
+      internalID: 7253057756276262396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_30
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 111
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cb03c42cf1331630800000000000000
+      internalID: 3896513061623892937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_31
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 111
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343c2ce1077eb1af0800000000000000
+      internalID: -424491271117946045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_32
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 110
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1a06c800868e8d0800000000000000
+      internalID: -2816887215355813439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_33
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 108
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e7d32622b9f9dff0800000000000000
+      internalID: -10702980552337439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_34
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 108
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 118f93201cb9225c0800000000000000
+      internalID: -4241656645761239023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_35
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 90
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c2f91e4558c89140800000000000000
+      internalID: 4726748077633434306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_36
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 90
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a29881e7f1cd0160800000000000000
+      internalID: 6993459066761155234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_37
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 90
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d4803021aca4150800000000000000
+      internalID: 5857716444057849120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_38
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 92
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: -0.0000076293945, y: 4}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cbcae1975e800d10800000000000000
+      internalID: 2089826733861292996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_39
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 92
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f5d30c23a1d64bb0800000000000000
+      internalID: -4952040241498958349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_40
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 92
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79c94e36590880260800000000000000
+      internalID: 7064037394645032087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_41
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 87
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cce644ef8808c820800000000000000
+      internalID: 2938608170962447559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_42
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 89
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: -0.0000076293945, y: 4}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e46f7d7ab96d9c10800000000000000
+      internalID: 2061920454095889641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_43
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 89
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab7127fd0b6aa19d0800000000000000
+      internalID: -2802744539491461190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_44
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 89
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e0382d70b047160800000000000000
+      internalID: 7022249847201926812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_45
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 73
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c6d9956f9d4fabe0800000000000000
+      internalID: -1463866006872402232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_46
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 73
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838d8a4533cc3dd30800000000000000
+      internalID: 4455128977235302456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_47
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 73
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f38e6883cd4158e0800000000000000
+      internalID: -1706497281593801743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_48
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 73
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cceca9e2e5b26850800000000000000
+      internalID: 6368852809242963137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_49
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 74
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ae66292f9baea80800000000000000
+      internalID: -8436726500435760506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_50
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 74
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cdcd7353e0b04fe0800000000000000
+      internalID: -1206770209730474552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_51
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 65
+        width: 26
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e25851e3cb8a3890800000000000000
+      internalID: -7477510557879741724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_52
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 71
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -7.5}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -7.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f82c11f4d1ceb530800000000000000
+      internalID: 3872745849907587318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_53
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 71
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -7.5}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -7.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bd3d7a665add2d40800000000000000
+      internalID: 5561341179561065912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_54
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 71
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f238a428af71187a0800000000000000
+      internalID: -6376789232684727505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_55
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 71
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e721e41624fcff0800000000000000
+      internalID: -13719288169726435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_56
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff9f4afb0996ee00800000000000000
+      internalID: 1073713837897654266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_57
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 56
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b222e0215d0dac90800000000000000
+      internalID: -7157049590726647113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_58
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 56
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: -0.0000076293945, y: 4}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcf26807529698260800000000000000
+      internalID: 7100321897048846285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_59
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 56
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d747cfd71f7c550800000000000000
+      internalID: 6181174536997993797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_60
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 56
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115f4c77c09bacb50800000000000000
+      internalID: 6614302465947137297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_61
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 48
+        width: 26
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75700da7c91feea90800000000000000
+      internalID: -7282617893033867433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_62
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 46
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 2}
+        - {x: 8, y: 2}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: dccaadde79f7e2e70800000000000000
+      internalID: 9092344988214930637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_63
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 44
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3eaf02d4c8f3ef10800000000000000
+      internalID: 2297953759110606399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_64
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 53
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a888e4be69a6fce0800000000000000
+      internalID: -1371722743541102426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_65
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df5a4e9e0d4d96a0800000000000000
+      internalID: -6440907166889386023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_66
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 792cdbd04d6bb28e0800000000000000
+      internalID: -1717077811031850345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_67
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 210109a5c6fcdb380800000000000000
+      internalID: -8953772419859869678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_68
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe1b5d167ce28ea0800000000000000
+      internalID: -5871870972094898444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_69
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4906509a02ef63f10800000000000000
+      internalID: 2249264480146251924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_70
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 31
+        width: 26
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 833877fa5612dcbd0800000000000000
+      internalID: -2608391888558390472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_71
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 26
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebe9036511410bd90800000000000000
+      internalID: -7084140149160763714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_72
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 26
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ef2707305c14dc0800000000000000
+      internalID: -3656424803885973947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_73
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 36
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fceeec2c9ea6f520800000000000000
+      internalID: 2735565809466141936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_74
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 36
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f4544663f96eb920800000000000000
+      internalID: 3007958095243793654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_75
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38e57da73c7847b80800000000000000
+      internalID: -8397938131489825149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_76
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06480b12b672ead50800000000000000
+      internalID: 6750376232555152480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_77
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 122e322cb8a81c2c0800000000000000
+      internalID: -4413093826984156639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_78
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bbc19d98d70f31a0800000000000000
+      internalID: -6827729883132474440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_79
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be1b919d86cd0e1f0800000000000000
+      internalID: -1017571172908682773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_80
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763b6f60ab3058660800000000000000
+      internalID: 7387314861286798183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_81
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b6f1e7e86f912d0800000000000000
+      internalID: -3307341359465141490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_82
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 8
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46643fe97d66950a0800000000000000
+      internalID: -6892364678443088284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_83
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 9
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: -0.0000076293945, y: 4}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66789208130b4a3a0800000000000000
+      internalID: -6655000622696659098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_84
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 9
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65df31bb366d8e2c0800000000000000
+      internalID: -4402032911925904042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_85
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 19
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d6b1eff05fb7f20800000000000000
+      internalID: 3421597790954548628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_86
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 5
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c84c27920dc9bffb0800000000000000
+      internalID: -4612920975448423284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_87
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 5
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: -0.0000076293945, y: 4}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c33ac8a82de9870800000000000000
+      internalID: 8691615823378463754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_88
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 5
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a9fe622425d14e0800000000000000
+      internalID: -2009359414662817246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_89
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 5
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08ffb22f415f57e80800000000000000
+      internalID: -8181363677737517184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_90
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b20d8c2f9a2d02a10800000000000000
+      internalID: 1882736271605420075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_91
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 225
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ecba13e2669e370800000000000000
+      internalID: 8352319332523167288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

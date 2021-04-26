@@ -46,6 +46,7 @@ public class BozuMachine : Enemy
     private bool isOnScreen = false;
 
 
+
     protected override void Start()
     {
         base.Start();
@@ -53,6 +54,7 @@ public class BozuMachine : Enemy
         CurrentBozuState = BozuState.NotOnScreen;
         motor = GetComponent<CharacterMotor>();
         sprite = GetComponentInChildren<SpriteAnimationController>();
+        if (GameData.Instance.OnRightSide(transform.position.x)) { sprite.direction = -1; }
         OnGroundCollision += BozuGroundedFlag;
         OnHeadCollision += BozuHeadFlag;
         directionInt = Mathf.Sign(sprite.transform.localScale.x);
@@ -335,4 +337,6 @@ public class BozuMachine : Enemy
             }
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class CameraMachine : MonoBehaviour
 {
@@ -14,16 +15,34 @@ public class CameraMachine : MonoBehaviour
     public float bottomSide;
     public float topSide;
     public Vector3 shakeVector;
+    private Vector2 size;
+    [SerializeField] private GameObject runner;
+    private float ySpawnPosition =0;
+    [SerializeField] private float enemyTimerLeft=0;
+    [SerializeField] private float enemyTimerRight=0;
+    [SerializeField] private float nextEnemyTimeLeft;
+    [SerializeField] private float nextEnemyTimeRight;
+    private bool ySpawnGoingUp;
+    private float spawnTimeMin = 3f;
+    private float spawnTimeMax = 8f;
+
 
     private void Start()
     {
+        nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
+        nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
         machine = GameData.Instance.machine;
+        size.x = GetComponent<PixelPerfectCamera>().refResolutionX;
+        size.y = GetComponent<PixelPerfectCamera>().refResolutionY;
     }
 
     
     void FixedUpdate()
     {
+
+
         UpdateBounds();
+        SpawnEnemies();
         currentCameraBox = machine.currentCameraBox;
         boxTransform = currentCameraBox.transform;
 
@@ -38,15 +57,15 @@ public class CameraMachine : MonoBehaviour
 
             Target.x = Mathf.Clamp(
                 Target.x,
-                boxTransform.position.x - (boxTransform.localScale.x / 2f) +240,
-                boxTransform.position.x + (boxTransform.localScale.x / 2f) -240
+                boxTransform.position.x - (boxTransform.localScale.x / 2f) + (size.x/2),
+                boxTransform.position.x + (boxTransform.localScale.x / 2f) -(size.x/2)
             );
 
 
             Target.y = Mathf.Clamp(
                 Target.y,
-                boxTransform.position.y - (boxTransform.localScale.y / 2f) + 135f,
-                boxTransform.position.y + (boxTransform.localScale.y / 2f) - 135f
+                boxTransform.position.y - (boxTransform.localScale.y / 2f) + (size.y/2),
+                boxTransform.position.y + (boxTransform.localScale.y / 2f) - (size.y/2)
             );
             
       
@@ -67,12 +86,13 @@ public class CameraMachine : MonoBehaviour
         
     }
 
+   
     public void UpdateBounds()
     {
-        topSide = transform.position.y + 135;
-        bottomSide = transform.position.y - 135;
-        rightSide = transform.position.x + 240;
-        leftSide = transform.position.x - 240;
+        topSide = transform.position.y + (size.y / 2);
+        bottomSide = transform.position.y - (size.y / 2);
+        rightSide = transform.position.x + (size.x / 2);
+        leftSide = transform.position.x - (size.x / 2);
     }
 
     public IEnumerator CameraShake(float magnitude, float duration)
@@ -90,6 +110,72 @@ public class CameraMachine : MonoBehaviour
 
 
         
+    }
+
+    private void SpawnEnemies()
+    {
+
+        enemyTimerRight += Time.deltaTime;
+        enemyTimerLeft += Time.deltaTime;
+
+        if (ySpawnGoingUp)
+        {
+            ySpawnPosition += 1;
+        }
+        else
+        {
+            ySpawnPosition -= 1;
+        }
+
+        if(ySpawnPosition > transform.position.y + size.y / 2)
+        {
+            ySpawnGoingUp = false;
+        }
+
+        if(ySpawnPosition < transform.position.y - size.y / 2)
+        {
+            ySpawnGoingUp = true;
+        }
+
+        Vector3 rightPoint = new Vector3(transform.position.x + (size.x / 2) - 15, ySpawnPosition, 0);
+        Vector3 leftPoint = new Vector3(transform.position.x - (size.x / 2) + 15, ySpawnPosition, 0);
+
+        print(GameData.Instance.IsOnScreen(rightPoint, Vector3.one));
+
+        RaycastHit2D hitInfoRight = Physics2D.Linecast(rightPoint, rightPoint + (Vector3.down * 90));
+        RaycastHit2D hitInfoLeft = Physics2D.Linecast(leftPoint, leftPoint + Vector3.down * 90);
+
+        
+
+        if (hitInfoRight)
+        {
+
+            if(hitInfoRight.distance > 32 && enemyTimerRight > nextEnemyTimeRight && GameData.Instance.IsOnScreen(hitInfoRight.point,Vector3.zero))
+            {
+                if(Vector3.Distance(machine.transform.position, hitInfoRight.point) > 48)
+                {
+                    enemyTimerRight = 0;
+                    nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
+                    Instantiate(runner, hitInfoRight.point, Quaternion.identity);
+                }
+            }
+        }
+
+        if (hitInfoLeft)
+        {
+            if (hitInfoLeft.distance > 16 && enemyTimerLeft > nextEnemyTimeLeft && GameData.Instance.IsOnScreen(hitInfoLeft.point, Vector3.zero))
+            {
+                if (Vector3.Distance(machine.transform.position, hitInfoLeft.point) > 48)
+                {
+                    enemyTimerLeft = 0;
+                    nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
+                    Instantiate(runner, hitInfoLeft.point, Quaternion.identity);
+                }
+            }
+        }
+
+
+
     }
 
 }

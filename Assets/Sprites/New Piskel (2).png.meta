@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: 51f6b7e01a72e451abfdd11768854780
+guid: 91e6250ac102e434bb834634addbd3d5
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -5923028570945957142
-    second: WadeJumpRegular_0
-  - first:
-      213: 6223359156349620531
-    second: WadeJumpRegular_1
-  - first:
-      213: 5749089512275690863
-    second: WadeJumpRegular_2
-  - first:
-      213: -4054327993108108419
-    second: WadeJumpRegular_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -47,15 +35,15 @@ TextureImporter:
     filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 1
@@ -113,91 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: WadeJumpRegular_0
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 34
-        width: 19
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae2d64275ec2dcda0800000000000000
-      internalID: -5923028570945957142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeJumpRegular_1
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 35
-        width: 22
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 331d4ef0e20dd5650800000000000000
-      internalID: 6223359156349620531
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeJumpRegular_2
-      rect:
-        serializedVersion: 2
-        x: 141
-        y: 35
-        width: 22
-        height: 25
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f65cd11937ed8cf40800000000000000
-      internalID: 5749089512275690863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeJumpRegular_3
-      rect:
-        serializedVersion: 2
-        x: 201
-        y: 33
-        width: 22
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7b6ed7cb222cb7c0800000000000000
-      internalID: -4054327993108108419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

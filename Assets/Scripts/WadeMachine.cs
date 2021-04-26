@@ -7,22 +7,23 @@ using System;
 public partial class WadeMachine : CharacterMotor
 {
     public WadeInventory Inventory;
+    public WadeSound Sound;
     private CharacterBody2D body;
     private CharacterMotor motor;
     private float walkSpeed = 125f;
     private float halfGravThreshold = -25;
     private float walkAcceleration = 1600f;
     private float walkDeceleration = 1000f;
-    private float jumpSpeed = 250f;
+    private float jumpSpeed = 240f;
     private float wallJumpHSpeed = 60;
     private float conveyerJumpHSpeed = 450;
-    private float maxFall = -310f;
-    private float gravity = 1300f;
+    private float maxFall = -300f;
+    private float gravity = 2000f;
     private float moveX;
     private float moveY;
     private float aimX;
     public Vector2 Speed;
-    private float varJumpTime = .22f;
+    private float varJumpTime = .19f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private ObjectSprite sprite;
@@ -40,7 +41,7 @@ public partial class WadeMachine : CharacterMotor
     private int startHealth = 3;
     public bool canOpenChest;
     [SerializeField] private float conveyerAddition;
-    private float hInputTimer =0;
+    private float hInputTimer = 0;
     private bool teleportHit;
     private float invincibiltyTimer = 0;
     private float invincibiltyTime = 1;
@@ -48,7 +49,7 @@ public partial class WadeMachine : CharacterMotor
     private WadeInputs inputs;
     [SerializeField] bool canHopDown;
     private float forceMoveXTimer = 0;
-    private float forceMoveXDirection = 0; 
+    private float forceMoveXDirection = 0;
     private float WallJumpForceTime = .32f;
     private Vector3 forceToVector;
     private bool canInteract;
@@ -61,6 +62,7 @@ public partial class WadeMachine : CharacterMotor
     protected override void Start()
     {
         Inventory = GetComponent<WadeInventory>();
+        Sound = GetComponent<WadeSound>();
         CurrentWadeState = StNormal;
         OnGroundCollision += WadeGroundedFlag;
         inputs = GetComponent<WadeInputs>();
@@ -89,25 +91,25 @@ public partial class WadeMachine : CharacterMotor
             moveX = inputs.moveInput.x;
         }
 
-        
+
 
         moveY = inputs.moveInput.y;
 
         shotTimer += Time.deltaTime;
 
-        
+
 
         jumpGraceTimer += Time.deltaTime;
 
         hInputTimer += Time.deltaTime;
 
-        if(invincibiltyTimer <= invincibiltyTime)
+        if (invincibiltyTimer <= invincibiltyTime)
         {
             invincibiltyTimer += Time.deltaTime;
         }
-        
 
-        
+
+
 
         if (varJumpTimer > 0) { varJumpTimer -= Time.deltaTime; }
 
@@ -121,20 +123,20 @@ public partial class WadeMachine : CharacterMotor
         if (Input.GetKeyDown(KeyCode.H))
         {
             hInputTimer = 0;
-            
+
         }
 
-        if(CurrentWadeState == StNormal)
+        if (CurrentWadeState == StNormal)
         {
             NormalUpdate();
         }
 
-        if(CurrentWadeState == StHit)
+        if (CurrentWadeState == StHit)
         {
             HitUpdate();
         }
 
-        if(CurrentWadeState == StChest)
+        if (CurrentWadeState == StChest)
         {
             ChestUpdate();
         }
@@ -145,18 +147,18 @@ public partial class WadeMachine : CharacterMotor
 
     void NormalUpdate()
     {
-        
+
 
         ShootStuff();
 
         if (IsGrounded)
         {
 
-            if(jumpGraceTimer > jumpGraceTime)
+            if (jumpGraceTimer > jumpGraceTime)
             {
                 conveyerAddition = TakeConveyerSpeed();
             }
-        
+
             if (!crouching)
             {
                 if (moveY == -1 && moveX == 0)
@@ -176,7 +178,7 @@ public partial class WadeMachine : CharacterMotor
 
         if ((IsGrounded && jumpGraceTimer < jumpGraceTime || !IsGrounded && airTimer < jumpGraceTime && inputs.jumpPress) && !canInteract)
         {
-            if(!canHopDown)
+            if (!canHopDown)
             {
                 Jump();
             }
@@ -192,7 +194,9 @@ public partial class WadeMachine : CharacterMotor
 
         if (!IsGrounded)
         {
-            
+
+            if (IsHead) { varJumpTimer = 0; }
+
             conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
 
             if ((IsAgainstLeftWall || IsAgainstRightWall) && jumpGraceTimer < jumpGraceTime)
@@ -202,9 +206,9 @@ public partial class WadeMachine : CharacterMotor
 
             airTimer += Time.deltaTime;
 
-            float mult = (Mathf.Abs(Speed.y) < halfGravThreshold && inputs.jumpHeld) ? .75f : 1f;
+            
 
-            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
+            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * Time.deltaTime);
         }
 
 
@@ -219,7 +223,7 @@ public partial class WadeMachine : CharacterMotor
             {
                 varJumpTimer = 0;
             }
-                
+
         }
 
 
@@ -237,7 +241,7 @@ public partial class WadeMachine : CharacterMotor
 
         if (crouching)
         {
-            if(body.CharacterSize != new Vector3(13, 11, 0))
+            if (body.CharacterSize != new Vector3(13, 11, 0))
             {
                 body.SetCharacterSize(new Vector3(13, 11, 0));
             }
@@ -270,7 +274,7 @@ public partial class WadeMachine : CharacterMotor
     private void WallJump(bool rightCollision)
     {
         float moveDirection = rightCollision ? -1 : 1;
-     
+
         jumpGraceTimer = Mathf.Infinity;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
         varJumpTimer = varJumpTime / 2f;
@@ -288,11 +292,11 @@ public partial class WadeMachine : CharacterMotor
 
     void HitUpdate()
     {
-        
+
 
 
         Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * 15 * Time.deltaTime);
-        
+
         Speed.x = MathHelper.Approach(Speed.x, 0, 400 * Time.deltaTime);
         Speed.y = MathHelper.Approach(Speed.y, 0, 400 * Time.deltaTime);
         if (Time.timeScale >= .7) { TransitionToState(StNormal); }
@@ -305,7 +309,7 @@ public partial class WadeMachine : CharacterMotor
         Teleport(forceToVector, transform.rotation);
 
         sprite.Play(sprite.SmallChest);
-        if(sprite.imageIndex == sprite.SmallChest.totalFrames - 1)
+        if (sprite.imageIndex == sprite.SmallChest.totalFrames - 1)
         {
             WadeGroundedFlag();
             float squish = Mathf.Min(maxFall / maxFall, 1);
@@ -315,7 +319,7 @@ public partial class WadeMachine : CharacterMotor
         }
 
     }
-    
+
 
     float AccelMultipler()
     {
@@ -335,10 +339,10 @@ public partial class WadeMachine : CharacterMotor
     {
         if (CurrentWadeState.canFlip)
         {
-            if(moveX != 0)
+            if (moveX != 0)
             {
                 sprite.direction = Mathf.Sign(moveX);
-                
+
             }
         }
         directionInt = Mathf.Sign(sprite.direction);
@@ -349,21 +353,21 @@ public partial class WadeMachine : CharacterMotor
     {
         float x = 16;
         float y = 10;
-        
 
-        if(aimX != 0)
+
+        if (aimX != 0)
         {
             if (moveY > 0)
             {
                 x = 16;
                 y = 26;
-                shootDirection = Vector2.right * directionInt + Vector2.up ;
+                shootDirection = Vector2.right * directionInt + Vector2.up;
             }
-            else if(moveY < 0)
+            else if (moveY < 0)
             {
                 x = 16;
                 y = 2 * directionInt;
-                shootDirection = Vector2.right * directionInt + Vector2.down ;
+                shootDirection = Vector2.right * directionInt + Vector2.down;
             }
             else
             {
@@ -372,9 +376,9 @@ public partial class WadeMachine : CharacterMotor
                 shootDirection = Vector2.right * directionInt;
             }
         }
-        else if(aimX == 0 && moveY != 0)
+        else if (aimX == 0 && moveY != 0)
         {
-            if(moveY == -1)
+            if (moveY == -1)
             {
                 if (IsGrounded)
                 {
@@ -406,11 +410,12 @@ public partial class WadeMachine : CharacterMotor
         shootDirection = Vector2.ClampMagnitude(shootDirection, 1f);
 
         x *= directionInt;
-  
-        shootPoint = new Vector2(x,y);
+
+        shootPoint = new Vector2(x, y);
 
         if (inputs.shootPress)
         {
+            Sound.PlayGunShot();
             Debug.Log("youshot");
             Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
             newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
@@ -436,7 +441,7 @@ public partial class WadeMachine : CharacterMotor
     {
         if (invincibiltyTimer >= invincibiltyTime)
         {
-            
+
             directionInt = -recoilDirection;
             TransitionToState(StHit);
             Debug.Log("wadeIsHit");
@@ -477,7 +482,7 @@ public partial class WadeMachine : CharacterMotor
                 }
                 else
                 {
-                    if (shotTimer > 6)
+                    if (shotTimer > 1)
                     {
                         sprite.Play(sprite.JumpRegular, true);
                     }
@@ -505,7 +510,7 @@ public partial class WadeMachine : CharacterMotor
                     }
                     else
                     {
-                        if (shotTimer > 6)
+                        if (shotTimer > 1)
                         {
                             sprite.Play(sprite.RunRegular, true);
                         }
@@ -532,7 +537,7 @@ public partial class WadeMachine : CharacterMotor
                     }
                     else
                     {
-                        if (shotTimer > 6)
+                        if (shotTimer > 1)
                         {
                             sprite.Play(sprite.Idle, true);
                         }
@@ -548,14 +553,14 @@ public partial class WadeMachine : CharacterMotor
 
         if (CurrentWadeState == StHit)
         {
-                sprite.Play(sprite.Hit, true);
+            sprite.Play(sprite.Hit, true);
         }
 
         sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
         sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
     }
 
-    
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -565,7 +570,7 @@ public partial class WadeMachine : CharacterMotor
         if (chest)
         {
             canInteract = true;
-            if(IsGrounded && Mathf.Sign(chest.transform.localScale.x) == -Mathf.Sign(directionInt) && jumpGraceTimer < .2f)
+            if (IsGrounded && Mathf.Sign(chest.transform.localScale.x) == -Mathf.Sign(directionInt) && jumpGraceTimer < .2f)
             {
                 chest.OpenChest();
                 forceToVector = chest.wadeToPosition;
@@ -584,20 +589,20 @@ public partial class WadeMachine : CharacterMotor
                 lockedDoor.Unlock(Inventory);
                 jumpGraceTimer = Mathf.Infinity;
                 canInteract = false;
-              
+
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.GetComponentInParent<Enemy>() && CurrentWadeState.canGetHit)
         {
             TakeDamage(-directionInt);
         }
 
-        if(collision.gameObject.layer == 10 && CurrentWadeState.canGetHit)
+        if (collision.gameObject.layer == 10 && CurrentWadeState.canGetHit)
         {
             TransitionToState(StHit);
             teleportHit = true;
@@ -638,16 +643,16 @@ public partial class WadeMachine : CharacterMotor
         bool middleOneWay = Physics2D.Linecast(transform.position, transform.position + Vector3.down, oneWay);
         bool middleNormal = Physics2D.Linecast(transform.position, transform.position + Vector3.down, obstacles);
 
-        if(middleNormal || leftNormal || rightNormal || !crouching) { return false; }
-        if(leftOneWay || rightOneWay || middleOneWay) { return true; }
+        if (middleNormal || leftNormal || rightNormal || !crouching) { return false; }
+        if (leftOneWay || rightOneWay || middleOneWay) { return true; }
         return false;
     }
 
     RaycastHit2D RightBottomHit()
     {
         int obstacles = layerMaskSettings.profile.obstacles;
-        
-        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles); 
+
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
         return hitInfo;
     }
 
