@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
-  m_Name: BozuAimDDown
+  m_Name: BozuAimDown
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 7473188877406922273, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
-  - {fileID: -3865790381677525367, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
-  - {fileID: -6550820973728108000, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
-  - {fileID: 1004479014343567949, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
-  - {fileID: -6317889803932752613, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
-  - {fileID: 8912607057918488077, guid: e9f43c259d4e64b7aae36a8d760a3b79, type: 3}
+  - {fileID: 7473188877406922273, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
+  - {fileID: -3865790381677525367, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
+  - {fileID: -6550820973728108000, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
+  - {fileID: 1004479014343567949, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
+  - {fileID: -6317889803932752613, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
+  - {fileID: 8912607057918488077, guid: 6db8550a2a2584d118938bb76beb136c, type: 3}
   imageIndex: 0
   framesPerSecond: 6
   loop: 1

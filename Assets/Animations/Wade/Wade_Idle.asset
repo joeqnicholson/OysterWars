@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 6423823142295918119, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
   - {fileID: -4158160006242064996, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
   - {fileID: 7064406913368636871, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
-  - {fileID: 8082894202322081561, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
+  - {fileID: -2763011203481368939, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
   imageIndex: 1
-  currentImage: {fileID: -2970415526882100244, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
-  framesPerSecond: 6
+  framesPerSecond: 5
   loop: 1
+  totalFrames: 6

@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: -5719783700440449848, guid: dcca57461d4d040f28488e62facbc278, type: 3}
   - {fileID: -2716448135720797315, guid: dcca57461d4d040f28488e62facbc278, type: 3}
   imageIndex: 0
-  currentImage: {fileID: 6667187057019799583, guid: dcca57461d4d040f28488e62facbc278, type: 3}
-  framesPerSecond: 6
+  framesPerSecond: 10
   loop: 1
+  totalFrames: 6
