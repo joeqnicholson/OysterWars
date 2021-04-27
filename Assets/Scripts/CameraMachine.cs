@@ -145,34 +145,40 @@ public class CameraMachine : MonoBehaviour
         RaycastHit2D hitInfoRight = Physics2D.Linecast(rightPoint, rightPoint + (Vector3.down * 90));
         RaycastHit2D hitInfoLeft = Physics2D.Linecast(leftPoint, leftPoint + Vector3.down * 90);
 
+        float distanceToTarget = Vector3.Distance(Target, transform.position);
+        print(distanceToTarget);
+
+
+        if(distanceToTarget < 60)
+        {
+            if (hitInfoRight)
+            {
+
+                if (hitInfoRight.distance > 32 && enemyTimerRight > nextEnemyTimeRight && GameData.Instance.IsOnScreen(hitInfoRight.point, Vector3.zero))
+                {
+                    if (Vector3.Distance(machine.transform.position, hitInfoRight.point) > 48)
+                    {
+                        enemyTimerRight = 0;
+                        nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
+                        Instantiate(runner, hitInfoRight.point, Quaternion.identity);
+                    }
+                }
+            }
+
+            if (hitInfoLeft)
+            {
+                if (hitInfoLeft.distance > 16 && enemyTimerLeft > nextEnemyTimeLeft && GameData.Instance.IsOnScreen(hitInfoLeft.point, Vector3.zero))
+                {
+                    if (Vector3.Distance(machine.transform.position, hitInfoLeft.point) > 48)
+                    {
+                        enemyTimerLeft = 0;
+                        nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
+                        Instantiate(runner, hitInfoLeft.point, Quaternion.identity);
+                    }
+                }
+            }
+        }
         
-
-        if (hitInfoRight)
-        {
-
-            if(hitInfoRight.distance > 32 && enemyTimerRight > nextEnemyTimeRight && GameData.Instance.IsOnScreen(hitInfoRight.point,Vector3.zero))
-            {
-                if(Vector3.Distance(machine.transform.position, hitInfoRight.point) > 48)
-                {
-                    enemyTimerRight = 0;
-                    nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
-                    Instantiate(runner, hitInfoRight.point, Quaternion.identity);
-                }
-            }
-        }
-
-        if (hitInfoLeft)
-        {
-            if (hitInfoLeft.distance > 16 && enemyTimerLeft > nextEnemyTimeLeft && GameData.Instance.IsOnScreen(hitInfoLeft.point, Vector3.zero))
-            {
-                if (Vector3.Distance(machine.transform.position, hitInfoLeft.point) > 48)
-                {
-                    enemyTimerLeft = 0;
-                    nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
-                    Instantiate(runner, hitInfoLeft.point, Quaternion.identity);
-                }
-            }
-        }
 
 
 

@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: ConveyerLeft
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: -630035748853759923, guid: 757fe2592768b4d78ba2d5858e77f60f, type: 3}
-  - {fileID: 32235110728249312, guid: 757fe2592768b4d78ba2d5858e77f60f, type: 3}
-  - {fileID: -2502174123403235105, guid: 757fe2592768b4d78ba2d5858e77f60f, type: 3}
-  - {fileID: -1988129801350179153, guid: 757fe2592768b4d78ba2d5858e77f60f, type: 3}
+  - {fileID: -8958749028927105676, guid: 3d6a542b8abc64be9a1f549a9c16d23e, type: 3}
+  - {fileID: 9068977881613817642, guid: 3d6a542b8abc64be9a1f549a9c16d23e, type: 3}
+  - {fileID: 7069079370818699553, guid: 3d6a542b8abc64be9a1f549a9c16d23e, type: 3}
   imageIndex: 0
   framesPerSecond: 24
   loop: 1
-  totalFrames: 4
+  totalFrames: 3

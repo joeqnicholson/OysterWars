@@ -38,9 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Wade
-    uniqueID: 3673015479
-    locked: 0
   - name: OverlayColour
     uniqueID: 2772100401
     locked: 0
@@ -52,4 +49,10 @@ TagManager:
     locked: 0
   - name: Tiles
     uniqueID: 3480213917
+    locked: 0
+  - name: Enemies
+    uniqueID: 2860645299
+    locked: 0
+  - name: Wade
+    uniqueID: 3673015479
     locked: 0

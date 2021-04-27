@@ -94,10 +94,7 @@ public class WadeInputs : MonoBehaviour
 
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(90, 90, 600, 40),"jumpheld" + jumpHeld + "moveVector = " + moveInput);
-    }
+ 
 }
 
 

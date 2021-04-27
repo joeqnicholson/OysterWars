@@ -12,23 +12,25 @@ public partial class WadeMachine : CharacterMotor
     private CharacterMotor motor;
     private float walkSpeed = 125f;
     private float halfGravThreshold = -25;
-    private float walkAcceleration = 1600f;
-    private float walkDeceleration = 1000f;
-    private float jumpSpeed = 240f;
+    private float walkAcceleration = 2600f;
+    private float walkDeceleration = 2000f;
+    private float jumpSpeed = 178f;
+    private bool hasShortHopped;
     private float wallJumpHSpeed = 60;
     private float conveyerJumpHSpeed = 450;
-    private float maxFall = -300f;
-    private float gravity = 2000f;
+    private float maxFall = -250f;
+    private float gravity = 1500f;
     private float moveX;
     private float moveY;
     private float aimX;
     public Vector2 Speed;
-    private float varJumpTime = .19f;
+    private float varJumpTime = .24f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private ObjectSprite sprite;
     public float directionInt;
     private float shotTimer;
+    private float shotAnimationCooldown = 4;
     public CameraBox currentCameraBox;
     private bool crouching;
     private Vector2 shootDirection;
@@ -53,7 +55,7 @@ public partial class WadeMachine : CharacterMotor
     private float WallJumpForceTime = .32f;
     private Vector3 forceToVector;
     private bool canInteract;
-
+    
 
 
 
@@ -209,22 +211,22 @@ public partial class WadeMachine : CharacterMotor
             
 
             Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * Time.deltaTime);
-        }
 
-
-
-        if (varJumpTimer > 0)
-        {
-            if (inputs.jumpHeld)
+            if (varJumpTimer > 0)
             {
                 Speed.y = jumpSpeed;
             }
-            else
-            {
-                varJumpTimer = 0;
-            }
 
+            if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
+            {
+                varJumpTimer = .08f;
+                hasShortHopped = true;
+            }
         }
+       
+
+     
+
 
 
         if (moveX == 0)
@@ -258,6 +260,7 @@ public partial class WadeMachine : CharacterMotor
 
     private void Jump()
     {
+        hasShortHopped = false;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
         jumpGraceTimer = Mathf.Infinity;
         varJumpTimer = varJumpTime;
@@ -277,7 +280,7 @@ public partial class WadeMachine : CharacterMotor
 
         jumpGraceTimer = Mathf.Infinity;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
-        varJumpTimer = varJumpTime / 2f;
+        varJumpTimer = varJumpTime /1.5f;
         forceMoveXDirection = moveDirection;
         forceMoveXTimer = WallJumpForceTime;
         Speed.x = (walkSpeed + wallJumpHSpeed) * forceMoveXDirection;
@@ -323,7 +326,9 @@ public partial class WadeMachine : CharacterMotor
 
     float AccelMultipler()
     {
-        float airMult = IsGrounded ? 1 : .65f;
+        return 1;
+
+        float airMult = IsGrounded ? 1 : .5f;
 
         if (moveX != 0)
         {
@@ -351,8 +356,8 @@ public partial class WadeMachine : CharacterMotor
 
     void ShootStuff()
     {
-        float x = 16;
-        float y = 10;
+        float x = 14;
+        float y = 14;
 
 
         if (aimX != 0)
@@ -371,8 +376,8 @@ public partial class WadeMachine : CharacterMotor
             }
             else
             {
-                x = 20;
-                y = 10;
+                x = 14;
+                y = 14;
                 shootDirection = Vector2.right * directionInt;
             }
         }
@@ -482,7 +487,7 @@ public partial class WadeMachine : CharacterMotor
                 }
                 else
                 {
-                    if (shotTimer > 1)
+                    if (shotTimer > shotAnimationCooldown)
                     {
                         sprite.Play(sprite.JumpRegular, true);
                     }
@@ -510,7 +515,7 @@ public partial class WadeMachine : CharacterMotor
                     }
                     else
                     {
-                        if (shotTimer > 1)
+                        if (shotTimer > shotAnimationCooldown)
                         {
                             sprite.Play(sprite.RunRegular, true);
                         }
@@ -537,7 +542,7 @@ public partial class WadeMachine : CharacterMotor
                     }
                     else
                     {
-                        if (shotTimer > 1)
+                        if (shotTimer > shotAnimationCooldown)
                         {
                             sprite.Play(sprite.Idle, true);
                         }
@@ -628,7 +633,7 @@ public partial class WadeMachine : CharacterMotor
     void OnGUI()
     {
         //Output the angle found above
-        GUI.Label(new Rect(25, 25, 200, 40), "wades health is" + health);
+        //GUI.Label(new Rect(25, 25, 200, 40), "wades health is" + health);
     }
 
     bool CanHopDown()

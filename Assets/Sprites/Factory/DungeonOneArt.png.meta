@@ -299,6 +299,18 @@ TextureImporter:
   - first:
       213: 7527426838884528456
     second: DungeonOneArt_98
+  - first:
+      213: -7665997487327312062
+    second: DungeonOneArt_99
+  - first:
+      213: -7448317743800410939
+    second: DungeonOneArt_100
+  - first:
+      213: 2165103918691841344
+    second: DungeonOneArt_101
+  - first:
+      213: -6285360996355888759
+    second: DungeonOneArt_102
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1324,7 +1336,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 7cce644ef8808c820800000000000000
@@ -1829,8 +1845,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: -8}
-        - {x: -8, y: 2}
-        - {x: 8, y: 2}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
@@ -1944,7 +1960,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 210109a5c6fcdb380800000000000000
@@ -2579,7 +2599,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 939797c57634ff710800000000000000
@@ -2681,6 +2705,102 @@ TextureImporter:
       bones: []
       spriteID: 8413474f3dac67860800000000000000
       internalID: 7527426838884528456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_99
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24781d6c6e7ec9590800000000000000
+      internalID: -7665997487327312062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_100
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 136
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc9982997242a890800000000000000
+      internalID: -7448317743800410939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_101
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 3
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 045fe67fa8efb0e10800000000000000
+      internalID: 2165103918691841344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonOneArt_102
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 39
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 989ac1f9979e5c8a0800000000000000
+      internalID: -6285360996355888759
       vertices: []
       indices: 
       edges: []

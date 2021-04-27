@@ -171,8 +171,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1434321997
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3453576740497602027, guid: 7ebe95ca60f6044be99c42d8308e3909, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -294,6 +294,7 @@ MonoBehaviour:
   BozuAimDUp: {fileID: 11400000, guid: b864a726f8e314c3296046758bb93fc4, type: 2}
   BozuAimUp: {fileID: 11400000, guid: 95aafafbb2bca42659b0d12601a1c116, type: 2}
   BozuAimDDown: {fileID: 11400000, guid: 419fbc89489244470b29b6944cacc29d, type: 2}
+  BozuAimDown: {fileID: 11400000, guid: ad6580548b19448888322a19e029e698, type: 2}
   Speed: {x: 0, y: 0}
   CurrentBozuState: 0
   varJumpTimer: 0

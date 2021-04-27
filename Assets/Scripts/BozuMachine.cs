@@ -20,6 +20,7 @@ public class BozuMachine : Enemy
     [SerializeField] SpriteAnimation BozuAimDUp;
     [SerializeField] SpriteAnimation BozuAimUp;
     [SerializeField] SpriteAnimation BozuAimDDown;
+    [SerializeField] SpriteAnimation BozuAimDown;
     private BozuState LastBozuState;
     SpriteAnimationController sprite;
     private float runSpeed = 97;
@@ -257,9 +258,9 @@ public class BozuMachine : Enemy
                             }
                         case -90:
                             {
-                                x = 11;
-                                y = 2;
-                                sprite.Play(BozuAimDDown);
+                                x = 0;
+                                y = -6;
+                                sprite.Play(BozuAimDown);
                                 break;
                             }
 
