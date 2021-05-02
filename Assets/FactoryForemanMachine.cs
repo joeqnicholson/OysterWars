@@ -77,6 +77,19 @@ public class FactoryForemanMachine : Enemy
                 }
             case FactoryForemanState.Shoot:
                 {
+
+                    if(sprite.imageIndex > 1)
+                    {
+                        RaycastHit2D hitInfo = Physics2D.CircleCast(transform.position + new Vector3(21, 51), 70,Vector3.zero);
+                        if (hitInfo)
+                        {
+                            if (hitInfo.collider.GetComponent<WadeMachine>())
+                            {
+                                hitInfo.collider.GetComponent<WadeMachine>().TakeDamage(sprite.direction);
+                            }
+                        }
+                    }
+
                     sprite.Play(Shoot);
                     if (sprite.stopped)
                     {
@@ -130,6 +143,7 @@ public class FactoryForemanMachine : Enemy
                 newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((wadeDistance/280) + randomX,randomY,0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.GetComponent<Bullet>().MakeLob();
+                newBullet.transform.localScale *= 2;
 
                 hasTriggeredAnimation = true;
             }
@@ -138,8 +152,9 @@ public class FactoryForemanMachine : Enemy
             {
                 firePoint = new Vector3(65, 35, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(1.5f, -.4f, 0));
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(2f, -.3f, 0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
+                newBullet.transform.localScale *= 2;
                 print("ShootBullet");
                 hasTriggeredAnimation = true;
             }

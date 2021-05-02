@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float SpeedX;
-    private float SpeedY;
+    private Vector2 Speed;
     private Vector3 lastPosition;
     private float grav = 0;
     private const float Gravity = 1000;
@@ -23,19 +22,38 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D hit;
+        
 
         lastPosition = transform.position;
 
-        SpeedY -= grav * Time.deltaTime;
+        Speed.y -= grav * Time.deltaTime;
 
-        transform.Translate(new Vector3(SpeedX,SpeedY,0) * Time.deltaTime);
+        transform.Translate(new Vector3(Speed.x,Speed.y,0) * Time.deltaTime);
 
         if(!GameData.Instance.IsOnScreen(transform.position, Vector2.one)) { Destroy(gameObject); }
 
-        RaycastHit2D hitInfo = Physics2D.Linecast(lastPosition, transform.position);
+        BoxCollision();
 
-        if(hitInfo)
+        
+            
+
+    }
+
+    public void ChangeMoveDirection(Vector3 newDirection)
+    {
+        Speed.x = newDirection.x * speed;
+        Speed.y = newDirection.y * speed;
+    }
+
+    public void MakeLob()
+    {
+        grav = Gravity;
+    }
+
+    public void BoxCollision()
+    {
+        RaycastHit2D hitInfo = Physics2D.BoxCast(lastPosition, GetComponent<BoxCollider2D>().size, 0, Speed, 1);
+        if (hitInfo)
         {
 
             if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
@@ -48,7 +66,7 @@ public class Bullet : MonoBehaviour
                 WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
                 if (wade)
                 {
-                    wade.TakeDamage(Mathf.Sign(SpeedX), gameObject);
+                    wade.TakeDamage(Mathf.Sign(Speed.x), gameObject);
                 }
             }
 
@@ -65,29 +83,57 @@ public class Bullet : MonoBehaviour
                 }
             }
 
-            
+
             if (hitInfo.collider.GetComponent<ConveyerSwitch>())
             {
                 hitInfo.collider.GetComponent<ConveyerSwitch>().SwitchDirection();
                 Destroy(gameObject);
             }
-            
-
-            
         }
-            
-
     }
 
-    public void ChangeMoveDirection(Vector3 newDirection)
+    public void LineCollision()
     {
-        SpeedX = newDirection.x * speed;
-        SpeedY = newDirection.y * speed;
-    }
+        RaycastHit2D hitInfo = Physics2D.Linecast(lastPosition, transform.position);
 
-    public void MakeLob()
-    {
-        grav = Gravity;
+        if (hitInfo)
+        {
+
+            if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
+            {
+                Destroy(gameObject);
+            }
+
+            if (enemyBullet)
+            {
+                WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
+                if (wade)
+                {
+                    wade.TakeDamage(Mathf.Sign(Speed.x), gameObject);
+                }
+            }
+
+            if (!enemyBullet)
+            {
+                Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>();
+                if (enemy)
+                {
+                    if (enemy.IsOnScreen())
+                    {
+                        enemy.TakeDamage();
+                        Destroy(gameObject);
+                    }
+                }
+            }
+
+
+            if (hitInfo.collider.GetComponent<ConveyerSwitch>())
+            {
+                hitInfo.collider.GetComponent<ConveyerSwitch>().SwitchDirection();
+                Destroy(gameObject);
+            }
+
+        }
     }
     
 
