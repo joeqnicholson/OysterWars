@@ -10,7 +10,7 @@ public partial class WadeMachine : CharacterMotor
     public WadeSound Sound;
     private CharacterBody2D body;
     private CharacterMotor motor;
-    private float walkSpeed = 125f;
+    private float walkSpeed = 110f;
     private float halfGravThreshold = -25;
     private float walkAcceleration = 2600f;
     private float walkDeceleration = 2000f;

@@ -21,6 +21,7 @@ public class FactoryForemanMachine : Enemy
     [SerializeField] GameObject bullet;
     private Vector3 firePoint;
     private int wrenchThrows;
+    public float wadeDistance;
 
 
     protected override void Start()
@@ -47,6 +48,7 @@ public class FactoryForemanMachine : Enemy
     
     void Update()
     {
+        wadeDistance = Vector3.Distance(transform.position, GameData.Instance.wadePosition);
         stateTimer += Time.deltaTime;
         switch (CurrentState)
         {
@@ -122,10 +124,10 @@ public class FactoryForemanMachine : Enemy
                 firePoint = new Vector3(25, 50, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
 
-                float randomX = Random.Range(.1f, 1f);
+                float randomX = Random.Range(-.3f, .3f);
                 float randomY = Random.Range(.7f, 1f);
 
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(randomX,randomY,0));
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((wadeDistance/280) + randomX,randomY,0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.GetComponent<Bullet>().MakeLob();
 

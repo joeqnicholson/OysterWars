@@ -19041,7 +19041,7 @@ GameObject:
   - component: {fileID: 170926255}
   - component: {fileID: 170926254}
   - component: {fileID: 170926253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FactoryForeman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19184,6 +19184,7 @@ MonoBehaviour:
   Dash: {fileID: 11400000, guid: 26d8dc81c39ee4cada4a3315028d73cf, type: 2}
   Wrench: {fileID: 11400000, guid: e04155002f1884139a0260d3f6724d48, type: 2}
   bullet: {fileID: 4658799744597204573, guid: 3c53bef4b563f45d6a420399cebafbf8, type: 3}
+  wadeDistance: 0
 --- !u!4 &170926257
 Transform:
   m_ObjectHideFlags: 0
