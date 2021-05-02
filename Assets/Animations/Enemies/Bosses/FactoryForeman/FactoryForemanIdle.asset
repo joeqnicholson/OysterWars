@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: FactoryForemanIdle
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 0}
+  - {fileID: 1101937862220687322, guid: c0a1a0e0f59c2470d9a05ad23f0f218c, type: 3}
+  - {fileID: 7359059375952930535, guid: c0a1a0e0f59c2470d9a05ad23f0f218c, type: 3}
+  - {fileID: -4627480258721612610, guid: c0a1a0e0f59c2470d9a05ad23f0f218c, type: 3}
+  - {fileID: -4303921057711941258, guid: c0a1a0e0f59c2470d9a05ad23f0f218c, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
+  framesPerSecond: 2
   loop: 1
-  totalFrames: 1
+  totalFrames: 4

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FactoryForemanDash
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 0}
+  - {fileID: 7469102464514457887, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: 1666918367678382166, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
-  loop: 1
-  totalFrames: 1
+  framesPerSecond: 2
+  loop: 0
+  totalFrames: 2

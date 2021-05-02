@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
-  m_Name: FactoryForemanDash
+  m_Name: FactoryForemanWrench
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 0}
+  - {fileID: -4422672928403030404, guid: 203789a1502474641a56eb41ce457749, type: 3}
+  - {fileID: -6632323909338723839, guid: 203789a1502474641a56eb41ce457749, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
-  loop: 1
-  totalFrames: 1
+  framesPerSecond: 4
+  loop: 0
+  totalFrames: 2

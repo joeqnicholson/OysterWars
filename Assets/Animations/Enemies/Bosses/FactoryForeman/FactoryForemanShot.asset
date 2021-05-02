@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: FactoryForemanShot
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 0}
+  - {fileID: 7800108317891673652, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 6063816848080539662, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 7643765487865430149, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 6580479007046181158, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 7917387580924711965, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 1736288479961222240, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 2745470137045071116, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
+  - {fileID: 5726679388157163402, guid: 22de9ecfc133240dba237cf3c2a94006, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
-  loop: 1
-  totalFrames: 1
+  framesPerSecond: 8
+  loop: 0
+  totalFrames: 8

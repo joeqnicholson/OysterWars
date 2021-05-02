@@ -136,7 +136,7 @@ public class FactoryForemanMachine : Enemy
             {
                 firePoint = new Vector3(65, 35, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(1, -.20f, 0));
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(1.5f, -.4f, 0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 print("ShootBullet");
                 hasTriggeredAnimation = true;
