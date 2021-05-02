@@ -8,7 +8,7 @@ public class CameraMachine : MonoBehaviour
     [SerializeField] WadeMachine machine;
     CameraBox currentCameraBox;
     Transform boxTransform;
-    Vector3 Target;
+    public Vector3 Target;
     public Transform sideTest;
     public float leftSide;
     public float rightSide;
@@ -25,6 +25,7 @@ public class CameraMachine : MonoBehaviour
     private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
+    
 
 
     private void Start()

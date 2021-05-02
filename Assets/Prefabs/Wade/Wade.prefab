@@ -49,7 +49,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0c0463038103b4abfbb60d475bd2e562, type: 2}
@@ -70,11 +70,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingLayerID: -621951817
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5114766328844628182, guid: 612e815ceceea4e9f985d5ac88bf7d7b, type: 3}
-  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_LightVolumeOpacity: 0.053
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 1
+  m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0.43
@@ -264,10 +264,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawBodyShapeGizmo: 1
   gizmosColor: {r: 0.52, g: 1, b: 0.24, a: 1}
-  width: 13
+  width: 11
   height: 22
   depth: 1
-  stepOffset: 0.25
+  stepOffset: 1
 --- !u!114 &3044800118309256012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +310,7 @@ MonoBehaviour:
   depenetrationSettings:
     isEnabled: 1
   Inventory: {fileID: 0}
+  Sound: {fileID: 0}
   Speed: {x: 0, y: 0}
   directionInt: 0
   currentCameraBox: {fileID: 0}
@@ -331,6 +332,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footStep: {fileID: 8300000, guid: 977b0c75f9535453f9f6aa609698a62b, type: 3}
   birdChirp: {fileID: 8300000, guid: 2ec60c2abcbf645438cdddf4c428c593, type: 3}
+  wadeHit: {fileID: 0}
+  gunShots:
+  - {fileID: 8300000, guid: d25bcd74bd1ad48f9ad4032b0cb438a0, type: 3}
+  - {fileID: 8300000, guid: 53bf056021f3a4b65830283e13e8293a, type: 3}
+  - {fileID: 8300000, guid: 3f74c0a7c9f314de99f7a50667fe82fd, type: 3}
+  - {fileID: 8300000, guid: d8a6cc392c3bb4c128ad3b4229295f55, type: 3}
+  - {fileID: 8300000, guid: a7776d2c639ae497c81d01347549c331, type: 3}
+  - {fileID: 8300000, guid: dedd3a2780ffa46929eb31f9eef7cdf2, type: 3}
+  - {fileID: 8300000, guid: 58aa3402028a944b18caa3b8a0590bd6, type: 3}
+  - {fileID: 8300000, guid: 3ea2800bf4e5a494d948b3deeb320ec3, type: 3}
+  - {fileID: 8300000, guid: 9ee16933207c74fc89e680a807846a5b, type: 3}
+  - {fileID: 8300000, guid: f80eafe9581934908bb536a13d114bc3, type: 3}
+  - {fileID: 8300000, guid: 23b8cc1021d734b0e822ae97b7883233, type: 3}
+  - {fileID: 8300000, guid: 513ac57c6df25493ea73049e83924742, type: 3}
+  - {fileID: 8300000, guid: 5e4514cbf7c0442f891d58ec159b495c, type: 3}
+  - {fileID: 8300000, guid: eec43383d14fc4e2a92433679fea0324, type: 3}
+  - {fileID: 8300000, guid: c4e3df1223334418783c0fab105ebfd6, type: 3}
 --- !u!82 &3044800118309256014
 AudioSource:
   m_ObjectHideFlags: 0
@@ -343,8 +361,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.13
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0

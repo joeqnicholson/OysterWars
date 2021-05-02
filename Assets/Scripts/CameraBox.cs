@@ -16,7 +16,7 @@ public class CameraBox : MonoBehaviour
 
 
 
-    private void OnEnable()
+    private void Start()
     {
         GetComponent<MeshRenderer>().enabled = false;
         xSize = transform.localScale.x/2;

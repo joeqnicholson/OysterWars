@@ -41,6 +41,7 @@ public partial class WadeMachine : CharacterMotor
 
         if(toState == StHit)
         {
+            Sound.PlayWadeHit();
             StartCoroutine(GameData.Instance.cameraMachine.CameraShake(10, .2f));
             ForceNotGroundedState();
             Speed.x = 100 * -directionInt;

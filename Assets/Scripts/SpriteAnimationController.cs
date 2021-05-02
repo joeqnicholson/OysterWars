@@ -9,7 +9,7 @@ public class SpriteAnimationController : MonoBehaviour
     [SerializeField] public int imageIndex = 0;
     [SerializeField] public Sprite currentImage;
     [SerializeField] float frameTimer;
-    [SerializeField] private bool stopped = false;
+    [SerializeField] public bool stopped = false;
     [SerializeField] public SpriteAnimation currentSprite;
     private SpriteRenderer spriteRenderer;
 
@@ -39,6 +39,9 @@ public class SpriteAnimationController : MonoBehaviour
                 stopped = false;
             }
         }
+
+       
+
         currentSprite = nextAnimation;
     }
 
@@ -87,4 +90,12 @@ public class SpriteAnimationController : MonoBehaviour
         if(direction == -1) { direction = 1; }
         else if(direction == 1) { direction = -1; }
     }
+
+    public void ResetPlay()
+    {
+        imageIndex = 0;
+        frameTimer = 0;
+        stopped = false;
+    }
+
 }

@@ -8,6 +8,7 @@ public class WadeSound : MonoBehaviour
 
     [SerializeField] private AudioClip footStep;
     [SerializeField] private AudioClip birdChirp;
+    [SerializeField] private AudioClip wadeHit;
     [SerializeField] private AudioClip[] gunShots = new AudioClip[10];
 
     private AudioSource audioSource;
@@ -16,6 +17,9 @@ public class WadeSound : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (wadeHit == null)
+            Debug.LogError("wadeHit has not been assigned.", this);
+        // Notice, that we pass 'this' as a context object so that Unity will highlight this object when clicked.
     }
 
     // Update is called once per frame
@@ -27,6 +31,12 @@ public class WadeSound : MonoBehaviour
     public void PlayGunShot ()
     {
         audioSource.PlayOneShot(gunShots[Random.Range(0, gunShots.Length - 1)]);
+    }
+
+    public void PlayWadeHit()
+    {
+        audioSource.PlayOneShot(wadeHit);
+
     }
 
 }
