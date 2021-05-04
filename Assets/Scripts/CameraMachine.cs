@@ -17,11 +17,12 @@ public class CameraMachine : MonoBehaviour
     public Vector3 shakeVector;
     private Vector2 size;
     [SerializeField] private GameObject runner;
+    [SerializeField] private bool spawnEnemies;
     private float ySpawnPosition =0;
-    [SerializeField] private float enemyTimerLeft=0;
-    [SerializeField] private float enemyTimerRight=0;
-    [SerializeField] private float nextEnemyTimeLeft;
-    [SerializeField] private float nextEnemyTimeRight;
+    private float enemyTimerLeft=0;
+    private float enemyTimerRight=0;
+    private float nextEnemyTimeLeft;
+    private float nextEnemyTimeRight;
     private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
@@ -43,7 +44,12 @@ public class CameraMachine : MonoBehaviour
 
 
         UpdateBounds();
-        SpawnEnemies();
+
+        if (spawnEnemies)
+        {
+            SpawnEnemies();
+        }
+        
         currentCameraBox = machine.currentCameraBox;
         boxTransform = currentCameraBox.transform;
 
@@ -99,11 +105,9 @@ public class CameraMachine : MonoBehaviour
     public IEnumerator CameraShake(float magnitude, float duration)
     {
         float elapsed = 0;
-        print("camershake");
         while(elapsed < duration)
         {
-            shakeVector = Vector3.Lerp(shakeVector,new Vector3(Random.Range(-magnitude, magnitude), Random.Range(-magnitude, magnitude), 0),3 * Time.deltaTime);
-            print(shakeVector);
+            shakeVector = new Vector3(Random.Range(-magnitude, magnitude), Random.Range(-magnitude, magnitude), 0);
             elapsed += Time.deltaTime;
             yield return null;
         }

@@ -123,6 +123,7 @@ public class BozuMachine : Enemy
                 {
                     sprite.PlayNothing();
                     Speed = Vector2.zero;
+                    shotTimer = shotTime - 0.3f;
                     break;
                 }
                 
@@ -299,8 +300,7 @@ public class BozuMachine : Enemy
     {
         if (!IsGrounded)
         {
-            print('F');
-            varJumpTimer = 1000;
+            varJumpTimer = Mathf.Infinity;
             Speed.y /= 2 ;
         }
     }

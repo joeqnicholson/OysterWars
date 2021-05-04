@@ -8,6 +8,24 @@ TextureImporter:
   - first:
       213: 1666918367678382166
     second: MiniBossDashStab_1
+  - first:
+      213: 4399710111229798574
+    second: MiniBossDashStab_2
+  - first:
+      213: -7937607275657905595
+    second: MiniBossDashStab_3
+  - first:
+      213: -5368687875755255474
+    second: MiniBossDashStab_4
+  - first:
+      213: 6922488790628403819
+    second: MiniBossDashStab_5
+  - first:
+      213: 3537527245523697695
+    second: MiniBossDashStab_6
+  - first:
+      213: 5860324904758871790
+    second: MiniBossDashStab_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +131,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 85
-        width: 78
-        height: 85
+        y: 300
+        width: 150
+        height: 100
       alignment: 9
-      pivot: {x: 0.41025642, y: 0.08235294}
+      pivot: {x: 0.1866667, y: 0.21}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,12 +151,12 @@ TextureImporter:
       name: MiniBossDashStab_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 78
-        height: 85
+        x: 150
+        y: 300
+        width: 150
+        height: 100
       alignment: 9
-      pivot: {x: 0.41025642, y: 0.08235294}
+      pivot: {x: 0.1866667, y: 0.21}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,6 +164,132 @@ TextureImporter:
       bones: []
       spriteID: 6504b077c65122710800000000000000
       internalID: 1666918367678382166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8eb861909ee0d30800000000000000
+      internalID: 4399710111229798574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 200
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54abadfec34f7d190800000000000000
+      internalID: -7937607275657905595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4959af42d69e75b0800000000000000
+      internalID: -5368687875755255474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 100
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a870fc0ee911060800000000000000
+      internalID: 6922488790628403819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f10c4b48942d71130800000000000000
+      internalID: 3537527245523697695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBossDashStab_7
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 150
+        height: 100
+      alignment: 9
+      pivot: {x: 0.1866667, y: 0.21}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee60788937e045150800000000000000
+      internalID: 5860324904758871790
       vertices: []
       indices: 
       edges: []

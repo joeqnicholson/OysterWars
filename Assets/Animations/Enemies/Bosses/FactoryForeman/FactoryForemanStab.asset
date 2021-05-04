@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: FactoryForemanStab
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: 1666918367678382166, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: 4399710111229798574, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: -7937607275657905595, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: -5368687875755255474, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: 6922488790628403819, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: 3537527245523697695, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  - {fileID: 5860324904758871790, guid: 70046921582694b3a84e3f2b52c0bdea, type: 3}
+  imageIndex: 0
+  framesPerSecond: 7
+  loop: 0
+  totalFrames: 7

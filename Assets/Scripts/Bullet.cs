@@ -39,15 +39,20 @@ public class Bullet : MonoBehaviour
 
     }
 
+    public void ChangeSpeed(float s)
+    {
+        speed = s;
+    }
+
     public void ChangeMoveDirection(Vector3 newDirection)
     {
         Speed.x = newDirection.x * speed;
         Speed.y = newDirection.y * speed;
     }
 
-    public void MakeLob()
+    public void MakeLob(float gravity = Gravity)
     {
-        grav = Gravity;
+        grav = gravity;
     }
 
     public void BoxCollision()

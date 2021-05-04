@@ -4,17 +4,18 @@ using UnityEngine;
 
 public enum FactoryForemanState
 {
-    Idle, Shoot, Dash, Wrench
+    Idle, Shoot, Stab, Wrench
 }
 
 public class FactoryForemanMachine : Enemy
 {
     [SerializeField] SpriteAnimation Idle;
     [SerializeField] SpriteAnimation Shoot;
-    [SerializeField] SpriteAnimation Dash;
+    [SerializeField] SpriteAnimation Stab;
     [SerializeField] SpriteAnimation Wrench;
     private SpriteAnimationController sprite;
     private FactoryForemanState CurrentState;
+    private FactoryForemanState LastAttack;
     private bool hasTriggeredAnimation;
     private float idleTime;
     private float stateTimer;
@@ -22,6 +23,7 @@ public class FactoryForemanMachine : Enemy
     private Vector3 firePoint;
     private int wrenchThrows;
     public float wadeDistance;
+    public Vector3 originalPosition;
 
 
     protected override void Start()
@@ -31,6 +33,8 @@ public class FactoryForemanMachine : Enemy
         TransitionToState(FactoryForemanState.Idle);
         base.Start();
         sprite = GetComponent<SpriteAnimationController>();
+        sprite.direction = transform.localScale.x;
+        originalPosition = transform.position;
     }
 
     void TransitionToState(FactoryForemanState state)
@@ -40,6 +44,7 @@ public class FactoryForemanMachine : Enemy
         if(state == FactoryForemanState.Wrench && fromState == FactoryForemanState.Wrench) { sprite.ResetPlay(); }
 
         if(state == FactoryForemanState.Idle) { idleTime = Random.Range(.5f, 2f); }
+
         stateTimer = 0;
         CurrentState = state;
         hasTriggeredAnimation = false;
@@ -48,6 +53,7 @@ public class FactoryForemanMachine : Enemy
     
     void Update()
     {
+        print(WadeDistanceVector());
         wadeDistance = Vector3.Distance(transform.position, GameData.Instance.wadePosition);
         stateTimer += Time.deltaTime;
         switch (CurrentState)
@@ -57,30 +63,47 @@ public class FactoryForemanMachine : Enemy
                     sprite.Play(Idle);
                     if (stateTimer > idleTime)
                     {
-                        int stateNumber = Random.Range(1, 3);
-                        if(stateNumber == 1)
+                        if(Mathf.Abs(WadeDistanceVector().x) > 110)
                         {
-                            TransitionToState(FactoryForemanState.Wrench);
-                            wrenchThrows = 4;
+                            int stateNumber = Random.Range(1, 4);
+                            if (stateNumber == 1)
+                            {
+                                wrenchThrows = 4;
+                                LastAttack = FactoryForemanState.Wrench;
+                                TransitionToState(FactoryForemanState.Wrench);
+                            }
+                            else if (stateNumber == 2)
+                            {
+                                LastAttack = FactoryForemanState.Shoot;
+                                TransitionToState(FactoryForemanState.Shoot);
+                            }
+                            else if (stateNumber == 3)
+                            {
+                                TransitionToState(
+                                    LastAttack == FactoryForemanState.Shoot ?
+                                    FactoryForemanState.Wrench :
+                                    FactoryForemanState.Shoot
+                                    );
+                            }
                         }
-                        else if(stateNumber == 2)
+                        else
                         {
-                            TransitionToState(FactoryForemanState.Shoot);
+                            TransitionToState(FactoryForemanState.Stab);
                         }
-                        //else if(stateNumber == 2)
-                        //{
-                        //    wrenchThrows = 3;
-                        //    TransitionToState(FactoryForemanState.Wrench);
-                        //}
+                            
+                           
+                        
+                       
+
                     }
                     break;
                 }
             case FactoryForemanState.Shoot:
                 {
-
-                    if(sprite.imageIndex > 1)
+                    sprite.Play(Shoot);
+                    if (sprite.imageIndex > 1)
                     {
-                        RaycastHit2D hitInfo = Physics2D.CircleCast(transform.position + new Vector3(21, 51), 70,Vector3.zero);
+                        RaycastHit2D hitInfo = Physics2D.CircleCast(transform.position + new Vector3(sprite.direction * 31, 41), 80,Vector3.zero);
                         if (hitInfo)
                         {
                             if (hitInfo.collider.GetComponent<WadeMachine>())
@@ -90,7 +113,7 @@ public class FactoryForemanMachine : Enemy
                         }
                     }
 
-                    sprite.Play(Shoot);
+                    
                     if (sprite.stopped)
                     {
                         TransitionToState(FactoryForemanState.Idle);
@@ -117,9 +140,29 @@ public class FactoryForemanMachine : Enemy
                     }
                     break;
                 }
-            case FactoryForemanState.Dash:
+            case FactoryForemanState.Stab:
                 {
-                    sprite.Play(Dash);
+
+                    sprite.Play(Stab);
+                    if (sprite.imageIndex > 2)
+                    {
+                        RaycastHit2D hitInfo = Physics2D.BoxCast(transform.position + new Vector3(sprite.direction * 31, 41), new Vector2(140,40),0, Vector3.zero);
+                        if (hitInfo)
+                        {
+                            if (hitInfo.collider.GetComponent<WadeMachine>())
+                            {
+                                hitInfo.collider.GetComponent<WadeMachine>().TakeDamage(sprite.direction);
+                            }
+                        }
+                    }
+
+                    if (sprite.stopped)
+                    {
+                        transform.position = originalPosition;
+                        TransitionToState(FactoryForemanState.Idle);
+                    }
+
+                    
                     break;
                 }
 
@@ -134,15 +177,15 @@ public class FactoryForemanMachine : Enemy
             if (sprite.currentSprite == Wrench && sprite.imageIndex == 1)
             {
                 print("Throw Wrench");
-                firePoint = new Vector3(25, 50, 0) + transform.position;
+                firePoint = new Vector3(-25, 50, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
 
-                float randomX = Random.Range(-.3f, .3f);
-                float randomY = Random.Range(.7f, 1f);
-
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((wadeDistance/280) + randomX,randomY,0));
+                float randomX = Random.Range(-.2f, .2f);
+                float randomY = Random.Range(.7f, .8f);
+                newBullet.GetComponent<Bullet>().ChangeSpeed(300);
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((sprite.direction * wadeDistance/280) + randomX,randomY,0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
-                newBullet.GetComponent<Bullet>().MakeLob();
+                newBullet.GetComponent<Bullet>().MakeLob(700);
                 newBullet.transform.localScale *= 2;
 
                 hasTriggeredAnimation = true;
@@ -150,19 +193,16 @@ public class FactoryForemanMachine : Enemy
 
             if(sprite.currentSprite == Shoot && sprite.imageIndex == 5)
             {
-                firePoint = new Vector3(65, 35, 0) + transform.position;
+                firePoint = new Vector3(-65, 35, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(2f, -.3f, 0));
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(sprite.direction * 2f, -.3f, 0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.transform.localScale *= 2;
                 print("ShootBullet");
                 hasTriggeredAnimation = true;
             }
 
-            if (sprite.currentSprite == Dash && sprite.imageIndex == 1)
-            {
-                print("Dash");
-            }
+
 
 
         }

@@ -42,7 +42,7 @@ public class GameData : MonoBehaviour
     private void Update()
     {
         cameraPosition = cameraMachine.transform.position;
-        wadeXYPosition = new Vector2(wadeXYPosition.x, wadeXYPosition.y);
+        wadeXYPosition = new Vector2(wadePosition.x, wadePosition.y);
         wadePosition = machine.transform.position;
     }
 
