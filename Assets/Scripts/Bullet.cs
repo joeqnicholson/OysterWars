@@ -61,10 +61,7 @@ public class Bullet : MonoBehaviour
         if (hitInfo)
         {
 
-            if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
-            {
-                Destroy(gameObject);
-            }
+            
 
             if (enemyBullet)
             {
@@ -78,6 +75,7 @@ public class Bullet : MonoBehaviour
             if (!enemyBullet)
             {
                 Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>();
+                SecretFade secretFade = hitInfo.collider.GetComponent<SecretFade>();
                 if (enemy)
                 {
                     if (enemy.IsOnScreen())
@@ -85,6 +83,11 @@ public class Bullet : MonoBehaviour
                         enemy.TakeDamage();
                         Destroy(gameObject);
                     }
+                }
+
+                if (secretFade)
+                {
+                    secretFade.StartFade();
                 }
             }
 
@@ -94,6 +97,13 @@ public class Bullet : MonoBehaviour
                 hitInfo.collider.GetComponent<ConveyerSwitch>().SwitchDirection();
                 Destroy(gameObject);
             }
+
+
+            //if (hitInfo.collider.gameObject.layer == 0)
+            //{
+            //    Destroy(gameObject);
+            //}
+
         }
     }
 
