@@ -41,6 +41,7 @@ public class StationaryShooterEnemy : Enemy
     {
         base.Start();
         CurrentStationaryState = StationaryState.NotActive;
+        shotTime = Random.Range(2.1f, 3.1f);
         sprite = GetComponent<SpriteAnimationController>();
         shootTransform = Instantiate(new GameObject()).transform;
         
@@ -155,6 +156,7 @@ public class StationaryShooterEnemy : Enemy
                         Bullet newBullet = Instantiate(currentBullet, shootTransform.position, Quaternion.identity).GetComponent<Bullet>();
                         newBullet.GetComponent<Bullet>().ChangeMoveDirection(bulletDirection);
                         newBullet.GetComponent<Bullet>().enemyBullet = true;
+                        shotTime = Random.Range(2.1f, 3.1f);
                         shotTimer = 0;
                     }
 
