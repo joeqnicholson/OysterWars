@@ -145,13 +145,13 @@ public class CameraMachine : MonoBehaviour
         Vector3 rightPoint = new Vector3(transform.position.x + (size.x / 2) - 15, ySpawnPosition, 0);
         Vector3 leftPoint = new Vector3(transform.position.x - (size.x / 2) + 15, ySpawnPosition, 0);
 
-        print(GameData.Instance.IsOnScreen(rightPoint, Vector3.one));
+
 
         RaycastHit2D hitInfoRight = Physics2D.Linecast(rightPoint, rightPoint + (Vector3.down * 90));
         RaycastHit2D hitInfoLeft = Physics2D.Linecast(leftPoint, leftPoint + Vector3.down * 90);
 
         float distanceToTarget = Vector3.Distance(Target, transform.position);
-        print(distanceToTarget);
+
 
 
         if(distanceToTarget < 60)

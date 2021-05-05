@@ -78,11 +78,15 @@ public class Bullet : MonoBehaviour
                 SecretFade secretFade = hitInfo.collider.GetComponent<SecretFade>();
                 if (enemy)
                 {
-                    if (enemy.IsOnScreen())
-                    {
-                        enemy.TakeDamage();
-                        Destroy(gameObject);
-                    }
+                        if (enemy.IsOnScreen())
+                        {
+                            if (enemy.canGetHit)
+                            {
+                                enemy.TakeDamage();
+                                Destroy(gameObject);
+                            }
+                            
+                        }
                 }
 
                 if (secretFade)
@@ -99,10 +103,10 @@ public class Bullet : MonoBehaviour
             }
 
 
-            //if (hitInfo.collider.gameObject.layer == 0)
-            //{
-            //    Destroy(gameObject);
-            //}
+            if (hitInfo.collider.gameObject.layer == 0)
+            {
+                Destroy(gameObject);
+            }
 
         }
     }

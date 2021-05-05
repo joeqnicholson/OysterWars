@@ -76,6 +76,7 @@ MonoBehaviour:
   depenetrationSettings:
     isEnabled: 1
   startHealth: 5
+  health: 0
   boxCollider: {fileID: 0}
   canGetHit: 1
   NotActive: {fileID: 11400000, guid: 5a8180cae01214890849ac5054db4c9d, type: 2}
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawBodyShapeGizmo: 1
   gizmosColor: {r: 0.52, g: 1, b: 0.24, a: 1}
-  width: 22.4
-  height: 20.08
+  width: 22
+  height: 30
   depth: 0
   stepOffset: 0.25

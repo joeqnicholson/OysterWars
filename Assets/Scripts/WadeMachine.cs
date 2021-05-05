@@ -55,7 +55,7 @@ public partial class WadeMachine : CharacterMotor
     private float WallJumpForceTime = .32f;
     private Vector3 forceToVector;
     private bool canInteract;
-    
+   
 
 
 
@@ -63,6 +63,7 @@ public partial class WadeMachine : CharacterMotor
     // Start is called before the first frame update
     protected override void Start()
     {
+        
         Inventory = GetComponent<WadeInventory>();
         Sound = GetComponent<WadeSound>();
         CurrentWadeState = StNormal;
@@ -187,7 +188,7 @@ public partial class WadeMachine : CharacterMotor
             else
             {
                 ForceNotGroundedState();
-                print("bigdaddyFall");
+             
                 Vector3 deltaPosition = -transform.up * (2 * CharacterConstants.SkinWidth + jumpDownDistance);
                 varJumpTimer = 0;
                 Teleport(body.RigidbodyComponent.Position + deltaPosition, transform.rotation);
@@ -268,7 +269,6 @@ public partial class WadeMachine : CharacterMotor
         if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && conveyerAddition != 0 && moveX != 0)
         {
             Speed.x = (walkSpeed + conveyerJumpHSpeed) * sprite.direction;
-            print(Speed.x);
             varJumpTimer = varJumpTime * .5f;
         }
         Speed.y = jumpSpeed;
@@ -287,9 +287,7 @@ public partial class WadeMachine : CharacterMotor
         Speed.y = jumpSpeed;
 
 
-        print(Speed.x);
-        print(forceMoveXDirection);
-        print(forceMoveXTimer);
+      
 
     }
 
@@ -610,7 +608,6 @@ public partial class WadeMachine : CharacterMotor
         if (collision.gameObject.layer == 10 && CurrentWadeState.canGetHit)
         {
             TransitionToState(StHit);
-            teleportHit = true;
         }
     }
 

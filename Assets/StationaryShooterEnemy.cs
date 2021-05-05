@@ -46,6 +46,11 @@ public class StationaryShooterEnemy : Enemy
         
     }
 
+    public void BecomeActive()
+    {
+        CurrentStationaryState = StationaryState.Active;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +58,7 @@ public class StationaryShooterEnemy : Enemy
         {
             case StationaryState.NotActive:
                 {
+                    
                     if(Mathf.Abs(GameData.Instance.wadePosition.x - transform.position.x) < ActiveDistance.x &&
                         Mathf.Abs(GameData.Instance.wadePosition.y - transform.position.y) < ActiveDistance.y
                         )
@@ -158,5 +164,10 @@ public class StationaryShooterEnemy : Enemy
         }
 
         
+    }
+
+    public bool IsActive()
+    {
+        return CurrentStationaryState == StationaryState.Active;
     }
 }

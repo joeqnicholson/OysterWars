@@ -24,11 +24,15 @@ public class FactoryForemanMachine : Enemy
     private int wrenchThrows;
     public float wadeDistance;
     public Vector3 originalPosition;
+    private BoxCollider2D slashBox;
+    [SerializeField] StationaryShooterEnemy ventBoy1;
+    [SerializeField] StationaryShooterEnemy ventBoy2;
 
 
     protected override void Start()
     {
-        
+        slashBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        slashBox.enabled = false;
         idleTime = Random.Range(.5f, 2f);
         TransitionToState(FactoryForemanState.Idle);
         base.Start();
@@ -53,17 +57,24 @@ public class FactoryForemanMachine : Enemy
     
     void Update()
     {
-        print(WadeDistanceVector());
-        wadeDistance = Vector3.Distance(transform.position, GameData.Instance.wadePosition);
+
+        if(health < startHealth / 2)
+        {
+            ventBoy1.BecomeActive();
+            ventBoy2.BecomeActive();
+        }
+        
         stateTimer += Time.deltaTime;
         switch (CurrentState)
         {
             case FactoryForemanState.Idle:
                 {
+                    slashBox.enabled = false;
+                    wadeDistance = WadeDistanceVector().x;
                     sprite.Play(Idle);
                     if (stateTimer > idleTime)
                     {
-                        if(Mathf.Abs(WadeDistanceVector().x) > 110)
+                        if(Mathf.Abs(wadeDistance) > 130)
                         {
                             int stateNumber = Random.Range(1, 4);
                             if (stateNumber == 1)
@@ -146,18 +157,12 @@ public class FactoryForemanMachine : Enemy
                     sprite.Play(Stab);
                     if (sprite.imageIndex > 2)
                     {
-                        RaycastHit2D hitInfo = Physics2D.BoxCast(transform.position + new Vector3(sprite.direction * 31, 41), new Vector2(140,40),0, Vector3.zero);
-                        if (hitInfo)
-                        {
-                            if (hitInfo.collider.GetComponent<WadeMachine>())
-                            {
-                                hitInfo.collider.GetComponent<WadeMachine>().TakeDamage(sprite.direction);
-                            }
-                        }
+                        slashBox.enabled = true;
                     }
 
                     if (sprite.stopped)
                     {
+                        slashBox.enabled = false;
                         transform.position = originalPosition;
                         TransitionToState(FactoryForemanState.Idle);
                     }
@@ -176,14 +181,14 @@ public class FactoryForemanMachine : Enemy
         {
             if (sprite.currentSprite == Wrench && sprite.imageIndex == 1)
             {
-                print("Throw Wrench");
+
                 firePoint = new Vector3(-25, 50, 0) + transform.position;
                 GameObject newBullet = Instantiate(bullet, firePoint, Quaternion.identity);
 
                 float randomX = Random.Range(-.2f, .2f);
                 float randomY = Random.Range(.7f, .8f);
                 newBullet.GetComponent<Bullet>().ChangeSpeed(300);
-                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((sprite.direction * wadeDistance/280) + randomX,randomY,0));
+                newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((sprite.direction * Mathf.Abs(wadeDistance)/280) + randomX,randomY,0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.GetComponent<Bullet>().MakeLob(700);
                 newBullet.transform.localScale *= 2;
@@ -198,8 +203,19 @@ public class FactoryForemanMachine : Enemy
                 newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3(sprite.direction * 2f, -.3f, 0));
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.transform.localScale *= 2;
-                print("ShootBullet");
+
                 hasTriggeredAnimation = true;
+            }
+
+            if(sprite.currentSprite == Stab && sprite.imageIndex == 3)
+            {
+                if(GameData.Instance.wadeXYPosition.x + 90 < originalPosition.x)
+                {
+                    print(wadeDistance + 90);
+                    print(originalPosition.x);
+                    transform.position += new Vector3(wadeDistance + 90, 0, 0);
+                    hasTriggeredAnimation = true;
+                }
             }
 
 

@@ -7,8 +7,8 @@ using Lightbug.Kinematic2D.Core;
 public class Enemy : CharacterMotor
 {
     private GameData gameData;
-    [SerializeField] private int startHealth;
-    private int health;
+    [SerializeField] public int startHealth;
+    public int health;
     private int damage = 1;
     public BoxCollider2D boxCollider;
     public bool canGetHit = true;
