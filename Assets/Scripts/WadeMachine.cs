@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Kinematic2D.Core;
+using UnityEngine.SceneManagement;
 using System;
 
 public partial class WadeMachine : CharacterMotor
@@ -444,12 +445,21 @@ public partial class WadeMachine : CharacterMotor
     {
         if (invincibiltyTimer >= invincibiltyTime)
         {
-
-            directionInt = -recoilDirection;
-            TransitionToState(StHit);
-            Debug.Log("wadeIsHit");
             if (projectile) { Destroy(projectile); }
-            if (health <= 0) { transform.position = new Vector3(-277, -233, 0); health = startHealth; }
+            directionInt = -recoilDirection;
+            health -= 1;
+            if (health <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                TransitionToState(StHit);
+                Debug.Log("wadeIsHit");
+            }
+            
+            
+           
         }
     }
 

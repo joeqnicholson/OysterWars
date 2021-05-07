@@ -164,7 +164,7 @@ public class CameraMachine : MonoBehaviour
                     if (Vector3.Distance(machine.transform.position, hitInfoRight.point) > 48)
                     {
                         enemyTimerRight = 0;
-                        nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
+                        nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax + 1);
                         Instantiate(runner, hitInfoRight.point, Quaternion.identity);
                     }
                 }
@@ -177,7 +177,7 @@ public class CameraMachine : MonoBehaviour
                     if (Vector3.Distance(machine.transform.position, hitInfoLeft.point) > 48)
                     {
                         enemyTimerLeft = 0;
-                        nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
+                        nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax + 2);
                         Instantiate(runner, hitInfoLeft.point, Quaternion.identity);
                     }
                 }
