@@ -75,7 +75,7 @@ MonoBehaviour:
     unstableToNotGroundedContinuity: 1
   depenetrationSettings:
     isEnabled: 1
-  startHealth: 5
+  startHealth: 1
   health: 0
   boxCollider: {fileID: 0}
   canGetHit: 1
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1434321997
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7501097971631119447, guid: 008c10ead3d684578aa742b8d97762a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

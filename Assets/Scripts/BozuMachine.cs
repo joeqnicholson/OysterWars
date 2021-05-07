@@ -123,7 +123,7 @@ public class BozuMachine : Enemy
                 {
                     sprite.PlayNothing();
                     Speed = Vector2.zero;
-                    shotTimer = shotTime - 0.3f;
+                    shotTimer = shotTime/2f;
                     break;
                 }
                 
