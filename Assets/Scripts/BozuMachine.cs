@@ -25,8 +25,8 @@ public class BozuMachine : Enemy
     SpriteAnimationController sprite;
     private float runSpeed = 97;
     [SerializeField]private Vector2 Speed;
-    private float jumpSpeed = 210f;
-    private float maxFall = -320f;
+    private float jumpSpeed = 178f;
+    private float maxFall = -250f;
     private float gravity = 1500f;
     [SerializeField] private BozuState CurrentBozuState;
     private float varJumpTime = .2f;

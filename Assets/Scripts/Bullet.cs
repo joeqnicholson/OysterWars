@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private const float Gravity = 1000;
     public bool enemyBullet;
     [SerializeField] private float damage;
-    float speed = 350;
+    float speed = 300;
 
 
 
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        
+        if (enemyBullet) { speed = 230; }
 
         lastPosition = transform.position;
 

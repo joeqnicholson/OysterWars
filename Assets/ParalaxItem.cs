@@ -5,26 +5,24 @@ using UnityEngine;
 public class ParalaxItem : MonoBehaviour
 {
     [SerializeField] float distance;
+    Vector3 previousCamPos;
+    Vector3 InitialPosition;
 
     void Start()
     {
-        
+        InitialPosition = transform.position;
+        previousCamPos = GameData.Instance.cameraMachine.transform.position;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 shake = GameData.Instance.cameraMachine.shakeVector;
+        distance = Mathf.Clamp(distance, 0f, 4f);
 
-        Vector3 desiredDirection =
+        Vector3 desiredAddition = (Camera.main.transform.position - previousCamPos) / (4/distance);
 
-            (GameData.Instance.cameraMachine.Target -
+        transform.position += desiredAddition;
 
-            GameData.Instance.cameraMachine.transform.position)
-            ;
-
-        transform.position = Vector3.Lerp(transform.position + shake, transform.position + shake + desiredDirection / distance, 4 * Time.deltaTime );
-
-
+        previousCamPos = GameData.Instance.cameraMachine.transform.position;
     }
 }
