@@ -26,6 +26,7 @@ public class CameraMachine : MonoBehaviour
     private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
+
     
 
 
@@ -41,6 +42,10 @@ public class CameraMachine : MonoBehaviour
     
     void FixedUpdate()
     {
+
+        
+
+
 
 
         UpdateBounds();

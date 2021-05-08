@@ -173,6 +173,17 @@ public partial class WadeMachine : CharacterMotor
 
             if (moveY == -1 && moveX == 0) { crouching = true; }
 
+            if(moveX > 0)
+            {
+                if (sprite.frameTriggerNow)
+                {
+                    if(sprite.imageIndex == 1 || sprite.imageIndex == 4)
+                    {
+                        Sound.PlayFootStep();
+                    }
+                }
+            }
+
             if (crouching && (moveX != 0 || moveY != -1))
             {
                 sprite.scale = new Vector3(.7f, 1.3f, 1);
@@ -262,6 +273,8 @@ public partial class WadeMachine : CharacterMotor
 
     private void Jump()
     {
+        Sound.PlayJumpUp();
+        Sound.PlayFootStep();
         hasShortHopped = false;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
         jumpGraceTimer = Mathf.Infinity;
@@ -278,7 +291,8 @@ public partial class WadeMachine : CharacterMotor
     private void WallJump(bool rightCollision)
     {
         float moveDirection = rightCollision ? -1 : 1;
-
+        Sound.PlayJumpUp();
+        Sound.PlayFootStep();
         jumpGraceTimer = Mathf.Infinity;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
         varJumpTimer = varJumpTime /1.5f;
@@ -637,6 +651,7 @@ public partial class WadeMachine : CharacterMotor
 
     public void WadeGroundedFlag()
     {
+        Sound.PlayJumpLand();
         airTimer = 0;
         forceMoveXTimer = 0;
         float squish = Mathf.Min(Speed.y / maxFall, 1);

@@ -33,6 +33,7 @@ public class ObjectSprite : MonoBehaviour
     public SpriteAnimation Hit;
     public SpriteAnimation SmallChest;
     public SpriteAnimationController controller;
+    public bool frameTriggerNow;
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class ObjectSprite : MonoBehaviour
             {
                 imageIndex = 0;
                 frameTimer = 0;
+                frameTriggerNow = true;
                 stopped = false;
             }
         }
@@ -65,7 +67,7 @@ public class ObjectSprite : MonoBehaviour
     public void Animate()
     {
         currentImage = currentSprite.Keyframe(imageIndex);
-
+        frameTriggerNow = false;
         if (!stopped)
         {
             frameTimer += Time.deltaTime;
@@ -78,6 +80,7 @@ public class ObjectSprite : MonoBehaviour
                 if (currentSprite.loop)
                 {
                     imageIndex = 0;
+                    frameTriggerNow = true;
                 }
                 else
                 {
@@ -87,6 +90,7 @@ public class ObjectSprite : MonoBehaviour
             else
             {
                 imageIndex += 1;
+                frameTriggerNow = true;
             }
             frameTimer = 0;
         }
