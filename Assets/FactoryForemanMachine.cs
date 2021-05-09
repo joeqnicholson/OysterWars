@@ -177,7 +177,7 @@ public class FactoryForemanMachine : Enemy
 
     void HandleAnimationTriggers()
     {
-        if (hasTriggeredAnimation == false)
+        if (sprite.frameTriggerNow == true)
         {
             if (sprite.currentSprite == Wrench && sprite.imageIndex == 1)
             {
@@ -193,7 +193,6 @@ public class FactoryForemanMachine : Enemy
                 newBullet.GetComponent<Bullet>().MakeLob(700);
                 newBullet.transform.localScale *= 2;
 
-                hasTriggeredAnimation = true;
             }
 
             if(sprite.currentSprite == Shoot && sprite.imageIndex == 5)
@@ -204,7 +203,6 @@ public class FactoryForemanMachine : Enemy
                 newBullet.GetComponent<Bullet>().enemyBullet = true;
                 newBullet.transform.localScale *= 2;
 
-                hasTriggeredAnimation = true;
             }
 
             if(sprite.currentSprite == Stab && sprite.imageIndex == 3)
@@ -214,7 +212,7 @@ public class FactoryForemanMachine : Enemy
                     print(wadeDistance + 90);
                     print(originalPosition.x);
                     transform.position += new Vector3(wadeDistance + 90, 0, 0);
-                    hasTriggeredAnimation = true;
+
                 }
             }
 

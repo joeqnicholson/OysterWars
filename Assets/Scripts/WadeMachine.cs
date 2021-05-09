@@ -173,7 +173,7 @@ public partial class WadeMachine : CharacterMotor
 
             if (moveY == -1 && moveX == 0) { crouching = true; }
 
-            if(moveX > 0)
+            if(Mathf.Abs(moveX) > 0)
             {
                 if (sprite.frameTriggerNow)
                 {

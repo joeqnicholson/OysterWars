@@ -12,6 +12,7 @@ public class SpriteAnimationController : MonoBehaviour
     [SerializeField] public bool stopped = false;
     [SerializeField] public SpriteAnimation currentSprite;
     private SpriteRenderer spriteRenderer;
+    public bool frameTriggerNow;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class SpriteAnimationController : MonoBehaviour
             {
                 imageIndex = 0;
                 frameTimer = 0;
+                frameTriggerNow = true;
                 stopped = false;
             }
         }
@@ -50,6 +52,7 @@ public class SpriteAnimationController : MonoBehaviour
         if (currentSprite)
         {
             currentImage = currentSprite.Keyframe(imageIndex);
+            frameTriggerNow = false;
 
             if (!stopped)
             {
@@ -63,6 +66,7 @@ public class SpriteAnimationController : MonoBehaviour
                     if (currentSprite.loop)
                     {
                         imageIndex = 0;
+                        frameTriggerNow = true;
                     }
                     else
                     {
@@ -72,6 +76,7 @@ public class SpriteAnimationController : MonoBehaviour
                 else
                 {
                     imageIndex += 1;
+                    frameTriggerNow = true;
                 }
                 frameTimer = 0;
             }
