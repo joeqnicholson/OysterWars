@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7929890384504983752}
   - component: {fileID: 7929890384504983753}
   - component: {fileID: 7929890384504983754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConveyerBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,6 +104,7 @@ MonoBehaviour:
   frameTimer: 0
   stopped: 0
   currentSprite: {fileID: 0}
+  frameTriggerNow: 0
 --- !u!114 &7929890384504983753
 MonoBehaviour:
   m_ObjectHideFlags: 0

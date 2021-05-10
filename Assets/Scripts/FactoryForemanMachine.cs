@@ -173,6 +173,8 @@ public class FactoryForemanMachine : Enemy
 
         }
         HandleAnimationTriggers();
+        sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
+        sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
     }
 
     void HandleAnimationTriggers()
@@ -207,6 +209,7 @@ public class FactoryForemanMachine : Enemy
 
             if(sprite.currentSprite == Stab && sprite.imageIndex == 3)
             {
+                sprite.scale = new Vector2(1.4f, .6f);
                 if(GameData.Instance.wadeXYPosition.x + 90 < originalPosition.x)
                 {
                     print(wadeDistance + 90);

@@ -54,4 +54,17 @@ public class WadeInventory : MonoBehaviour
         }
     }
 
+    public bool WadeHasItem(Item desiredItem)
+    {
+        if((int)itemCount[desiredItem] > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
 }

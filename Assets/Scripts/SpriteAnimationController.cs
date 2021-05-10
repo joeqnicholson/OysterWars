@@ -18,7 +18,6 @@ public class SpriteAnimationController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
     }
 
     // Update is called once per frame

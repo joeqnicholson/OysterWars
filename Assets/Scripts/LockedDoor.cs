@@ -5,7 +5,9 @@ using UnityEngine;
 public class LockedDoor : MonoBehaviour
 {
     [SerializeField] private SpriteAnimation Closed;
-    [SerializeField] private SpriteAnimation Open;
+    [SerializeField] private SpriteAnimation OpenLeft;
+    [SerializeField] private SpriteAnimation OpenRight;
+    private SpriteAnimation Open;
     private BoxCollider2D collision;
     SpriteAnimationController sprite;
     private bool open;
@@ -17,7 +19,7 @@ public class LockedDoor : MonoBehaviour
     void Start()
     {
         open = false;
-        
+        Open = OpenLeft;
         collision = transform.GetChild(0).GetComponent< BoxCollider2D>();
         sprite = GetComponent<SpriteAnimationController>();
     }
@@ -37,7 +39,7 @@ public class LockedDoor : MonoBehaviour
 
         if(sprite.currentSprite == Open)
         {
-            if(sprite.imageIndex == 15)
+            if(sprite.stopped)
             {
                 collision.enabled = false;
             }
@@ -46,10 +48,12 @@ public class LockedDoor : MonoBehaviour
 
     public void Unlock(WadeInventory inventory)
     {
+        if(GameData.Instance.wadePosition.x < transform.position.x) { Open = OpenRight; } else { Open = OpenLeft; }
         if(inventory.TakeNeededItem(Key, 1))
         {
             open = true;
             GetComponent<BoxCollider2D>().enabled = false;
         }
     }
+
 }

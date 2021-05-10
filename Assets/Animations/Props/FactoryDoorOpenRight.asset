@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
-  m_Name: DoorClosed
+  m_Name: FactoryDoorOpenRight
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 5213229242370633579, guid: 974b60cb658b84d1babf7ff2be187dd7, type: 3}
+  - {fileID: 2013603307435878212, guid: b0136a9ffac404135863c62b79b167ef, type: 3}
+  - {fileID: 7401522970972163876, guid: b0136a9ffac404135863c62b79b167ef, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
-  loop: 1
-  totalFrames: 1
+  framesPerSecond: 10
+  loop: 0
+  totalFrames: 2

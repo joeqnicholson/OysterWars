@@ -41,7 +41,7 @@ public partial class WadeMachine : CharacterMotor
     private float jumpGraceTimer = 0;
     private float jumpGraceTime = 0.1f;
     private int health;
-    private int startHealth = 3;
+    private int startHealth = 8;
     public bool canOpenChest;
     [SerializeField] private float conveyerAddition;
     private float hInputTimer = 0;
@@ -685,7 +685,7 @@ public partial class WadeMachine : CharacterMotor
 
     RaycastHit2D RightBottomHit()
     {
-        int obstacles = layerMaskSettings.profile.obstacles;
+        int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
         RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
         return hitInfo;
@@ -693,7 +693,7 @@ public partial class WadeMachine : CharacterMotor
 
     RaycastHit2D LeftBottomHit()
     {
-        int obstacles = layerMaskSettings.profile.obstacles;
+        int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
         RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomLeft(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
         return hitInfo;
@@ -701,7 +701,7 @@ public partial class WadeMachine : CharacterMotor
 
     RaycastHit2D MiddleBottomHit()
     {
-        int obstacles = layerMaskSettings.profile.obstacles;
+        int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
         RaycastHit2D hitInfo = Physics2D.Linecast(transform.position, transform.position + Vector3.down, obstacles);
         return hitInfo;

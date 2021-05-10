@@ -9,7 +9,7 @@ public class Chest : MonoBehaviour
     [SerializeField] GameObject itemObject;
     private SpriteAnimationController itemSprite;
     [SerializeField] Item item;
-    private SpriteAnimationController animator;
+    private SpriteAnimationController sprite;
     public bool open = false;
     public Vector3 itemPosition;
     public Vector3 wadeToPosition;
@@ -17,8 +17,9 @@ public class Chest : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<SpriteAnimationController>();
+        sprite = GetComponent<SpriteAnimationController>();
         itemSprite = transform.GetChild(1).GetComponent<SpriteAnimationController>();
+        sprite.direction = Mathf.Sign(transform.localScale.x);
         itemObject = transform.GetChild(1).gameObject;
         wadeToPosition = transform.position + Vector3.right * 25 * Mathf.Sign(transform.localScale.x);
         itemObject.transform.position = wadeToPosition;
@@ -30,11 +31,11 @@ public class Chest : MonoBehaviour
     {
         if (!open)
         {
-            animator.Play(ChestClosed);
+            sprite.Play(ChestClosed);
         }
         else
         {
-            animator.Play(ChestOpen);
+            sprite.Play(ChestOpen);
             transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f, bigChest ? 9:5);
             transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(25, bigChest? 18:10);
             GetComponent<BoxCollider2D>().enabled = false;
