@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: FactoryForemanDropDown
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 0}
+  - {fileID: -7256872827564339592, guid: b381c60aa50484235a38542d7373fe9a, type: 3}
+  - {fileID: -1966097733709060517, guid: b381c60aa50484235a38542d7373fe9a, type: 3}
+  - {fileID: 4051098030398571270, guid: b381c60aa50484235a38542d7373fe9a, type: 3}
   imageIndex: 0
-  framesPerSecond: 0
-  loop: 1
-  totalFrames: 1
+  framesPerSecond: 4
+  loop: 0
+  totalFrames: 3
   destroyOnEnd: 0
