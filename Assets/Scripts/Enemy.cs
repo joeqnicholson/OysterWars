@@ -12,7 +12,11 @@ public class Enemy : CharacterMotor
     private int damage = 1;
     public BoxCollider2D boxCollider;
     public bool canGetHit = true;
-    
+    [SerializeField] private bool respawn;
+    public GameObject respawnPrefab;
+    CharacterBody2D body;
+    public CameraBox cameraBox;
+  
    
 
     
@@ -24,6 +28,8 @@ public class Enemy : CharacterMotor
         health = startHealth;
         gameData = GameData.Instance;
         boxCollider = GetComponent<BoxCollider2D>();
+        body = GetComponent<CharacterBody2D>();
+        if (!respawn) { respawnPrefab = null; }
 
     }
 
@@ -33,7 +39,19 @@ public class Enemy : CharacterMotor
         if (canGetHit)
         {
             health -= 1;
-            if (health <= 0) { Destroy(gameObject); }
+            if (health <= 0)
+            {
+                GameObject explosionFX =Instantiate(
+                    GameData.Instance.particleSpawn,
+                    transform.position + Vector3.up * (boxCollider.size.y / 2),
+                    Quaternion.identity
+                    );
+                explosionFX.GetComponent<SpriteAnimationController>().Play(GameData.Instance.explosion);
+
+                OnDeath();
+
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -61,6 +79,25 @@ public class Enemy : CharacterMotor
         return new Vector2(xPos, yPos);
     }
 
-    
+    public RaycastHit2D RightBottomHit(float distance = 1)
+    {
+        int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
+
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down * distance, obstacles);
+        return hitInfo;
+    }
+
+    public RaycastHit2D LeftBottomHit(float distance = 1)
+    {
+        int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
+
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomLeft(transform.position), body.GetBottomLeft(transform.position) + Vector3.down * distance, obstacles);
+        return hitInfo;
+    }
+
+    public virtual void OnDeath()
+    {
+
+    }
 
 }

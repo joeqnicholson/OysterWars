@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: Land
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -6002107765823786558, guid: a8dcef63a0a9c419c9b92bb43d8676b6, type: 3}
+  - {fileID: -9178183847134734819, guid: a8dcef63a0a9c419c9b92bb43d8676b6, type: 3}
+  - {fileID: -8699125413719330023, guid: a8dcef63a0a9c419c9b92bb43d8676b6, type: 3}
+  imageIndex: 0
+  framesPerSecond: 12
+  loop: 0
+  totalFrames: 3
+  destroyOnEnd: 1

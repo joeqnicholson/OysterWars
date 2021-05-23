@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: 5986030973748356752, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: -5600206312213581617, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: 3815954189206336483, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: -3690502768834906923, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: -49130668184793455, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: -2330519403281856691, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  - {fileID: -4796932125324312052, guid: 00aa0b9e5aec245a5ba423d784fbca89, type: 3}
+  imageIndex: 9
+  framesPerSecond: 12
+  loop: 0
+  totalFrames: 7
+  destroyOnEnd: 1

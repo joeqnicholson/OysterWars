@@ -69,11 +69,15 @@ public partial class WadeMachine : CharacterMotor
 
             if (teleportHit)
             {
-                transform.position = currentCameraBox.SpawnPoint;
+                transform.position = Camera.main.GetComponent<CameraMachine>().currentCameraBox.SpawnPoint;
             }
+
             teleportHit = false;
+
             invincibiltyTimer = 0;
+
             Time.timeScale = 1;
+
         }
 
         if(fromState == StChest)

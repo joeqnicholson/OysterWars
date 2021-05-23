@@ -34,9 +34,6 @@ public class Bullet : MonoBehaviour
 
         BoxCollision();
 
-        
-            
-
     }
 
     public void ChangeSpeed(float s)

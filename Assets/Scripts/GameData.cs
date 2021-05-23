@@ -25,10 +25,13 @@ public class GameData : MonoBehaviour
         }
     }
 
+    public SpriteAnimation explosion;
+    public GameObject particleSpawn;
     public Vector3 wadePosition;
     public Vector2 wadeXYPosition;
     public WadeMachine machine;
     public CameraMachine cameraMachine;
+    public MusicManager music;
     private Vector3 cameraPosition;
 
 
@@ -36,6 +39,7 @@ public class GameData : MonoBehaviour
     {
         cameraMachine = Camera.main.gameObject.GetComponent<CameraMachine>();
         machine = GameObject.Find("Wade").GetComponent<WadeMachine>();
+        music = GameObject.Find("Music").GetComponent<MusicManager>();
         wadePosition = machine.transform.position;
     }
 

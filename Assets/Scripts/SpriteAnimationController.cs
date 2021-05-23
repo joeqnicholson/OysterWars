@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class SpriteAnimationController : MonoBehaviour
 {
     public float direction = 1;
@@ -70,6 +72,7 @@ public class SpriteAnimationController : MonoBehaviour
                     else
                     {
                         stopped = true;
+                        if (currentSprite.destroyOnEnd) { Destroy(gameObject); }
                     }
                 }
                 else
@@ -87,6 +90,7 @@ public class SpriteAnimationController : MonoBehaviour
     {
         currentSprite = null;
         spriteRenderer.sprite = null;
+        stopped = false;
     }
 
     public void Flip()

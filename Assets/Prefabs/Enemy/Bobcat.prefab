@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 484018842060161819}
   - component: {fileID: 484018842060161818}
   - component: {fileID: 484018842060161820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bobcat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,8 +76,11 @@ MonoBehaviour:
   depenetrationSettings:
     isEnabled: 1
   startHealth: 10
+  health: 0
   boxCollider: {fileID: 0}
   canGetHit: 1
+  respawn: 1
+  respawnPrefab: {fileID: 484018842060161822}
 --- !u!114 &484018842060161820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 484018843855616751}
   - component: {fileID: 484018843855616750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BobcatArtwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +168,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1434321997
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 13
   m_Sprite: {fileID: -2495032952293323396, guid: 74c5e1c0871dd4e4bbc2758d10585219, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -233,9 +236,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BobcatArm
       objectReference: {fileID: 0}
+    - target: {fileID: 6238536276452532595, guid: cff31177e89994a1a8b19455f4cf68b2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6238536276452532598, guid: cff31177e89994a1a8b19455f4cf68b2, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6238536276452532598, guid: cff31177e89994a1a8b19455f4cf68b2, type: 3}
       propertyPath: m_SortingLayerID

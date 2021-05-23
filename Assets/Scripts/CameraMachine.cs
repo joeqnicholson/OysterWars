@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class CameraMachine : MonoBehaviour
 {
     [SerializeField] WadeMachine machine;
-    CameraBox currentCameraBox;
+    public CameraBox currentCameraBox;
     Transform boxTransform;
     public Vector3 Target;
     public Transform sideTest;
@@ -18,16 +18,19 @@ public class CameraMachine : MonoBehaviour
     private Vector2 size;
     [SerializeField] private GameObject runner;
     [SerializeField] private bool spawnEnemies;
-    private float ySpawnPosition =0;
-    private float enemyTimerLeft=0;
-    private float enemyTimerRight=0;
-    private float nextEnemyTimeLeft;
-    private float nextEnemyTimeRight;
-    private bool ySpawnGoingUp;
+    [SerializeField] private float ySpawnPosition =0;
+    [SerializeField] private float enemyTimerLeft=0;
+    [SerializeField] private float enemyTimerRight=0;
+    [SerializeField] private float nextEnemyTimeLeft;
+    [SerializeField] private float nextEnemyTimeRight;
+    [SerializeField] private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
-
-    
+    private float ChangeTargetSpeed = 4;
+    private float timeVariable = 1;
+    [SerializeField] LayerMask layerMask;
+    public Transform thingsR;
+    public Transform thingsL;
 
 
     private void Start()
@@ -43,11 +46,6 @@ public class CameraMachine : MonoBehaviour
     void FixedUpdate()
     {
 
-        
-
-
-
-
         UpdateBounds();
 
         if (spawnEnemies)
@@ -55,47 +53,39 @@ public class CameraMachine : MonoBehaviour
             SpawnEnemies();
         }
         
-        currentCameraBox = machine.currentCameraBox;
+
         boxTransform = currentCameraBox.transform;
 
-        if (machine.currentCameraBox)
-        {
-            
+        
+
             Target = new Vector3(
-                    currentCameraBox.onTrackX ? machine.transform.position.x : boxTransform.position.x,
-                    currentCameraBox.onTrackY ? machine.transform.position.y : boxTransform.position.y,
+                    machine.transform.position.x,
+                    machine.transform.position.y,
                     -10
                     );
 
+
+        if (currentCameraBox)
+        {
             Target.x = Mathf.Clamp(
                 Target.x,
-                boxTransform.position.x - (boxTransform.localScale.x / 2f) + (size.x/2),
-                boxTransform.position.x + (boxTransform.localScale.x / 2f) -(size.x/2)
+                boxTransform.position.x - (boxTransform.localScale.x / 2f) + (size.x / 2),
+                boxTransform.position.x + (boxTransform.localScale.x / 2f) - (size.x / 2)
             );
 
 
             Target.y = Mathf.Clamp(
                 Target.y,
-                boxTransform.position.y - (boxTransform.localScale.y / 2f) + (size.y/2),
-                boxTransform.position.y + (boxTransform.localScale.y / 2f) - (size.y/2)
+                boxTransform.position.y - (boxTransform.localScale.y / 2f) + (size.y / 2),
+                boxTransform.position.y + (boxTransform.localScale.y / 2f) - (size.y / 2)
             );
-            
-      
+
         }
-
-        
-
-
     }
 
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, Target, 4 * Time.deltaTime) + shakeVector;
-    }
-
-    public void ChangeTarget(CameraBox currentCamera)
-    {
-        
+        transform.position = Vector3.Lerp(transform.position, Target, ChangeTargetSpeed * Time.deltaTime) + shakeVector;
     }
 
    
@@ -118,8 +108,6 @@ public class CameraMachine : MonoBehaviour
         }
         shakeVector = Vector3.zero;
 
-
-        
     }
 
     private void SpawnEnemies()
@@ -150,24 +138,27 @@ public class CameraMachine : MonoBehaviour
         Vector3 rightPoint = new Vector3(transform.position.x + (size.x / 2) - 15, ySpawnPosition, 0);
         Vector3 leftPoint = new Vector3(transform.position.x - (size.x / 2) + 15, ySpawnPosition, 0);
 
-
-
-        RaycastHit2D hitInfoRight = Physics2D.Linecast(rightPoint, rightPoint + (Vector3.down * 90));
-        RaycastHit2D hitInfoLeft = Physics2D.Linecast(leftPoint, leftPoint + Vector3.down * 90);
+        RaycastHit2D hitInfoRight = Physics2D.Linecast(rightPoint, rightPoint + (Vector3.down * 90), layerMask);
+        RaycastHit2D hitInfoLeft = Physics2D.Linecast(leftPoint, leftPoint + (Vector3.down * 90), layerMask);
 
         float distanceToTarget = Vector3.Distance(Target, transform.position);
+     
+   
+      
 
 
-
-        if(distanceToTarget < 60)
+        if(distanceToTarget < 50)
         {
             if (hitInfoRight)
             {
+                
 
                 if (hitInfoRight.distance > 32 && enemyTimerRight > nextEnemyTimeRight && GameData.Instance.IsOnScreen(hitInfoRight.point, Vector3.zero))
                 {
+                    print('2');
                     if (Vector3.Distance(machine.transform.position, hitInfoRight.point) > 48)
                     {
+                        print('3');
                         enemyTimerRight = 0;
                         nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax + 1);
                         Instantiate(runner, hitInfoRight.point, Quaternion.identity);
@@ -193,5 +184,12 @@ public class CameraMachine : MonoBehaviour
 
 
     }
-
+    private void OnDrawGizmos()
+    {
+        
+       
+    }
 }
+
+
+

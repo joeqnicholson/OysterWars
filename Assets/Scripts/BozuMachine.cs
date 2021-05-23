@@ -45,7 +45,10 @@ public class BozuMachine : Enemy
     [SerializeField] GameObject currentBullet;
     [SerializeField] private bool sixteenDirections;
     private bool isOnScreen = false;
-
+    [SerializeField] private GameObject particleSpawn;
+    [SerializeField] private SpriteAnimation JumpParticle;
+    [SerializeField] private SpriteAnimation LandParticle;
+    [SerializeField] private SpriteAnimation StartRunParticle;
 
 
     protected override void Start()
@@ -111,7 +114,7 @@ public class BozuMachine : Enemy
                         shotTimer = 0;
                     }
 
-                    if (!IsGrounded) { Speed.y = -200f; } else { Speed.y = 0; }
+                    if (!IsGrounded) { Speed.y = -200f;} else { Speed.y = 0; }
 
                     break;
                 }
@@ -220,6 +223,17 @@ public class BozuMachine : Enemy
                     else
                     {
                         sprite.Play(BozuRun);
+
+                        if (sprite.frameTriggerNow)
+                        {
+                            if(sprite.imageIndex == 1)
+                            {
+                                GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                                particle.GetComponent<SpriteAnimationController>().direction = directionInt;
+                                particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
+                            }
+                        }
+
                     }
                     break;
                 }
@@ -291,6 +305,15 @@ public class BozuMachine : Enemy
 
     private void BozuGroundedFlag()
     {
+        float yPoint;
+        if (!LeftBottomHit(20)) { yPoint = RightBottomHit(20).point.y; }
+        else if (!RightBottomHit(20)) { yPoint = LeftBottomHit(20).point.y; }
+        else if (RightBottomHit(20).distance > LeftBottomHit(20).distance) { yPoint = LeftBottomHit(20).point.y; }
+        else { yPoint = RightBottomHit(20).point.y; }
+
+        GameObject particle = Instantiate(particleSpawn, new Vector3(transform.position.x, yPoint, 0), Quaternion.identity);
+        particle.GetComponent<SpriteAnimationController>().Play(LandParticle);
+
 
         sprite.scale = new Vector2(1.4f, .6f);
         Speed.y = 0;
@@ -307,7 +330,8 @@ public class BozuMachine : Enemy
 
     private void Jump(float currentVarJumpTime)
     {
-
+        GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+        particle.GetComponent<SpriteAnimationController>().Play(JumpParticle);
         ForceNotGroundedState();
         sprite.scale = new Vector3(0.5f, 1.5f, 1);
         varJumpTime = currentVarJumpTime;

@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: -1578606241022553767, guid: 7ebe95ca60f6044be99c42d8308e3909, type: 3}
   - {fileID: -7806555425465253278, guid: 7ebe95ca60f6044be99c42d8308e3909, type: 3}
   imageIndex: 0
-  framesPerSecond: 15
+  framesPerSecond: 19
   loop: 1
   totalFrames: 7
+  destroyOnEnd: 0

@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 8349389226502012901}
   - component: {fileID: 8349389226502012903}
   - component: {fileID: 8349389226502012900}
-  - component: {fileID: 8349389226502012902}
   m_Layer: 7
   m_Name: RunnerBozuArt
   m_TagString: Untagged
@@ -134,6 +133,7 @@ MonoBehaviour:
   frameTimer: 0
   stopped: 0
   currentSprite: {fileID: 0}
+  frameTriggerNow: 0
 --- !u!212 &8349389226502012900
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1434321997
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3453576740497602027, guid: 7ebe95ca60f6044be99c42d8308e3909, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -185,32 +185,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8349389226502012902
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8349389226502012898}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5, y: 13.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4, y: 0.1}
-    oldSize: {x: 40, y: 40}
-    newSize: {x: 40, y: 40}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 13, y: 27}
-  m_EdgeRadius: 0
 --- !u!1 &8349389226560021007
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +261,11 @@ MonoBehaviour:
   depenetrationSettings:
     isEnabled: 1
   startHealth: 0
+  health: 0
   boxCollider: {fileID: 0}
+  canGetHit: 1
+  respawn: 0
+  respawnPrefab: {fileID: 0}
   BozuRun: {fileID: 11400000, guid: db4298a43a2be4a4b8099bb06aecb690, type: 2}
   BozuJump: {fileID: 11400000, guid: 47b541857fd90477d9472cbfb2d1611d, type: 2}
   BozuAimIdle: {fileID: 11400000, guid: ce6072ce6d3e24abda5d2b9d1c70658f, type: 2}
@@ -308,6 +286,10 @@ MonoBehaviour:
   shotTime: 2
   currentBullet: {fileID: 4658799744597204573, guid: 3c53bef4b563f45d6a420399cebafbf8, type: 3}
   sixteenDirections: 0
+  particleSpawn: {fileID: 7451746226589151205, guid: c0db0c914fbe2465b86882bcd819472f, type: 3}
+  JumpParticle: {fileID: 11400000, guid: 5e1b6e4f8eae3489e8f585a87b0dd17e, type: 2}
+  LandParticle: {fileID: 11400000, guid: 3cc7bc9d48f3b49f2bc187b1f48d6c6d, type: 2}
+  StartRunParticle: {fileID: 11400000, guid: 9b99e3ff2079f43c59f76234b53007f3, type: 2}
 --- !u!114 &8349389226560021107
 MonoBehaviour:
   m_ObjectHideFlags: 0

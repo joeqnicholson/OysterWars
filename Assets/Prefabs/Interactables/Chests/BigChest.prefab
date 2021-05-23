@@ -102,6 +102,7 @@ MonoBehaviour:
   frameTimer: 0
   stopped: 0
   currentSprite: {fileID: 0}
+  frameTriggerNow: 0
 --- !u!1 &6203149763371511626
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +177,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1349513921
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5176837695871528811, guid: 99acee19ab04447f2b626df1caa67de2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,6 +230,7 @@ MonoBehaviour:
   frameTimer: 0
   stopped: 0
   currentSprite: {fileID: 0}
+  frameTriggerNow: 0
 --- !u!61 &6203149763371511624
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -323,8 +325,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1349513921
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: -9052380572458914826, guid: 99acee19ab04447f2b626df1caa67de2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -29,5 +29,10 @@ public class MathHelper : MonoBehaviour
         return val > target ? Mathf.Max(val - maxMove, target) : Mathf.Min(val + maxMove, target);
     }
 
+    public static float AbsDifference(float numberOne, float numberTwo)
+    {
+        return (Mathf.Abs(Mathf.Abs(numberOne) - Mathf.Abs(numberTwo)));
+    }
+
     
 }

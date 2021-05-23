@@ -9,6 +9,8 @@ public class DungeonOneManager : MonoBehaviour
     private List<ConveyerSwitch> conveyerSwitches = new List<ConveyerSwitch>();
     [SerializeField] private GameObject AllTheSwitches;
     [SerializeField] private GameObject AllTheBelts;
+    
+
     public static DungeonOneManager Instance
     {
         get

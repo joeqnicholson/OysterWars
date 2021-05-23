@@ -79,6 +79,8 @@ MonoBehaviour:
   health: 0
   boxCollider: {fileID: 0}
   canGetHit: 1
+  respawn: 1
+  respawnPrefab: {fileID: 6299083702442047560}
   NotActive: {fileID: 11400000, guid: 5a8180cae01214890849ac5054db4c9d, type: 2}
   AimUp: {fileID: 11400000, guid: fb329a9a1944644579cc5fd8899f6567, type: 2}
   AimRight: {fileID: 11400000, guid: a84aa04b612344fea81a9da80edcc508, type: 2}
@@ -118,6 +120,7 @@ MonoBehaviour:
   frameTimer: 0
   stopped: 0
   currentSprite: {fileID: 0}
+  frameTriggerNow: 0
 --- !u!212 &6299083702442047574
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public partial class WadeMachine : CharacterMotor
     private float jumpSpeed = 178f;
     private bool hasShortHopped;
     private float wallJumpHSpeed = 60;
-    private float conveyerJumpHSpeed = 450;
+    private float conveyerJumpHSpeed = 250;
     private float maxFall = -250f;
     private float gravity = 1500f;
     private float moveX;
@@ -32,7 +32,6 @@ public partial class WadeMachine : CharacterMotor
     public float directionInt;
     private float shotTimer;
     private float shotAnimationCooldown = 4;
-    public CameraBox currentCameraBox;
     private bool crouching;
     private Vector2 shootDirection;
     private Vector2 shootPoint;
@@ -56,7 +55,12 @@ public partial class WadeMachine : CharacterMotor
     private float WallJumpForceTime = .32f;
     private Vector3 forceToVector;
     private bool canInteract;
-   
+    [SerializeField] private GameObject particleSpawn;
+    [SerializeField] private SpriteAnimation JumpParticle;
+    [SerializeField] private SpriteAnimation WallJumpParticle;
+    [SerializeField] private SpriteAnimation LandParticle;
+    [SerializeField] private SpriteAnimation StartRunParticle;
+    
 
 
 
@@ -119,7 +123,21 @@ public partial class WadeMachine : CharacterMotor
 
         UpdateSprite();
 
+        float lastDirection = directionInt;
+
         CharacterFlip();
+
+        if(lastDirection != directionInt)
+        {
+            if (IsGrounded)
+            {
+                GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                particle.GetComponent<SpriteAnimationController>().direction = directionInt;
+                particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
+            }
+        }
+
+
 
         if (inputs.jumpPress) { jumpGraceTimer = 0f; }
 
@@ -236,11 +254,11 @@ public partial class WadeMachine : CharacterMotor
                 hasShortHopped = true;
             }
         }
-       
-
-     
 
 
+
+
+        float lastSpeed = Speed.x;
 
         if (moveX == 0)
         {
@@ -249,6 +267,13 @@ public partial class WadeMachine : CharacterMotor
         else
         {
             Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkDeceleration * AccelMultipler() * Time.deltaTime);
+        }
+
+        if(Mathf.Abs (lastSpeed) < 5f && Mathf.Abs(moveX) > 0.2f && IsGrounded)
+        {
+            GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+            particle.GetComponent<SpriteAnimationController>().direction = directionInt;
+            particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
         }
 
 
@@ -273,6 +298,9 @@ public partial class WadeMachine : CharacterMotor
 
     private void Jump()
     {
+        GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+        particle.GetComponent<SpriteAnimationController>().Play(JumpParticle);
+
         Sound.PlayJumpUp();
         Sound.PlayFootStep();
         hasShortHopped = false;
@@ -286,10 +314,22 @@ public partial class WadeMachine : CharacterMotor
             varJumpTimer = varJumpTime * .5f;
         }
         Speed.y = jumpSpeed;
+
     }
 
     private void WallJump(bool rightCollision)
     {
+        
+
+        GameObject particle = Instantiate(
+            particleSpawn,
+            transform.position + transform.right * body.width / 2 * directionInt,
+            Quaternion.identity
+            );
+
+        particle.GetComponent<SpriteAnimationController>().Play(WallJumpParticle);
+        particle.GetComponent<SpriteAnimationController>().direction = -directionInt;
+
         float moveDirection = rightCollision ? -1 : 1;
         Sound.PlayJumpUp();
         Sound.PlayFootStep();
@@ -364,6 +404,8 @@ public partial class WadeMachine : CharacterMotor
             }
         }
         directionInt = Mathf.Sign(sprite.direction);
+
+        
 
     }
 
@@ -658,6 +700,20 @@ public partial class WadeMachine : CharacterMotor
         sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
         sprite.scale.y = MathHelper.Approach(1, .6f, squish);
         Speed.y = 0;
+
+        float yPoint;
+       
+
+        if (!LeftBottomHit(20)) { yPoint = RightBottomHit(20).point.y; }
+        else if (!RightBottomHit(20)) { yPoint = LeftBottomHit(20).point.y; }
+        else if(RightBottomHit(20).distance > LeftBottomHit(20).distance) { yPoint = LeftBottomHit(20).point.y; }
+        else { yPoint = RightBottomHit(20).point.y; }
+
+        GameObject particle =Instantiate(particleSpawn, new Vector3(transform.position.x, yPoint,0), Quaternion.identity);
+        particle.GetComponent<SpriteAnimationController>().Play(LandParticle);
+
+
+
     }
 
     void OnGUI()
@@ -683,27 +739,27 @@ public partial class WadeMachine : CharacterMotor
         return false;
     }
 
-    RaycastHit2D RightBottomHit()
+    RaycastHit2D RightBottomHit(float distance = 1)
     {
         int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
-        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomRight(transform.position), body.GetBottomLeft(transform.position) + Vector3.down * distance, obstacles);
         return hitInfo;
     }
 
-    RaycastHit2D LeftBottomHit()
+    RaycastHit2D LeftBottomHit(float distance = 1)
     {
         int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
-        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomLeft(transform.position), body.GetBottomLeft(transform.position) + Vector3.down, obstacles);
+        RaycastHit2D hitInfo = Physics2D.Linecast(body.GetBottomLeft(transform.position), body.GetBottomLeft(transform.position) + Vector3.down * distance, obstacles);
         return hitInfo;
     }
 
-    RaycastHit2D MiddleBottomHit()
+    RaycastHit2D MiddleBottomHit(float distance = 1)
     {
         int obstacles = layerMaskSettings.profile.obstacles | layerMaskSettings.profile.oneWayPlatforms;
 
-        RaycastHit2D hitInfo = Physics2D.Linecast(transform.position, transform.position + Vector3.down, obstacles);
+        RaycastHit2D hitInfo = Physics2D.Linecast(transform.position, transform.position + Vector3.down * distance, obstacles);
         return hitInfo;
     }
 

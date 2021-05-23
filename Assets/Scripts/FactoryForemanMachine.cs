@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FactoryForemanState
 {
-    Idle, Shoot, Stab, Wrench
+    Idle, Shoot, Stab, Wrench, DropDown, NotOnScreen
 }
 
 public class FactoryForemanMachine : Enemy
@@ -13,6 +13,7 @@ public class FactoryForemanMachine : Enemy
     [SerializeField] SpriteAnimation Shoot;
     [SerializeField] SpriteAnimation Stab;
     [SerializeField] SpriteAnimation Wrench;
+    [SerializeField] SpriteAnimation DropDown;
     private SpriteAnimationController sprite;
     private FactoryForemanState CurrentState;
     private FactoryForemanState LastAttack;
@@ -27,6 +28,7 @@ public class FactoryForemanMachine : Enemy
     private BoxCollider2D slashBox;
     [SerializeField] StationaryShooterEnemy ventBoy1;
     [SerializeField] StationaryShooterEnemy ventBoy2;
+    public AudioClip bossMusic;
 
 
     protected override void Start()
@@ -34,7 +36,7 @@ public class FactoryForemanMachine : Enemy
         slashBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
         slashBox.enabled = false;
         idleTime = Random.Range(.5f, 2f);
-        TransitionToState(FactoryForemanState.Idle);
+        TransitionToState(FactoryForemanState.NotOnScreen);
         base.Start();
         sprite = GetComponent<SpriteAnimationController>();
         sprite.direction = transform.localScale.x;
@@ -54,6 +56,10 @@ public class FactoryForemanMachine : Enemy
         hasTriggeredAnimation = false;
     }
 
+    public override void OnDeath()
+    {
+        GameData.Instance.music.ChangeSong(GameData.Instance.music.DungeonOneMusic);
+    }
     
     void Update()
     {
@@ -67,6 +73,38 @@ public class FactoryForemanMachine : Enemy
         stateTimer += Time.deltaTime;
         switch (CurrentState)
         {
+            case FactoryForemanState.NotOnScreen:
+                {
+                    canGetHit = false;
+                    sprite.PlayNothing();
+
+                    if(GameData.Instance.cameraMachine.currentCameraBox == cameraBox)
+                    {
+                        GameData.Instance.music.ChangeSong(GameData.Instance.music.FactoryForemanMusic);
+                        TransitionToState(FactoryForemanState.DropDown);
+                    }
+
+
+                    break;
+                }
+            case FactoryForemanState.DropDown:
+                {
+                    if(GameData.Instance.music.source.volume < 0.06f)
+                    {
+                        sprite.Play(DropDown);
+                    }
+                    
+
+                    if (sprite.stopped)
+                    {
+                        sprite.scale = new Vector2(1.4f, .6f);
+                        canGetHit = true;
+                        TransitionToState(FactoryForemanState.Idle);
+                    }
+
+                    
+                    break;
+                }
             case FactoryForemanState.Idle:
                 {
                     slashBox.enabled = false;
@@ -155,6 +193,7 @@ public class FactoryForemanMachine : Enemy
                 {
 
                     sprite.Play(Stab);
+
                     if (sprite.imageIndex > 2)
                     {
                         slashBox.enabled = true;
@@ -209,7 +248,7 @@ public class FactoryForemanMachine : Enemy
 
             if(sprite.currentSprite == Stab && sprite.imageIndex == 3)
             {
-                sprite.scale = new Vector2(1.4f, .6f);
+              
                 if(GameData.Instance.wadeXYPosition.x + 90 < originalPosition.x)
                 {
                     print(wadeDistance + 90);
@@ -219,11 +258,11 @@ public class FactoryForemanMachine : Enemy
                 }
             }
 
-
-
-
         }
         
     }
+
+    
+
 
 }

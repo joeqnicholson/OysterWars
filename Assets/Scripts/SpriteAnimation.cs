@@ -10,6 +10,7 @@ public class SpriteAnimation : ScriptableObject
     [SerializeField] private float framesPerSecond;
     [SerializeField] public bool loop = true;
     public float totalFrames;
+    public bool destroyOnEnd = false;
    
     
     private float frameTimer;

@@ -21,7 +21,6 @@ public class WadeInputs : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        print('D');
         gamepad = InputSystem.GetDevice<Gamepad>();
         keyboard = InputSystem.GetDevice<Keyboard>();
     
