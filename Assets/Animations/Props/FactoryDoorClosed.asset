@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FactoryDoorClosed
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 3422668050998220936, guid: b0136a9ffac404135863c62b79b167ef, type: 3}
+  - {fileID: 518974909, guid: 45525349498cf42e1ab2911cb3c752bf, type: 3}
   imageIndex: 0
   framesPerSecond: 0
   loop: 0
   totalFrames: 1
+  destroyOnEnd: 0

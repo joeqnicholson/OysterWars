@@ -19,7 +19,6 @@ public class StationaryShooterEnemy : Enemy
     [SerializeField] private SpriteAnimation AimRightDown;
     [SerializeField] private SpriteAnimation AimLeftDown;
     [SerializeField] private SpriteAnimation AimDown;
-    [SerializeField] private SpriteAnimationController sprite;
     [SerializeField] private Vector2 UpVector;
     [SerializeField] private Vector2 RightUpVector;
     [SerializeField] private Vector2 RightVector;
@@ -42,7 +41,6 @@ public class StationaryShooterEnemy : Enemy
         base.Start();
         CurrentStationaryState = StationaryState.NotActive;
         shotTime = Random.Range(2.1f, 3.1f);
-        sprite = GetComponent<SpriteAnimationController>();
         shootTransform = Instantiate(new GameObject()).transform;
         
     }
@@ -52,7 +50,6 @@ public class StationaryShooterEnemy : Enemy
         CurrentStationaryState = StationaryState.Active;
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (CurrentStationaryState)
@@ -60,8 +57,8 @@ public class StationaryShooterEnemy : Enemy
             case StationaryState.NotActive:
                 {
                     
-                    if(Mathf.Abs(GameData.Instance.wadePosition.x - transform.position.x) < ActiveDistance.x &&
-                        Mathf.Abs(GameData.Instance.wadePosition.y - transform.position.y) < ActiveDistance.y
+                    if( Mathf.Abs(GameData.Instance.wadePosition.x - transform.position.x) < ActiveDistance.x &&
+                        IsOnScreen()
                         )
                     {
                         
@@ -172,4 +169,6 @@ public class StationaryShooterEnemy : Enemy
     {
         return CurrentStationaryState == StationaryState.Active;
     }
+
+
 }

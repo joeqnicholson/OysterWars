@@ -26,11 +26,13 @@ public class CameraMachine : MonoBehaviour
     [SerializeField] private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
-    private float ChangeTargetSpeed = 4;
+    private float ChangeTargetSpeed = .25f;
     private float timeVariable = 1;
     [SerializeField] LayerMask layerMask;
     public Transform thingsR;
     public Transform thingsL;
+    public Vector3 velocity = Vector3.zero;
+
 
 
     private void Start()
@@ -40,15 +42,16 @@ public class CameraMachine : MonoBehaviour
         machine = GameData.Instance.machine;
         size.x = GetComponent<PixelPerfectCamera>().refResolutionX;
         size.y = GetComponent<PixelPerfectCamera>().refResolutionY;
+
     }
 
     
-    void FixedUpdate()
+    void LateUpdate()
     {
 
         UpdateBounds();
 
-        if (spawnEnemies)
+        if (currentCameraBox.spawnEnemies && spawnEnemies)
         {
             SpawnEnemies();
         }
@@ -60,7 +63,7 @@ public class CameraMachine : MonoBehaviour
 
             Target = new Vector3(
                     machine.transform.position.x,
-                    machine.transform.position.y,
+                    machine.transform.position.y + 16,
                     -10
                     );
 
@@ -81,11 +84,14 @@ public class CameraMachine : MonoBehaviour
             );
 
         }
-    }
 
-    void LateUpdate()
-    {
-        transform.position = Vector3.Lerp(transform.position, Target, ChangeTargetSpeed * Time.deltaTime) + shakeVector;
+        transform.position = Vector3.SmoothDamp(transform.position, Vector3Int.RoundToInt(Target), ref velocity, ChangeTargetSpeed) + shakeVector;
+
+        
+
+        // transform.position = Vector3Int.CeilToInt(transform.position);
+        // transform.position = Target;
+
     }
 
    
@@ -149,10 +155,8 @@ public class CameraMachine : MonoBehaviour
 
         if(distanceToTarget < 50)
         {
-            if (hitInfoRight)
+            if (hitInfoRight && hitInfoRight.collider.gameObject.layer != 10)
             {
-                
-
                 if (hitInfoRight.distance > 32 && enemyTimerRight > nextEnemyTimeRight && GameData.Instance.IsOnScreen(hitInfoRight.point, Vector3.zero))
                 {
                     print('2');
@@ -166,7 +170,7 @@ public class CameraMachine : MonoBehaviour
                 }
             }
 
-            if (hitInfoLeft)
+            if (hitInfoLeft && hitInfoLeft.collider.gameObject.layer != 10)
             {
                 if (hitInfoLeft.distance > 16 && enemyTimerLeft > nextEnemyTimeLeft && GameData.Instance.IsOnScreen(hitInfoLeft.point, Vector3.zero))
                 {

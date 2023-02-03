@@ -995,7 +995,7 @@ public class CharacterMotor : MonoBehaviour
 	
 
 	
-	void Move( Vector3 deltaPosition , bool groundedMovement , bool updateData , float dt )
+	public void Move( Vector3 deltaPosition , bool groundedMovement , bool updateData , float dt )
 	{
 		if( groundSettings.alwaysNotGrounded )
 			InternalForceNotGroundedState();

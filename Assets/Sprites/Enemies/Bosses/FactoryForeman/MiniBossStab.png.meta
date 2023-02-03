@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -57,8 +58,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      MiniBossDashStab_2: 4399710111229798574
+      MiniBossDashStab_5: 6922488790628403819
+      MiniBossDashStab_1: 1666918367678382166
+      MiniBossDashStab_7: 5860324904758871790
+      MiniBossDashStab_4: -5368687875755255474
+      MiniBossDashStab_6: 3537527245523697695
+      MiniBossDashStab_3: -7937607275657905595
+      MiniBossDashStab_0: 7469102464514457887
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

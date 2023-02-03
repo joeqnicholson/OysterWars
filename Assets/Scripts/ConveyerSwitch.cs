@@ -32,7 +32,9 @@ public class ConveyerSwitch : MonoBehaviour
 
     public void SwitchDirection()
     {
-        DungeonOneManager.Instance.SwitchConveyerDirection();
+        print("btuwhy");
+        FindObjectOfType<BeltsManager>().SwitchConveyerDirection();
+        GetComponent<AudioSource>().Play();
     }
 
     public void SetRight()

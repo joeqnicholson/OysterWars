@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: BossDoorClosed
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 8066981835553427677, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+  - {fileID: -719636627, guid: 3373f74b4266f4cb0958e66037dcec13, type: 3}
   imageIndex: 0
   framesPerSecond: 0
   loop: 1
   totalFrames: 1
+  destroyOnEnd: 0

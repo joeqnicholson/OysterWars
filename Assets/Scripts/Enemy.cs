@@ -16,11 +16,9 @@ public class Enemy : CharacterMotor
     public GameObject respawnPrefab;
     CharacterBody2D body;
     public CameraBox cameraBox;
-  
-   
-
-    
-
+    public bool touchForDamage = true;
+    public GameObject explosion;
+    public SpriteAnimationController sprite;
 
     protected override void Start()
     {
@@ -28,9 +26,19 @@ public class Enemy : CharacterMotor
         health = startHealth;
         gameData = GameData.Instance;
         boxCollider = GetComponent<BoxCollider2D>();
+        sprite = GetComponentInChildren<SpriteAnimationController>();
         body = GetComponent<CharacterBody2D>();
         if (!respawn) { respawnPrefab = null; }
+        sprite.transform.parent = null;
 
+    }
+
+    public void LateUpdate()
+    {
+        if(sprite)
+        {
+            sprite.transform.position = Vector3Int.RoundToInt(transform.position);
+        }
     }
 
     
@@ -42,14 +50,14 @@ public class Enemy : CharacterMotor
             if (health <= 0)
             {
                 GameObject explosionFX =Instantiate(
-                    GameData.Instance.particleSpawn,
+                    explosion,
                     transform.position + Vector3.up * (boxCollider.size.y / 2),
                     Quaternion.identity
                     );
-                explosionFX.GetComponent<SpriteAnimationController>().Play(GameData.Instance.explosion);
+                
 
                 OnDeath();
-
+                Destroy(sprite.gameObject);
                 Destroy(gameObject);
             }
         }

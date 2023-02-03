@@ -57,6 +57,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -66,8 +67,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -422,6 +423,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      BlackieSpitRocks_0: -7102298524195147275
+      BlackieSpitRocks_2: -1035657034190820451
+      BlackieSpitRocks_9: -3655103555095785960
+      BlackieSpitRocks_6: 5949398688551477263
+      BlackieSpitRocks_8: 7247137672425041769
+      BlackieSpitRocks_5: 1335076136849285536
+      BlackieSpitRocks_3: -5234037384479762901
+      BlackieSpitRocks_7: 4142255728218771039
+      BlackieSpitRocks_1: -4788602539806514633
+      BlackieSpitRocks_4: 1995418662798505408
+      BlackieSpitRocks_10: -2742811177178838076
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -19,9 +19,7 @@ public partial class WadeMachine : CharacterMotor
 
     private WadeState StHit = new WadeState { canGetHit = false, canFlip = false };
 
-
-
-
+    private WadeState StSwing = new WadeState { canGetHit = true };
 
 
     public void TransitionToState(WadeState newState)
@@ -66,10 +64,9 @@ public partial class WadeMachine : CharacterMotor
 
         if (fromState == StHit)
         {
-
             if (teleportHit)
             {
-                transform.position = Camera.main.GetComponent<CameraMachine>().currentCameraBox.SpawnPoint;
+                transform.position = spawnPoint;
             }
 
             teleportHit = false;

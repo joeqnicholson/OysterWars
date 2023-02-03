@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacles:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1025
   dynamicGround:
     serializedVersion: 2
     m_Bits: 0

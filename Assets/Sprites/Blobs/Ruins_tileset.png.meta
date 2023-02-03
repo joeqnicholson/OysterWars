@@ -165,6 +165,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -174,8 +175,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -1240,6 +1241,54 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Ruins_tileset_24: 2772424889484557513
+      Ruins_tileset_42: -3656033427919485473
+      Ruins_tileset_9: -5363682964535090484
+      Ruins_tileset_14: -4347648454078449329
+      Ruins_tileset_40: -1869826645470473119
+      Ruins_tileset_39: -471423440313251973
+      Ruins_tileset_19: 8808612853703772624
+      Ruins_tileset_13: 1230612550465603749
+      Ruins_tileset_23: -2944300695481950620
+      Ruins_tileset_15: 608339648637721232
+      Ruins_tileset_29: 565121122857411832
+      Ruins_tileset_18: -3363207781475488211
+      Ruins_tileset_32: 6959635011057592623
+      Ruins_tileset_6: -7420037061838482555
+      Ruins_tileset_26: 4921604956645199970
+      Ruins_tileset_27: -5016436539283160303
+      Ruins_tileset_11: -2520396147369963050
+      Ruins_tileset_8: -9053702908493014248
+      Ruins_tileset_28: 2225031505579714540
+      Ruins_tileset_1: 5827971907192127372
+      Ruins_tileset_38: -330525953501206218
+      Ruins_tileset_30: -3346379452366329295
+      Ruins_tileset_46: 7531794772822977286
+      Ruins_tileset_2: -681769074335238315
+      Ruins_tileset_21: 5304961522921479104
+      Ruins_tileset_4: 3491525831753932428
+      Ruins_tileset_31: -4784096338445462339
+      Ruins_tileset_36: -8623159972635841752
+      Ruins_tileset_17: 6165846457737699025
+      Ruins_tileset_3: -852969514538142429
+      Ruins_tileset_20: 6125640649583225371
+      Ruins_tileset_37: 8549816042878365063
+      Ruins_tileset_45: 1160504345581828314
+      Ruins_tileset_22: -3070492080155117170
+      Ruins_tileset_25: 4092372233438439474
+      Ruins_tileset_41: -1568487769683740665
+      Ruins_tileset_44: 4956707512871174925
+      Ruins_tileset_16: 5547055064178675384
+      Ruins_tileset_33: 2381385866491923424
+      Ruins_tileset_5: -2802008883407759840
+      Ruins_tileset_7: 3466703905188038082
+      Ruins_tileset_34: -1745859503376039830
+      Ruins_tileset_0: -3927194906801459128
+      Ruins_tileset_12: -7934223486291318381
+      Ruins_tileset_10: 4792056070238121856
+      Ruins_tileset_43: 4370820152138121347
+      Ruins_tileset_35: -9201469555485282610
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -12,13 +12,12 @@ public class LockedDoor : MonoBehaviour
     SpriteAnimationController sprite;
     private bool open;
     [SerializeField] private Item Key;
-
+    [SerializeField] private int number;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        open = false;
         Open = OpenLeft;
         collision = transform.GetChild(0).GetComponent< BoxCollider2D>();
         sprite = GetComponent<SpriteAnimationController>();
@@ -43,17 +42,39 @@ public class LockedDoor : MonoBehaviour
             {
                 collision.enabled = false;
             }
+            
+
         }
     }
 
     public void Unlock(WadeInventory inventory)
     {
-        if(GameData.Instance.wadePosition.x < transform.position.x) { Open = OpenRight; } else { Open = OpenLeft; }
+       
         if(inventory.TakeNeededItem(Key, 1))
         {
+            if(GameData.Instance.wadePosition.x < transform.position.x) { Open = OpenRight; } else { Open = OpenLeft; }
+
             open = true;
             GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<AudioSource>().Play();
+            FindObjectOfType<DungeonManager>().SaveDoor(number);
+            
         }
+
+        
     }
+
+    public void SetToOpen()
+    {
+        open = true;
+        print("now opening door");
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void SetNumber(int newNumber)
+    {
+        number = newNumber;
+    }
+
 
 }

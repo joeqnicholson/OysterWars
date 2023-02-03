@@ -14,6 +14,9 @@ public class Chest : MonoBehaviour
     public Vector3 itemPosition;
     public Vector3 wadeToPosition;
     [SerializeField] bool bigChest = false;
+    private bool setAsOpen;
+    private WadeMachine machine;
+    [SerializeField] private int number;
 
     void Start()
     {
@@ -38,23 +41,43 @@ public class Chest : MonoBehaviour
             sprite.Play(ChestOpen);
             transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f, bigChest ? 9:5);
             transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(25, bigChest? 18:10);
-            GetComponent<BoxCollider2D>().enabled = false;
-
-            if (itemSprite.imageIndex == itemSprite.currentSprite.totalFrames - 1)
+            
+            if(machine)
             {
-                GameData.Instance.machine.Inventory.PickupItem(item);
-                print("jimbo");
-
-                enabled = false;
+                if (itemSprite.imageIndex == itemSprite.currentSprite.totalFrames - 1)
+                {
+                    if(machine)
+                    {
+                        machine.Inventory.PickupItem(item);
+                    }
+                    enabled = false;
+                }
             }
+            
         }
 
     }
 
-    public void OpenChest()
+    public void OpenChest(WadeMachine wadeMachine)
+    {
+        machine = wadeMachine;
+        open = true;
+        GetComponent<AudioSource>().Play();
+        itemSprite.Play(item.ChestAnimation);
+        GetComponent<BoxCollider2D>().enabled = false;
+        FindObjectOfType<DungeonManager>().SaveChest(number);
+    }
+
+    public void SetToOpen()
     {
         open = true;
-        itemSprite.Play(item.ChestAnimation);
+        print("now opening chest");
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void SetNumber(int newNumber)
+    {
+        number = newNumber;
     }
 
     

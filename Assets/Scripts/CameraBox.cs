@@ -11,8 +11,7 @@ public class CameraBox : MonoBehaviour
     private float wadeY;
     public bool onTrackX;
     public bool onTrackY;
-    public Vector3 SpawnPoint;
-
+    public bool spawnEnemies = true;
     public LayerMask LayerMask;
     public List<EnemySpawn> spawns = new List<EnemySpawn>();
     
@@ -113,4 +112,5 @@ public class CameraBox : MonoBehaviour
     {
         Gizmos.DrawWireCube(transform.position + Vector3.forward * 10, transform.localScale);
     }
+
 }

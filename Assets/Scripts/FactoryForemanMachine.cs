@@ -14,7 +14,6 @@ public class FactoryForemanMachine : Enemy
     [SerializeField] SpriteAnimation Stab;
     [SerializeField] SpriteAnimation Wrench;
     [SerializeField] SpriteAnimation DropDown;
-    private SpriteAnimationController sprite;
     private FactoryForemanState CurrentState;
     private FactoryForemanState LastAttack;
     private bool hasTriggeredAnimation;
@@ -33,15 +32,15 @@ public class FactoryForemanMachine : Enemy
 
     protected override void Start()
     {
+        base.Start();
         slashBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
         slashBox.enabled = false;
         idleTime = Random.Range(.5f, 2f);
         TransitionToState(FactoryForemanState.NotOnScreen);
-        base.Start();
-        sprite = GetComponent<SpriteAnimationController>();
         sprite.direction = transform.localScale.x;
         originalPosition = transform.position;
     }
+
 
     void TransitionToState(FactoryForemanState state)
     {
@@ -230,8 +229,7 @@ public class FactoryForemanMachine : Enemy
                 float randomY = Random.Range(.7f, .8f);
                 newBullet.GetComponent<Bullet>().ChangeSpeed(300);
                 newBullet.GetComponent<Bullet>().ChangeMoveDirection(new Vector3((sprite.direction * Mathf.Abs(wadeDistance)/280) + randomX,randomY,0));
-                newBullet.GetComponent<Bullet>().enemyBullet = true;
-                newBullet.GetComponent<Bullet>().MakeLob(700);
+                newBullet.GetComponent<Bullet>().MakeLob(680);
                 newBullet.transform.localScale *= 2;
 
             }
@@ -257,6 +255,8 @@ public class FactoryForemanMachine : Enemy
 
                 }
             }
+
+
 
         }
         

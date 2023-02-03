@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: ExplosionMainColor
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: -1792805502, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 743498544, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 1472936306, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 1059989402, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 676343947, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 1685601255, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  - {fileID: 1970344464, guid: 515d1d6c012164018aaabd841e108ee1, type: 3}
+  imageIndex: 9
+  framesPerSecond: 12
+  loop: 0
+  totalFrames: 7
+  destroyOnEnd: 1

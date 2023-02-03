@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: FactoryDoorOpenRight
   m_EditorClassIdentifier: 
   keyframes:
-  - {fileID: 2013603307435878212, guid: b0136a9ffac404135863c62b79b167ef, type: 3}
-  - {fileID: 7401522970972163876, guid: b0136a9ffac404135863c62b79b167ef, type: 3}
+  - {fileID: 1492362631, guid: 45525349498cf42e1ab2911cb3c752bf, type: 3}
+  - {fileID: 2075387766, guid: 45525349498cf42e1ab2911cb3c752bf, type: 3}
   imageIndex: 0
   framesPerSecond: 10
   loop: 0
   totalFrames: 2
+  destroyOnEnd: 0

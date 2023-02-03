@@ -300,6 +300,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -309,8 +310,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -2503,6 +2504,99 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DungeonOneArt_84: -4402032911925904042
+      DungeonOneArt_40: 7064037394645032087
+      DungeonOneArt_62: 9092344988214930637
+      DungeonOneArt_15: 7613798132873829989
+      DungeonOneArt_52: 3872745849907587318
+      DungeonOneArt_43: -2802744539491461190
+      DungeonOneArt_22: 4376778858759098824
+      DungeonOneArt_66: -1717077811031850345
+      DungeonOneArt_82: -6892364678443088284
+      DungeonOneArt_8: 5569135231791212661
+      DungeonOneArt_91: 8352319332523167288
+      DungeonOneArt_3: 2749175572346233107
+      DungeonOneArt_48: 6368852809242963137
+      DungeonOneArt_79: -1017571172908682773
+      DungeonOneArt_86: -4612920975448423284
+      DungeonOneArt_54: -6376789232684727505
+      DungeonOneArt_11: -5009071821104740306
+      DungeonOneArt_60: 6614302465947137297
+      DungeonOneArt_80: 7387314861286798183
+      DungeonOneArt_83: -6655000622696659098
+      DungeonOneArt_77: -4413093826984156639
+      DungeonOneArt_12: 7060711642922322894
+      DungeonOneArt_39: -4952040241498958349
+      DungeonOneArt_89: -8181363677737517184
+      DungeonOneArt_64: -1371722743541102426
+      DungeonOneArt_46: 4455128977235302456
+      DungeonOneArt_87: 8691615823378463754
+      DungeonOneArt_53: 5561341179561065912
+      DungeonOneArt_36: 6993459066761155234
+      DungeonOneArt_23: 66625829217398
+      DungeonOneArt_24: 802341758695144240
+      DungeonOneArt_59: 6181174536997993797
+      DungeonOneArt_58: 7100321897048846285
+      DungeonOneArt_14: -29568933784185910
+      DungeonOneArt_73: 2735565809466141936
+      DungeonOneArt_72: -3656424803885973947
+      DungeonOneArt_4: -7978815772680701669
+      DungeonOneArt_75: -8397938131489825149
+      DungeonOneArt_19: -7808892274568608079
+      DungeonOneArt_13: 8857123549713896433
+      DungeonOneArt_57: -7157049590726647113
+      DungeonOneArt_21: -6226506610435801775
+      DungeonOneArt_20: -8808888972289239698
+      DungeonOneArt_27: -7271583627559539283
+      DungeonOneArt_28: 2677800563268805698
+      DungeonOneArt_88: -2009359414662817246
+      DungeonOneArt_55: -13719288169726435
+      DungeonOneArt_10: 7927524757387271410
+      DungeonOneArt_85: 3421597790954548628
+      DungeonOneArt_81: -3307341359465141490
+      DungeonOneArt_38: 2089826733861292996
+      DungeonOneArt_49: -8436726500435760506
+      DungeonOneArt_50: -1206770209730474552
+      DungeonOneArt_47: -1706497281593801743
+      DungeonOneArt_6: -3744097302366145407
+      DungeonOneArt_16: 3519380315154733581
+      DungeonOneArt_32: -2816887215355813439
+      DungeonOneArt_42: 2061920454095889641
+      DungeonOneArt_37: 5857716444057849120
+      DungeonOneArt_44: 7022249847201926812
+      DungeonOneArt_63: 2297953759110606399
+      DungeonOneArt_68: -5871870972094898444
+      DungeonOneArt_2: 1598698574537472965
+      DungeonOneArt_18: -116058218724710228
+      DungeonOneArt_45: -1463866006872402232
+      DungeonOneArt_9: -1689285301384357504
+      DungeonOneArt_26: -1252982626186518415
+      DungeonOneArt_70: -2608391888558390472
+      DungeonOneArt_7: 8647106706001860833
+      DungeonOneArt_31: -424491271117946045
+      DungeonOneArt_35: 4726748077633434306
+      DungeonOneArt_33: -10702980552337439
+      DungeonOneArt_5: 8632434014190674229
+      DungeonOneArt_25: -7900701792731411093
+      DungeonOneArt_30: 3896513061623892937
+      DungeonOneArt_67: -8953772419859869678
+      DungeonOneArt_61: -7282617893033867433
+      DungeonOneArt_90: 1882736271605420075
+      DungeonOneArt_34: -4241656645761239023
+      DungeonOneArt_78: -6827729883132474440
+      DungeonOneArt_56: 1073713837897654266
+      DungeonOneArt_1: -6392467341267625433
+      DungeonOneArt_65: -6440907166889386023
+      DungeonOneArt_71: -7084140149160763714
+      DungeonOneArt_69: 2249264480146251924
+      DungeonOneArt_51: -7477510557879741724
+      DungeonOneArt_41: 2938608170962447559
+      DungeonOneArt_0: 8544732241345334031
+      DungeonOneArt_76: 6750376232555152480
+      DungeonOneArt_74: 3007958095243793654
+      DungeonOneArt_29: 7253057756276262396
+      DungeonOneArt_17: -7980509092727460866
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

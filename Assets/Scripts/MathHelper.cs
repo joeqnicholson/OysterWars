@@ -34,5 +34,22 @@ public class MathHelper : MonoBehaviour
         return (Mathf.Abs(Mathf.Abs(numberOne) - Mathf.Abs(numberTwo)));
     }
 
+    public static float BalancedAngle(float i)
+    {
+        if(i==0 && i == Mathf.Infinity){return 0;}
+
+        float sign = Mathf.Sign(i);
+
+        if(Mathf.Abs(i) > 90)
+        {
+            return (90 - (Mathf.Abs(i)-90)) * sign;
+        }
+        else
+        {
+            return i;
+        }
+    }
+
+
     
 }

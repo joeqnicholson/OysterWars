@@ -63,6 +63,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -72,8 +73,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -424,6 +425,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      WadeSmallChest_0: -3122350020467235040
+      WadeSmallChest_5: -6592463480056425699
+      WadeSmallChest_2: -6762150496176550707
+      WadeSmallChest_6: 1634171977098379509
+      WadeSmallChest_1: 4891845479818426886
+      WadeSmallChest_11: 3262826037865607037
+      WadeSmallChest_7: -7235923197953604662
+      WadeSmallChest_8: -2674397936626919314
+      WadeSmallChest_4: -5310475489409620255
+      WadeSmallChest_10: -7828412339801249407
+      WadeSmallChest_3: -8224146939214855287
+      WadeSmallChest_9: 1047272409498629073
+      WadeSmallChest_12: -8372022684944531220
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -22,7 +22,6 @@ public class BozuMachine : Enemy
     [SerializeField] SpriteAnimation BozuAimDDown;
     [SerializeField] SpriteAnimation BozuAimDown;
     private BozuState LastBozuState;
-    SpriteAnimationController sprite;
     private float runSpeed = 97;
     [SerializeField]private Vector2 Speed;
     private float jumpSpeed = 178f;
@@ -57,7 +56,6 @@ public class BozuMachine : Enemy
         LastBozuState = CurrentBozuState;
         CurrentBozuState = BozuState.NotOnScreen;
         motor = GetComponent<CharacterMotor>();
-        sprite = GetComponentInChildren<SpriteAnimationController>();
         if (GameData.Instance.OnRightSide(transform.position.x)) { sprite.direction = -1; }
         OnGroundCollision += BozuGroundedFlag;
         OnHeadCollision += BozuHeadFlag;
@@ -109,8 +107,9 @@ public class BozuMachine : Enemy
                     {
                         print("bozuShoot");
                         Bullet newBullet = Instantiate(currentBullet, shootTransform.position, Quaternion.identity).GetComponent<Bullet>();
+                        newBullet.enemyBullet = true;
+                        newBullet.GetComponent<Bullet>().ChangeSpeed(150);
                         newBullet.GetComponent<Bullet>().ChangeMoveDirection(bulletDirection);
-                        newBullet.GetComponent<Bullet>().enemyBullet = true;
                         shotTimer = 0;
                     }
 
@@ -155,6 +154,7 @@ public class BozuMachine : Enemy
         bool highCeiling = Physics2D.Linecast( transform.position, transform.position + (Vector3.up * colliderHeight * 1.5f), jumpLayerMask);
         bool groundInFront = Physics2D.Linecast(transform.position + Vector3.right * directionInt * 45, transform.position + Vector3.right * directionInt * 55 + Vector3.down * 25, jumpLayerMask);
         bool deepGroundInFront = Physics2D.Linecast(transform.position + Vector3.right * directionInt * 45, transform.position + Vector3.right * directionInt * 55 + Vector3.down * 50, jumpLayerMask);
+
 
         if (Speed.y == 0 )
         {
@@ -291,6 +291,8 @@ public class BozuMachine : Enemy
 
     }
 
+
+
     void InAir()
     {
 
@@ -302,6 +304,15 @@ public class BozuMachine : Enemy
         }
         
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10 && canGetHit)
+        {
+            TakeDamage();
+        }
+    }
+
 
     private void BozuGroundedFlag()
     {
@@ -346,7 +357,7 @@ public class BozuMachine : Enemy
             if (!IsOnScreen())
             {
 
-                if(CurrentBozuState == BozuState.Runner) { Destroy(gameObject); }
+                if(CurrentBozuState == BozuState.Runner) { Destroy(sprite.gameObject); Destroy(gameObject); }
                 LastBozuState = CurrentBozuState;
                 CurrentBozuState = BozuState.NotOnScreen;
                 isOnScreen = false;

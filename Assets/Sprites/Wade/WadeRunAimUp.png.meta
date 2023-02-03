@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -51,8 +52,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      WadeRunAimUp_strip6_1: -6282361795135038895
+      WadeRunAimUp_strip6_5: 8009936613726271897
+      WadeRunAimUp_strip6_3: -2812072412449438606
+      WadeRunAimUp_strip6_2: 8580786242248427391
+      WadeRunAimUp_strip6_4: 4010732897609630940
+      WadeRunAimUp_strip6_0: 3943316968134508075
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

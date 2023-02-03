@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 Speed;
+    [System.NonSerialized]public Vector2 Speed;
     private Vector3 lastPosition;
     private float grav = 0;
-    private const float Gravity = 1000;
+    private const float Gravity = 500;
+    public GameObject explosionPrefab;
     public bool enemyBullet;
     [SerializeField] private float damage;
-    float speed = 250;
+    private float speed = 250;
+    private bool hookshot;
 
 
-
-    void Start()
+    public void Update()
     {
+
         
-    }
-
-
-    void Update()
-    {
-        if (enemyBullet) { speed = 160; }
-
         lastPosition = transform.position;
 
         Speed.y -= grav * Time.deltaTime;
-
+        Speed = Vector2.ClampMagnitude(Speed,speed);
         transform.Translate(new Vector3(Speed.x,Speed.y,0) * Time.deltaTime);
 
         if(!GameData.Instance.IsOnScreen(transform.position, Vector2.one)) { Destroy(gameObject); }
@@ -43,8 +38,10 @@ public class Bullet : MonoBehaviour
 
     public void ChangeMoveDirection(Vector3 newDirection)
     {
-        Speed.x = newDirection.x * speed;
-        Speed.y = newDirection.y * speed;
+        newDirection *= speed;
+        newDirection = Vector2.ClampMagnitude(newDirection,speed);
+        Speed.x = newDirection.x;
+        Speed.y = newDirection.y;
     }
 
     public void MakeLob(float gravity = Gravity)
@@ -52,19 +49,22 @@ public class Bullet : MonoBehaviour
         grav = gravity;
     }
 
+    public void MakeHookShot()
+    {
+        hookshot = true;
+    }
+
     public void BoxCollision()
     {
         RaycastHit2D hitInfo = Physics2D.BoxCast(lastPosition, GetComponent<BoxCollider2D>().size, 0, Speed, 1);
         if (hitInfo)
         {
-
-            
-
             if (enemyBullet)
             {
                 WadeMachine wade = hitInfo.collider.gameObject.GetComponent<WadeMachine>();
                 if (wade)
                 {
+                    Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
                     wade.TakeDamage(Mathf.Sign(Speed.x), gameObject);
                 }
             }
@@ -79,6 +79,7 @@ public class Bullet : MonoBehaviour
                         {
                             if (enemy.canGetHit)
                             {
+                                Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
                                 enemy.TakeDamage();
                                 Destroy(gameObject);
                             }
@@ -102,6 +103,13 @@ public class Bullet : MonoBehaviour
 
             if (hitInfo.collider.gameObject.layer == 0)
             {
+                Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
+
+                if(hookshot)
+                {
+                    FindObjectOfType<WadeMachine>().HookShotStart(hitInfo);
+                }
+
                 Destroy(gameObject);
             }
 
@@ -117,6 +125,7 @@ public class Bullet : MonoBehaviour
 
             if (hitInfo.collider.gameObject.layer == 0 && !hitInfo.collider.GetComponent<DestructableTiles>())
             {
+                Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
                 Destroy(gameObject);
             }
 
@@ -146,7 +155,7 @@ public class Bullet : MonoBehaviour
             if (hitInfo.collider.GetComponent<ConveyerSwitch>())
             {
                 hitInfo.collider.GetComponent<ConveyerSwitch>().SwitchDirection();
-                Destroy(gameObject);
+                // Destroy(gameObject);
             }
 
         }

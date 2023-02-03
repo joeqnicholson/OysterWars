@@ -165,6 +165,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -174,8 +175,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -1240,6 +1241,54 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      FactoryTiles_23: -4918229319472739154
+      FactoryTiles_28: -5289022496724523824
+      FactoryTiles_14: 4066645707692155616
+      FactoryTiles_1: 7877947075730319233
+      FactoryTiles_5: -9176966086781106456
+      FactoryTiles_7: -8760193402171730678
+      FactoryTiles_38: -6088195573116450688
+      FactoryTiles_42: 4815469288043709215
+      FactoryTiles_35: -6846713862415392721
+      FactoryTiles_40: 7318606028934227973
+      FactoryTiles_27: 82296743557352002
+      FactoryTiles_41: 4018279003489497994
+      FactoryTiles_39: 1460414956980955948
+      FactoryTiles_21: 5664707694898113826
+      FactoryTiles_6: -5840827820522859410
+      FactoryTiles_13: -5044799819379107854
+      FactoryTiles_32: 5014394999339932038
+      FactoryTiles_19: -1594290763130656741
+      FactoryTiles_46: 4842241788582791579
+      FactoryTiles_30: -6871431185525489893
+      FactoryTiles_18: 8945492039094397323
+      FactoryTiles_2: 8994451729980219612
+      FactoryTiles_16: 4475918247972881736
+      FactoryTiles_22: 1895610054137631518
+      FactoryTiles_33: 293592003384415025
+      FactoryTiles_25: -5333447256775166234
+      FactoryTiles_26: -6799058638906025346
+      FactoryTiles_9: 7283844400616647340
+      FactoryTiles_17: -6412725194977545951
+      FactoryTiles_11: -6982012178443502499
+      FactoryTiles_36: -6793306596118091372
+      FactoryTiles_3: 3568663024597314825
+      FactoryTiles_37: 8427728435863985968
+      FactoryTiles_43: -8903759243314302032
+      FactoryTiles_0: -6244347822004630890
+      FactoryTiles_20: 900470243341328227
+      FactoryTiles_29: 4045305073543395099
+      FactoryTiles_34: -638897265587739701
+      FactoryTiles_44: 6316865028514162238
+      FactoryTiles_10: -354190547059635792
+      FactoryTiles_45: 3049301822288949582
+      FactoryTiles_12: 4401996808669113788
+      FactoryTiles_24: 4655671670607436424
+      FactoryTiles_4: 8261064401248763465
+      FactoryTiles_15: 8111038228006189304
+      FactoryTiles_31: -7253449326749808638
+      FactoryTiles_8: 2253461910794298925
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

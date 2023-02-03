@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3327770347393787251}
   m_RootOrder: 0
@@ -63,6 +64,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -130,6 +132,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3327770347393787251}
   m_RootOrder: 1
@@ -145,6 +148,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -213,6 +217,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 198, y: -445, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3327770346592229062}
   - {fileID: 3327770346616923895}
@@ -266,6 +271,9 @@ MonoBehaviour:
   canGetHit: 1
   respawn: 1
   respawnPrefab: {fileID: 3327770347393787254}
+  cameraBox: {fileID: 0}
+  touchForDamage: 1
+  explosion: {fileID: 4448468720803265975, guid: 4972b9e3853cc49f58eebe96b10f5501, type: 3}
   BozuRun: {fileID: 11400000, guid: db4298a43a2be4a4b8099bb06aecb690, type: 2}
   BozuJump: {fileID: 11400000, guid: 47b541857fd90477d9472cbfb2d1611d, type: 2}
   BozuAimIdle: {fileID: 11400000, guid: ce6072ce6d3e24abda5d2b9d1c70658f, type: 2}

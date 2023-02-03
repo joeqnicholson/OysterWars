@@ -15,6 +15,7 @@ public class BobcatArm : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if(transform.parent.localScale.x == -1){transform.localScale=new Vector3(-1,1,1);}
     }
 
     void Update()

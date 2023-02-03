@@ -25,7 +25,7 @@ public class WadeInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        keys = (int)itemCount[LobShot];
+
     }
 
     public void PickupItem(Item item)

@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705116730878732836, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7920691731761411224, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -63,10 +67,50 @@ PrefabInstance:
       propertyPath: Closed
       value: 
       objectReference: {fileID: 11400000, guid: 93c100293304647eca7e140f34b81f92, type: 2}
+    - target: {fileID: 7920691731761411225, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: OpenLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ae0b84dff3bc4212a016d802fd4c5d9, type: 2}
+    - target: {fileID: 7920691731761411225, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: OpenRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ae0b84dff3bc4212a016d802fd4c5d9, type: 2}
+    - target: {fileID: 7920691731761411226, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_Size.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411226, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_Size.y
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 7920691731761411226, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8066981835553427677, guid: 4f80aa24bd61c4f3e9c1d8388ecbef93, type: 3}
+      objectReference: {fileID: -719636627, guid: 3373f74b4266f4cb0958e66037dcec13, type: 3}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920691731761411228, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 7920691731761411229, guid: fb3a5346d65d344c1bdd1caaf54b66bd, type: 3}
       propertyPath: m_Name
       value: BossDoor
