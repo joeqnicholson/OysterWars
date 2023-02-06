@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Kinematic2D.Core;
 
-public partial class WadeMachine : CharacterMotor
+public partial class WadeMachine : Actor
 {
     public class WadeState
     {
@@ -41,7 +41,6 @@ public partial class WadeMachine : CharacterMotor
         {
             Sound.PlayWadeHit();
             StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
-            ForceNotGroundedState();
             Speed.x = 100 * -directionInt;
             Speed.y = 70;
             Time.timeScale = .1f;
