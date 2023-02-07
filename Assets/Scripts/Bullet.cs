@@ -17,10 +17,8 @@ public class Bullet : MonoBehaviour
 
     public void Update()
     {
-
         
         lastPosition = transform.position;
-
         Speed.y -= grav * Time.deltaTime;
         Speed = Vector2.ClampMagnitude(Speed,speed);
         transform.Translate(new Vector3(Speed.x,Speed.y,0) * Time.deltaTime);
@@ -56,7 +54,8 @@ public class Bullet : MonoBehaviour
 
     public void BoxCollision()
     {
-        RaycastHit2D hitInfo = Physics2D.BoxCast(lastPosition, GetComponent<BoxCollider2D>().size, 0, Speed, 1);
+        // RaycastHit2D hitInfo = Physics2D.BoxCast(lastPosition, GetComponent<BoxCollider2D>().size, 0, Speed.normalized, Speed.magnitude);
+        RaycastHit2D hitInfo = Physics2D.Linecast(lastPosition, transform.position);
         if (hitInfo)
         {
             if (enemyBullet)

@@ -62,10 +62,16 @@ public partial class WadeMachine : Actor
     [SerializeField] private SpriteAnimation StartRunParticle;
     private Vector3 startPos;
     public GameObject HookshotRootObject;
+    private HookshotRoot root;
+    public GameObject hookshotKnife;
     public GameObject PointObject;
     public GameObject CurrentHookshotRoot;
     private float stillTimer;
     public float MoveTowardsSpeed;
+    private Vector3 yOffset;
+    public List<Vector2> previousPositions = new List<Vector2>();
+    public bool hooked;
+
 
 
 
@@ -75,6 +81,7 @@ public partial class WadeMachine : Actor
     // Start is called before the first frame update
     public void Start()
     {
+        Application.targetFrameRate = 60;
         startPos = transform.position;
         Inventory = GetComponent<WadeInventory>();
         Sound = GetComponent<WadeSound>();
@@ -83,7 +90,7 @@ public partial class WadeMachine : Actor
         health = startHealth;
         sprite = GetComponentInChildren<ObjectSprite>();
         enabled = true;
-        
+        yOffset = -Vector3.up * (size.y/2);
         // sprite.transform.parent = null;
     }
 
@@ -104,7 +111,7 @@ public partial class WadeMachine : Actor
             moveX = inputs.moveInput.x;
         }
 
-
+        hooked = Hooked();
 
         moveY = inputs.moveInput.y;
 
@@ -119,6 +126,11 @@ public partial class WadeMachine : Actor
         if (invincibiltyTimer <= invincibiltyTime)
         {
             invincibiltyTimer += Time.deltaTime;
+        }
+
+        if(CurrentHookshotRoot)
+        {
+            CurrentHookshotRoot.transform.position = transform.position;
         }
 
 
@@ -138,7 +150,7 @@ public partial class WadeMachine : Actor
         {
             if (onGround)
             {
-                GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                GameObject particle = Instantiate(particleSpawn, transform.position + yOffset, Quaternion.identity);
                 particle.GetComponent<SpriteAnimationController>().direction = directionInt;
                 particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
             }
@@ -178,12 +190,11 @@ public partial class WadeMachine : Actor
 
 
 
-        if(CurrentWadeState != StSwing)
-        {
-            Move(Speed);
-        }
+        Move(Speed);
+        
 
         WallChecks();
+        CheckOnGround();
         
 
         // sprite.gameObject.transform.position = Vector3Int.RoundToInt(transform.position);
@@ -239,85 +250,100 @@ public partial class WadeMachine : Actor
             }
             else
             {
-                
-             
-                Vector3 deltaPosition = -transform.up * (2 * CharacterConstants.SkinWidth + jumpDownDistance);
+                Vector3 nextPosition = -transform.up * (2 * CharacterConstants.SkinWidth + jumpDownDistance);
                 varJumpTimer = 0;
-                // transform.position = (body.RigidbodyComponent.Position + deltaPosition);
+                // transform.position = (body.RigidbodyComponent.Position + nextPosition);
             }
         }
+
+
 
         if (!onGround && stillTimer < 0)
         {
-            if (hitUp) { varJumpTimer = 0; }
-
-            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
-
-            if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
+            if(Hooked())
             {
-                WallJump(hitRight);
+                Vector2 lookAtVector = root.currentPoint.transform.position;
+                Vector2 myPosition = transform.position;
+                Vector2 difference = (myPosition - lookAtVector).normalized;
+                Vector2 perp = Vector2.Perpendicular(difference);
+
+                Move(perp * root.currentForce);
+
+                float currentDistance = Vector2.Distance(lookAtVector, myPosition);
+
+                if(currentDistance > root.currentDistance)
+                {
+                    Move(-difference * (currentDistance - root.currentDistance));
+                }
+
+                previousPositions.Add(myPosition);
+
+                for(int i = 1; i < previousPositions.Count; i++)
+                {
+                    Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
+                }
+                Speed.y = 0;
+            }
+            else
+            {
+                if (hitUp) { varJumpTimer = 0; }
+
+                conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
+
+                if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
+                {
+                    WallJump(hitRight);
+                }
+
+                airTimer += Time.deltaTime;
+
+                Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * Time.deltaTime);
+
+                if (varJumpTimer > 0)
+                {
+                    Speed.y = jumpSpeed;
+                }
+
+                if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
+                {
+                    varJumpTimer = .08f;
+                    hasShortHopped = true;
+                }
             }
 
-            airTimer += Time.deltaTime;
-
-            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * Time.deltaTime);
-
-            if (varJumpTimer > 0)
-            {
-                Speed.y = jumpSpeed;
-            }
-
-            if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
-            {
-                varJumpTimer = .08f;
-                hasShortHopped = true;
-            }
         }
-
-
-
 
         float lastSpeed = Speed.x;
 
 
-        if (moveX == 0)
+        if(Hooked() && onGround)
         {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkAcceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, 0, walkAcceleration * Time.deltaTime);
+        }
+        else if (moveX == 0 && !Hooked())
+        {
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
+        }
+        else if(!Hooked())
+        {
+            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
         }
         else
         {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed + conveyerAddition, walkDeceleration * AccelMultipler() * Time.deltaTime);
+            Speed.x = 0;
         }
+        
 
         if(Mathf.Abs(lastSpeed) < 5f && Mathf.Abs(moveX) > 0.2f && onGround && CurrentWadeState == StNormal)
         {
-            GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
+            GameObject particle = Instantiate(particleSpawn, transform.position + yOffset, Quaternion.identity);
             particle.GetComponent<SpriteAnimationController>().direction = directionInt;
             particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
         }
-
-        // if (crouching)
-        // {
-        //     if (collider.size != new Vector2(10, 10))
-        //     {
-        //         collider.size = (new Vector2(10, 10));
-        //         collider.offset = new Vector2(0, 5);
-        //     }
-        // }
-        // else
-        // {
-        //     if (collider.size != new Vector2(10, 20))
-        //     {
-        //         collider.size = (new Vector2(10, 20));
-        //         collider.offset = new Vector2(0, 10);
-        //     }
-        // }
-
     }
 
     private void Jump(bool swing = false)
     {
-
         GameObject particle = Instantiate(particleSpawn, transform.position, Quaternion.identity);
         particle.GetComponent<SpriteAnimationController>().Play(JumpParticle);
         Sound.PlayJumpUp();
@@ -342,13 +368,10 @@ public partial class WadeMachine : Actor
             Speed.y = jumpSpeed;
         }
         
-
     }
 
     private void WallJump(bool rightCollision)
     {
-        
-
         GameObject particle = Instantiate(
             particleSpawn,
             transform.position + transform.right * size.x / 2 * directionInt - transform.up * size.y/2,
@@ -381,19 +404,23 @@ public partial class WadeMachine : Actor
 
     void SwingUpdate()
     {
+       HookshotRoot root = CurrentHookshotRoot.GetComponent<HookshotRoot>();
 
-        Vector3 moveAmount = Vector3Int.RoundToInt(CurrentHookshotRoot.transform.position - transform.position);
-        Move(moveAmount, false);
+        Vector3 moveAmount = root.currentForce * -CurrentHookshotRoot.transform.up;
         Speed = moveAmount;
+        CurrentHookshotRoot.transform.position = transform.position;
+
+        if(root.currentDistance > root.distance)
+        {
+            Move(-root.transform.up * (root.currentDistance - root.distance));
+        }
+        
 
         if(inputs.jumpPress)
         {
-            
-
             Jump(true);
             Destroy(CurrentHookshotRoot);
             TransitionToState(StNormal);
-
         }
 
     }
@@ -520,20 +547,27 @@ public partial class WadeMachine : Actor
         {
             Sound.PlayGunShot();
             Debug.Log("youshot");
-            Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
+            Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0) + yOffset, Quaternion.identity).GetComponent<Bullet>();
             newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
             shotTimer = 0;
         }
 
         if (inputs.item1Press)
         {
-            Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0), Quaternion.identity).GetComponent<Bullet>();
-            newBullet.GetComponent<Bullet>().ChangeSpeed(350);
-            newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
+            if(CurrentHookshotRoot)
+            {
+                Destroy(CurrentHookshotRoot);
+            }
+            else
+            {
+                HookshotKnife newBullet = Instantiate(hookshotKnife, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0) + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
+                newBullet.GetComponent<HookshotKnife>().ChangeMoveDirection(shootDirection);
+                shotTimer = 0;
+                // stillTimer = 2;
 
-            newBullet.GetComponent<Bullet>().MakeHookShot();
-            
-            shotTimer = 0;
+                StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
+            }
+
         }
 
 
@@ -549,21 +583,15 @@ public partial class WadeMachine : Actor
 
         print(MathHelper.BalancedAngle(angle));
 
-        float swingVelocity = MathHelper.BalancedAngle(angle) * (Mathf.Abs(Speed.magnitude) / 150);
-
         Point pointToAdd = Instantiate(PointObject, hitInfo.point, Quaternion.identity).GetComponent<Point>();
 
-
         pointToAdd.normal = hitInfo.normal;
-        pointToAdd.createdForce = swingVelocity;
-
 
         CurrentHookshotRoot = Instantiate(HookshotRootObject, transform.position + Vector3.up * 9, transform.rotation);
-        CurrentHookshotRoot.GetComponent<HookshotRoot>().startPoint = pointToAdd.gameObject;
 
+        root = CurrentHookshotRoot.GetComponent<HookshotRoot>();
+        root.startPoint = pointToAdd.gameObject;
 
-        TransitionToState(StSwing);
-        
     }
 
 
@@ -591,6 +619,43 @@ public partial class WadeMachine : Actor
             }
         }
 
+    }
+
+    public bool Hooked()
+    {
+        if(!CurrentHookshotRoot)
+        {
+            return false;
+        }
+        else
+        {
+
+            if((!root.maxedOut && !inputs.triggerHeld))
+            {
+                return false;
+            }
+
+
+            if(onGround)
+            {
+                if(moveX == 0)
+                {
+                    return false;
+                }
+
+                float pointsDifference = Mathf.Sign(root.currentPoint.transform.position.x - transform.position.x);
+                bool oppositeDirection = Mathf.Sign(moveX) != pointsDifference;
+
+
+                if(!oppositeDirection)
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
     }
     
     public void Reset()
@@ -802,7 +867,7 @@ public partial class WadeMachine : Actor
         sprite.scale.y = MathHelper.Approach(1, .6f, squish);
         Speed.y = 0;
 
-        float yPoint = transform.position.y;
+
        
         
         // if (!LeftBottomHit(20)) { yPoint = RightBottomHit(20).point.y; }
@@ -810,7 +875,7 @@ public partial class WadeMachine : Actor
         // else if(RightBottomHit(20).distance > LeftBottomHit(20).distance) { yPoint = LeftBottomHit(20).point.y; }
         // else { yPoint = RightBottomHit(20).point.y;}
 
-        GameObject particle =Instantiate(particleSpawn, new Vector3(transform.position.x, yPoint,0), Quaternion.identity);
+        GameObject particle =Instantiate(particleSpawn, transform.position + yOffset, Quaternion.identity);
         particle.GetComponent<SpriteAnimationController>().Play(LandParticle);
 
 

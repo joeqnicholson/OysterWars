@@ -40,7 +40,6 @@ public class Actor : MonoBehaviour
     public void MoveX(float amount) 
     { 
 
-
         xRemainder += amount; 
 
         int move = Mathf.RoundToInt(xRemainder); 
@@ -90,7 +89,7 @@ public class Actor : MonoBehaviour
                     move -= sign; 
 
                     onGround = false;
-                    
+
                 } 
                 else 
                 {   
@@ -106,6 +105,17 @@ public class Actor : MonoBehaviour
         } 
 
     }   
+
+    public void CheckOnGround()
+    {
+        if(onGround)
+        {
+            if(!hitDown)
+            {
+                onGround = false;
+            }
+        }
+    }
 
 
     public virtual void OnGroundHit()
