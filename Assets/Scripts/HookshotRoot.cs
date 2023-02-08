@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HookshotRoot : MonoBehaviour
+public class HookshotRoot : Actor
 {
     public float distance;
     public float verticalty;
-    private const float gravity = 250;
+    public float gravity = 1500;
     public float currentForce;
     public float moveTowardsSpeed;
     float zTurn;
@@ -29,12 +29,14 @@ public class HookshotRoot : MonoBehaviour
     private float maxDistance = 600;
     public bool maxedOut;
     private float pointsTotalDistance;
-
+    Colliders colliders;
+    public List<Vector2> previousPositions = new List<Vector2>();
 
 
     void Start()
     {
         GetStartingStats(startPoint.GetComponent<Point>());
+        colliders = FindObjectOfType<Colliders>();
         lastPointLooker = Instantiate(new GameObject("LastPointLooker"), transform.position, Quaternion.identity).transform;
     }
 
@@ -42,34 +44,52 @@ public class HookshotRoot : MonoBehaviour
     {
         if(!stopped)
         {
-            if(lookAtLast)
-            {
-                // lastPointLooker rotation
-                lastPointLooker.position = transform.position;
-
-                Vector3 relativeLookPos = points[points.Count - 2].transform.position - lastPointLooker.position;
-                float angleLooker = Mathf.Atan2(relativeLookPos.y, relativeLookPos.x) * Mathf.Rad2Deg;
-                lastPointLooker.rotation = Quaternion.AngleAxis(angleLooker, Vector3.forward); 
-
-                CheckForNoWalls();
-            }
+            // if(lookAtLast)
+            // {
+            //     CheckForNoWalls();
+            // }
             
 
-            Vector3 relativePos = points[points.Count-1].transform.position - transform.position;
-            float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            zTurn = transform.eulerAngles.z;
+            // Vector3 relativePos = points[points.Count-1].transform.position - transform.position;
+            // float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
+            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // zTurn = transform.eulerAngles.z;
 
-            CheckForWalls();
+            // CheckForWalls();
 
-            verticalty = transform.right.x;
 
-            currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
 
             currentDistance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
 
-            float totalDistance = pointsTotalDistance + currentDistance;
-            maxedOut = totalDistance >= maxDistance;
+            Vector2 lookAtVector = points[points.Count-1].transform.position;
+            Vector2 myPosition = transform.position;
+            Vector2 difference = (myPosition - lookAtVector).normalized;
+            Vector2 perp = Vector2.Perpendicular(difference);
+            Vector3 annoyingConversion = perp;
+            float addition = 1/distance;
+
+            verticalty = -difference.normalized.x;
+
+            currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
+
+            if(currentDistance != distance)
+            {
+                Vector3 dienow = -difference;
+                transform.position += (dienow * (currentDistance - distance)) * Time.deltaTime;
+            }
+
+            transform.position += ((annoyingConversion * currentForce)) * Time.deltaTime;
+
+            previousPositions.Add(myPosition);
+            if(previousPositions.Count > 1000)
+            {
+                previousPositions.RemoveAt(0);
+            }
+
+            for(int i = 1; i < previousPositions.Count; i++)
+            {
+                Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
+            }
 
         }
 
@@ -122,7 +142,7 @@ public class HookshotRoot : MonoBehaviour
         CalculateDistance();
     }
 
-    public Point CreatePoint(RaycastHit2D hitInfo)
+    public Point CreatePoint(Hit hitInfo)
     {
         Point newPoint = Instantiate(PointObject, Vector3Int.RoundToInt(hitInfo.point), Quaternion.identity).GetComponent<Point>();
         newPoint.createdForce = currentForce;
@@ -162,22 +182,22 @@ public class HookshotRoot : MonoBehaviour
 
     void CheckForWalls()
     {
+
         Vector2 iPos = transform.position;
         Vector2 iMinusPos = points[points.Count-1].transform.position;
         Vector2 difference = (iPos - iMinusPos).normalized * 5; 
 
         float distance = Vector2.Distance(iPos - difference, iMinusPos + difference) - 5;
 
-        RaycastHit2D hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
+        Hit hit = Ray.CastTo(iPos - difference, iMinusPos + difference, colliders);
 
-        if(hit)
+        if(hit != null)
         {
             AddPoint(CreatePoint(hit));
         }
 
         Debug.DrawLine(iPos - difference, iMinusPos + difference, Color.green);
 
-           
     }
 
     void CheckForNoWalls()
@@ -189,16 +209,15 @@ public class HookshotRoot : MonoBehaviour
 
         float distance = Vector2.Distance(myPos - difference, iMinus2Pos + difference) - 5;
 
-        RaycastHit2D hit = Physics2D.Raycast(myPos - difference, -difference, distance,  layerMask);
+        Hit hit = Ray.CastTo(myPos - difference, iMinus2Pos + difference, colliders);
 
-        if(hit)
+        if(hit != null)
         {
             Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.blue);
         }
         else
         {
-           
-
+        
             bool higherThanPoint;
 
             if(points[points.Count - 2].transform.position.x < points[points.Count - 1].transform.position.x)
@@ -414,7 +433,7 @@ public class HookshotRoot : MonoBehaviour
 
 //     }
 
-//     public Point CreatePoint(RaycastHit2D hitInfo)
+//     public Point CreatePoint(Hit hitInfo)
 //     {
 //         Vector3 hitNormal = hitInfo.normal * 5;
 //         Point newPoint = Instantiate(PointObject, Vector3Int.RoundToInt(hitInfo.point) + hitNormal, Quaternion.identity).GetComponent<Point>();
@@ -446,7 +465,7 @@ public class HookshotRoot : MonoBehaviour
 
 //                 float distance = Vector2.Distance(iPos - difference, iMinusPos + difference) - 5;
 
-//                 RaycastHit2D hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
+//                 Hit hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
 
 //                 if(hit)
 //                 {
@@ -474,7 +493,7 @@ public class HookshotRoot : MonoBehaviour
 
 //             float distance = Vector2.Distance(iPos - difference, iMinus2Pos + difference) - 5;
 
-//             RaycastHit2D hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
+//             Hit hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
 
 //             if(hit)
 //             {
@@ -515,7 +534,7 @@ public class HookshotRoot : MonoBehaviour
 //         }
 
 
-//         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 16, transform.right, Mathf.Sign(currentForce), layerMask);
+//         Hit hit = Physics2D.CircleCast(transform.position, 16, transform.right, Mathf.Sign(currentForce), layerMask);
 
 //         if(hit && checkTime < 0)
 //         {

@@ -32,8 +32,11 @@ public class Actor : AABB
 
     float xRemainder;
 
+
+
     public void MoveX(float amount) 
     { 
+
         xRemainder += amount; 
 
         int move = Mathf.RoundToInt(xRemainder); 
@@ -57,6 +60,7 @@ public class Actor : AABB
                 } 
             } 
         } 
+
     } 
 
     float yRemainder;

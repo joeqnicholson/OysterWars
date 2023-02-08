@@ -625,6 +625,7 @@ public partial class WadeMachine : Actor
         if(!CurrentHookshotRoot)
         {
             return false;
+            previousPositions.Clear();
         }
         else
         {
@@ -640,6 +641,7 @@ public partial class WadeMachine : Actor
                 if(moveX == 0)
                 {
                     return false;
+                    previousPositions.Clear();
                 }
 
                 float pointsDifference = Mathf.Sign(root.currentPoint.transform.position.x - transform.position.x);
@@ -649,6 +651,7 @@ public partial class WadeMachine : Actor
                 if(!oppositeDirection)
                 {
                     return false;
+                    previousPositions.Clear();
                 }
             }
 
