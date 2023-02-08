@@ -81,6 +81,7 @@ public partial class WadeMachine : Actor
     // Start is called before the first frame update
     public void Start()
     {
+        base.Start();
         Application.targetFrameRate = 60;
         startPos = transform.position;
         Inventory = GetComponent<WadeInventory>();
@@ -91,14 +92,12 @@ public partial class WadeMachine : Actor
         sprite = GetComponentInChildren<ObjectSprite>();
         enabled = true;
         yOffset = -Vector3.up * (size.y/2);
-        // sprite.transform.parent = null;
     }
 
     // Update is called once per frame
     private void Update()
     {
         canHopDown = CanHopDown();
-        Time.timeScale = .90f;
         aimX = inputs.moveInput.x;
 
         if (forceMoveXTimer > 0)

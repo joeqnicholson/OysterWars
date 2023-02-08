@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor : MonoBehaviour
+public class Actor : AABB
 {
     public bool onGround;
-
-
-    public Vector2 size;
-
     public bool hitLeft;
     public bool hitRight;
     public bool hitUp;
     public bool hitDown;
 
+    public void Start()
+    {
+        base.Start();
+    }
 
     public void WallChecks()
     {
-        hitLeft = Physics2D.BoxCast(transform.position - Vector3.right , size, 0, Vector3.zero);
-        hitRight = Physics2D.BoxCast(transform.position + Vector3.right , size, 0, Vector3.zero);
-        hitUp = Physics2D.BoxCast(transform.position + Vector3.up , size, 0, Vector3.zero);
-        hitDown = Physics2D.BoxCast(transform.position - Vector3.up , size, 0, Vector3.zero);
+        hitLeft = CollideAtSolid(transform.position - Vector3.right);
+        hitRight = CollideAtSolid(transform.position + Vector3.right);
+        hitUp = CollideAtSolid(transform.position + Vector3.up);
+        hitDown = CollideAtSolid(transform.position - Vector3.up);
     }
 
 
@@ -32,14 +32,8 @@ public class Actor : MonoBehaviour
 
     float xRemainder;
 
-    public bool collideAt(Vector2 position)
-    {
-        return Physics2D.BoxCast(position, size, 0, Vector3.zero);
-    }
-
     public void MoveX(float amount) 
     { 
-
         xRemainder += amount; 
 
         int move = Mathf.RoundToInt(xRemainder); 
@@ -50,7 +44,7 @@ public class Actor : MonoBehaviour
             int sign = Mathf.RoundToInt(Mathf.Sign(move)); 
             while (move != 0) 
             { 
-                if (!collideAt(transform.position + new Vector3(sign , 0,0))) 
+                if (!CollideAtSolid(transform.position + new Vector3(sign , 0,0))) 
                 { 
                     //There is no Solid immediately beside us 
                     transform.Translate(Vector3.right * sign); 
@@ -63,7 +57,6 @@ public class Actor : MonoBehaviour
                 } 
             } 
         } 
-
     } 
 
     float yRemainder;
@@ -82,7 +75,7 @@ public class Actor : MonoBehaviour
             int sign = Mathf.RoundToInt(Mathf.Sign(move)); 
             while (move != 0) 
             { 
-                if (!collideAt(transform.position + new Vector3(0, sign  ,0))) 
+                if (!CollideAtSolid(transform.position + new Vector3(0, sign  ,0))) 
                 { 
                     //There is no Solid immediately beside us 
                     transform.Translate(Vector3.up * sign); 
