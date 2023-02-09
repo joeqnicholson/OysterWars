@@ -2,103 +2,106 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HookshotRoot : Actor
+public class HookshotRoot : MonoBehaviour
 {
     public float distance;
     public float verticalty;
     public float gravity = 1500;
     public float currentForce;
     public float moveTowardsSpeed;
-    float zTurn;
-    public LayerMask layerMask;
+    public float zTurn;
     public List<Point> points = new List<Point>();
-    private Transform lastPointLooker;
     private bool lookAtLast;
-    public float closeMod;
-    public float farMod;
-    private Vector3 lastPosition;
-    public Vector3 currentVelocity;
     public float lerpedDistanceModifier;
     public GameObject startPoint;
     public GameObject PointObject;
-    public float checkTime;
-    private bool stopped;
     public float currentDistance;
     public Point currentPoint;
     public float pointsDistance;
     private float maxDistance = 600;
     public bool maxedOut;
     private float pointsTotalDistance;
+    public float distanceToLast;
     Colliders colliders;
     public List<Vector2> previousPositions = new List<Vector2>();
 
 
     void Start()
     {
-        GetStartingStats(startPoint.GetComponent<Point>());
         colliders = FindObjectOfType<Colliders>();
-        lastPointLooker = Instantiate(new GameObject("LastPointLooker"), transform.position, Quaternion.identity).transform;
     }
 
     void Update()
     {
-        if(!stopped)
+
+        if(lookAtLast)
         {
-            // if(lookAtLast)
-            // {
-            //     CheckForNoWalls();
-            // }
-            
-
-            // Vector3 relativePos = points[points.Count-1].transform.position - transform.position;
-            // float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            // zTurn = transform.eulerAngles.z;
-
-            // CheckForWalls();
 
 
-
-            currentDistance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
-
-            Vector2 lookAtVector = points[points.Count-1].transform.position;
-            Vector2 myPosition = transform.position;
-            Vector2 difference = (myPosition - lookAtVector).normalized;
-            Vector2 perp = Vector2.Perpendicular(difference);
-            Vector3 annoyingConversion = perp;
-            float addition = 1/distance;
-
-            verticalty = -difference.normalized.x;
-
-            currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
-
-            if(currentDistance != distance)
+            for(int i = 1; i < points.Count; i++)
             {
-                Vector3 dienow = -difference;
-                transform.position += (dienow * (currentDistance - distance)) * Time.deltaTime;
+                Debug.DrawLine(points[i-1].transform.position, points[i].transform.position);
             }
 
-            transform.position += ((annoyingConversion * currentForce)) * Time.deltaTime;
-
-            previousPositions.Add(myPosition);
-            if(previousPositions.Count > 1000)
-            {
-                previousPositions.RemoveAt(0);
-            }
-
-            for(int i = 1; i < previousPositions.Count; i++)
-            {
-                Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
-            }
-
+            CheckForNoWalls();
         }
+        
+
+        Vector3 relativePos = points[points.Count-1].transform.position - transform.position;
+        float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
+        zTurn = angle;
+
+        CheckForWalls();
+
+
+
+        // currentDistance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
+
+        // Vector2 lookAtVector = points[points.Count-1].transform.position;
+        // Vector2 myPosition = transform.position;
+        // Vector2 difference = (myPosition - lookAtVector).normalized;
+        // Vector2 perp = Vector2.Perpendicular(difference);
+        // Vector2 annoyingConversion = perp;
+        // float addition = 1/distance;
+
+        // verticalty = -difference.normalized.x;
+
+        // currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
+
+        // Vector2 distanceHelper = Vector2.zero;
+
+        // if(currentDistance != distance)
+        // {
+        //     Vector2 dienow = -difference;
+        //     distanceHelper = (dienow * (currentDistance - distance));
+        // }
+
+        // Move((annoyingConversion * currentForce) + distanceHelper);
+
+        // previousPositions.Add(myPosition);
+        // if(previousPositions.Count > 1000)
+        // {
+        //     previousPositions.RemoveAt(0);
+        // }
+
+        // for(int i = 1; i < previousPositions.Count; i++)
+        // {
+        //     Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
+        // }
 
     }
 
+    
 
 
-    public void GetStartingStats(Point startingPoint)
+
+    public void GetStartingStats()
     {
+
+
+        Point startingPoint = startPoint.GetComponent<Point>();
+
+
         if(startingPoint.createdForce == 0)
         {
             currentForce = startingPoint.transform.position.x > transform.position.x ? 1 : -1;
@@ -110,11 +113,8 @@ public class HookshotRoot : Actor
 
         Vector3 relativePos = startingPoint.transform.position - transform.position;
         float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        zTurn = transform.eulerAngles.z;
-
-        print(startingPoint.transform.position);
-        print(startingPoint.normal);
+        zTurn = angle;
+        startingPoint.createdAngle = angle;
 
         AddPoint(startingPoint);
 
@@ -127,26 +127,17 @@ public class HookshotRoot : Actor
         distance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
         lookAtLast = points.Count != 1; 
         currentPoint = points[points.Count-1];
-
-        if(points.Count > 1)
-        {
-
-            Vector2 normal2 = points[points.Count-1].normal;
-            Vector2 perp = Vector2.Perpendicular(normal2);
-            Vector3 killMe = perp;
-            newPoint.transform.position += killMe * 5;
-        }
-
-        newPoint.transform.position += newPoint.normal * 5;
-
         CalculateDistance();
     }
 
     public Point CreatePoint(Hit hitInfo)
     {
-        Point newPoint = Instantiate(PointObject, Vector3Int.RoundToInt(hitInfo.point), Quaternion.identity).GetComponent<Point>();
+        Vector3 positionToCreate;
+        hitInfo.normal = hitInfo.solid.CornerNormal(hitInfo.solid.ClosestCorner(hitInfo.point));
+        positionToCreate = hitInfo.solid.ClosestCorner(hitInfo.point);
+        Point newPoint = Instantiate(PointObject, positionToCreate + hitInfo.normal * 3, Quaternion.identity).GetComponent<Point>();
         newPoint.createdForce = currentForce;
-        newPoint.createdAngle = transform.eulerAngles.z;
+        newPoint.createdAngle = zTurn;
         newPoint.normal = hitInfo.normal;
 
 
@@ -188,6 +179,7 @@ public class HookshotRoot : Actor
         Vector2 difference = (iPos - iMinusPos).normalized * 5; 
 
         float distance = Vector2.Distance(iPos - difference, iMinusPos + difference) - 5;
+        distanceToLast = Mathf.Abs(distance);
 
         Hit hit = Ray.CastTo(iPos - difference, iMinusPos + difference, colliders);
 
@@ -208,7 +200,7 @@ public class HookshotRoot : Actor
         Vector2 difference = (myPos - iMinus2Pos).normalized * 5; 
 
         float distance = Vector2.Distance(myPos - difference, iMinus2Pos + difference) - 5;
-
+        
         Hit hit = Ray.CastTo(myPos - difference, iMinus2Pos + difference, colliders);
 
         if(hit != null)
@@ -223,15 +215,15 @@ public class HookshotRoot : Actor
             if(points[points.Count - 2].transform.position.x < points[points.Count - 1].transform.position.x)
             {
                 Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.red);
-                higherThanPoint = transform.eulerAngles.z < points[points.Count - 1].createdAngle;
+                higherThanPoint = zTurn > points[points.Count - 1].createdAngle;
             }
             else
             {
                 Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.white);
-                higherThanPoint = transform.eulerAngles.z > points[points.Count - 1].createdAngle;
+                higherThanPoint = zTurn < points[points.Count - 1].createdAngle;
             }
 
-            if(higherThanPoint)
+            if(higherThanPoint || Mathf.Abs(distanceToLast) < 20)
             {
                 RemovePoint();
             }
@@ -239,16 +231,6 @@ public class HookshotRoot : Actor
         }
 
         
-    }
-
-    public void Stop()
-    {
-        stopped = true;
-    }
-
-    public void Restart()
-    {
-        stopped = false;
     }
 
 }

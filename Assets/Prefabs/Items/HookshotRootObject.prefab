@@ -99,20 +99,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 0
   verticalty: 0
-  gravity: 250
+  gravity: 2000
   currentForce: 0
-  moveTowardsSpeed: 150
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
+  moveTowardsSpeed: 250
+  zTurn: 0
   points: []
-  maxDistance: 180
-  closeMod: 4
-  farMod: 1
-  currentVelocity: {x: 0, y: 0, z: 0}
   lerpedDistanceModifier: 0
   startPoint: {fileID: 0}
   PointObject: {fileID: 4177534002213837577, guid: bcae2c086bf604cb9b7e6327fd259fa2, type: 3}
-  checkTime: 0
-  bouncy: 0
-  bounciness: 0.5
+  currentDistance: 0
+  currentPoint: {fileID: 0}
+  pointsDistance: 0
+  maxedOut: 0
+  distanceToLast: 0
+  previousPositions: []

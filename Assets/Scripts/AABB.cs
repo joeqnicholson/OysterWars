@@ -47,9 +47,24 @@ public class AABB : MonoBehaviour
         return xTouching && yTouching;
     }
 
+    public Vector3[] Corners()
+    {
+        //order goes TL,TR,BL,BR like a book;
+        Vector3[] corners = {TopLeft() ,TopRight() ,BottomLeft() ,BottomRight()};
+        return corners;
+    }
+
     public Vector3 Center()
     {
         return transform.position;
+    }
+
+    public Vector3 CornerNormal(Vector3 pos)
+    {
+        float signX = Mathf.Sign(pos.x - transform.position.x);
+        float signY = Mathf.Sign(pos.y - transform.position.y);
+
+        return new Vector3(signX, signY, 0);
     }
 
     public Vector3 Top()
@@ -74,22 +89,22 @@ public class AABB : MonoBehaviour
 
     public Vector3 TopRight()
     {
-        return Top() + Right();
+        return Top() + Right() - transform.position;
     }
 
     public Vector3 TopLeft()
     {
-        return Top() + Left();
+        return Top() + Left() - transform.position;
     }
 
     public Vector3 BottomRight()
     {
-        return Bottom() + Right();
+        return Bottom() + Right() - transform.position;
     }
 
     public Vector3 BottomLeft()
     {
-        return Bottom() + Left();
+        return Bottom() + Left() - transform.position;
     }
 
     public float yMax()
@@ -172,6 +187,24 @@ public class AABB : MonoBehaviour
     public float xMinAt(Vector3 pos)
     {
         return LeftAt(pos).x;
+    }
+
+    public Vector3 ClosestCorner(Vector3 pos)
+    {
+        float closest = Mathf.Infinity;
+        Vector3 closestCorner = Vector3.zero;
+
+        foreach(Vector3 corner in Corners())
+        {
+            float distance = Vector3.Distance(pos, corner);
+            if(distance < closest) 
+            { 
+                closest = distance; 
+                closestCorner = corner;
+            }
+        }
+
+        return closestCorner;
     }
 
 

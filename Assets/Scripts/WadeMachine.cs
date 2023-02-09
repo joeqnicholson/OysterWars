@@ -9,21 +9,21 @@ public partial class WadeMachine : Actor
 {
     public WadeInventory Inventory;
     public WadeSound Sound;
-    private float walkSpeed = 110f;
-    private float halfGravThreshold = -25;
+    private float walkSpeed = 90f;
+    private float HalfGravThreshold = 40;
     private float walkAcceleration = 2600f;
     private float walkDeceleration = 2000f;
-    private float jumpSpeed = 178f;
+    private float jumpSpeed = 150f;
     private bool hasShortHopped;
     private float wallJumpHSpeed = 60;
     private float conveyerJumpHSpeed = 250;
-    private float maxFall = -250f;
-    private float gravity = 1500f;
+    private float maxFall = -200f;
+    private float gravity = 900f;
     private float moveX;
     private float moveY;
     private float aimX;
     public Vector2 Speed;
-    private float varJumpTime = .24f;
+    private float varJumpTime = .25f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private ObjectSprite sprite;
@@ -71,7 +71,8 @@ public partial class WadeMachine : Actor
     private Vector3 yOffset;
     public List<Vector2> previousPositions = new List<Vector2>();
     public bool hooked;
-
+    private float currentSwingForce;
+    float hookSpeed = 4;
 
 
 
@@ -257,81 +258,54 @@ public partial class WadeMachine : Actor
 
 
 
-        if (!onGround && stillTimer < 0)
+        if (!onGround && !Hooked())
         {
-            if(Hooked())
+
+            if (hitUp) { varJumpTimer = 0; }
+
+            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
+
+            if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
             {
-                Vector2 lookAtVector = root.currentPoint.transform.position;
-                Vector2 myPosition = transform.position;
-                Vector2 difference = (myPosition - lookAtVector).normalized;
-                Vector2 perp = Vector2.Perpendicular(difference);
-
-                Move(perp * root.currentForce);
-
-                float currentDistance = Vector2.Distance(lookAtVector, myPosition);
-
-                if(currentDistance > root.currentDistance)
-                {
-                    Move(-difference * (currentDistance - root.currentDistance));
-                }
-
-                previousPositions.Add(myPosition);
-
-                for(int i = 1; i < previousPositions.Count; i++)
-                {
-                    Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
-                }
-                Speed.y = 0;
-            }
-            else
-            {
-                if (hitUp) { varJumpTimer = 0; }
-
-                conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
-
-                if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
-                {
-                    WallJump(hitRight);
-                }
-
-                airTimer += Time.deltaTime;
-
-                Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * Time.deltaTime);
-
-                if (varJumpTimer > 0)
-                {
-                    Speed.y = jumpSpeed;
-                }
-
-                if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
-                {
-                    varJumpTimer = .08f;
-                    hasShortHopped = true;
-                }
+                WallJump(hitRight);
             }
 
+            airTimer += Time.deltaTime;
+
+            float mult = (Math.Abs(Speed.y) < HalfGravThreshold && (inputs.jumpHeld)) ? .5f : 1f;
+
+            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
+
+            if (varJumpTimer > 0)
+            {
+                Speed.y = jumpSpeed;
+            }
+
+            if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
+            {
+                varJumpTimer = .08f;
+                hasShortHopped = true;
+            }
         }
 
         float lastSpeed = Speed.x;
 
+        if(!Hooked())
+        {
+            if (moveX == 0)
+            {
+                Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
+            }
+            else
+            {
+                Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
+            }
+        }
 
-        if(Hooked() && onGround)
+        if(stillTimer > 0)
         {
-            Speed.x = MathHelper.Approach(Speed.x, 0, walkAcceleration * Time.deltaTime);
+            Speed = Vector2.zero;
         }
-        else if (moveX == 0 && !Hooked())
-        {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkAcceleration * AccelMultipler() * Time.deltaTime);
-        }
-        else if(!Hooked())
-        {
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed, walkDeceleration * AccelMultipler() * Time.deltaTime);
-        }
-        else
-        {
-            Speed.x = 0;
-        }
-        
 
         if(Mathf.Abs(lastSpeed) < 5f && Mathf.Abs(moveX) > 0.2f && onGround && CurrentWadeState == StNormal)
         {
@@ -403,17 +377,29 @@ public partial class WadeMachine : Actor
 
     void SwingUpdate()
     {
-       HookshotRoot root = CurrentHookshotRoot.GetComponent<HookshotRoot>();
 
-        Vector3 moveAmount = root.currentForce * -CurrentHookshotRoot.transform.up;
-        Speed = moveAmount;
-        CurrentHookshotRoot.transform.position = transform.position;
+        List<Point> points = root.points;
 
-        if(root.currentDistance > root.distance)
+        float currentDistance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
+
+        Vector2 lookAtVector = points[points.Count-1].transform.position;
+        Vector2 myPosition = transform.position;
+        Vector2 difference = (myPosition - lookAtVector).normalized;
+        Vector2 perp = Vector2.Perpendicular(difference);
+
+        float verticalty = -difference.normalized.x;
+
+        currentSwingForce = Mathf.MoveTowards(currentSwingForce, verticalty * gravity, root.moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
+
+        Vector2 distanceHelper = Vector2.zero;
+
+        if(currentDistance > root.distance)
         {
-            Move(-root.transform.up * (root.currentDistance - root.distance));
+            Vector2 dienow = -difference;
+            distanceHelper = (dienow * (currentDistance - root.distance));
         }
-        
+
+        Speed = (perp * currentSwingForce) + distanceHelper;
 
         if(inputs.jumpPress)
         {
@@ -542,7 +528,7 @@ public partial class WadeMachine : Actor
 
         shootPoint = new Vector2(x, y);
 
-        if (inputs.shootPress)
+        if (inputs.item1Press)
         {
             Sound.PlayGunShot();
             Debug.Log("youshot");
@@ -551,7 +537,7 @@ public partial class WadeMachine : Actor
             shotTimer = 0;
         }
 
-        if (inputs.item1Press)
+        if (inputs.shootPress)
         {
             if(CurrentHookshotRoot)
             {
@@ -562,7 +548,7 @@ public partial class WadeMachine : Actor
                 HookshotKnife newBullet = Instantiate(hookshotKnife, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0) + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
                 newBullet.GetComponent<HookshotKnife>().ChangeMoveDirection(shootDirection);
                 shotTimer = 0;
-                // stillTimer = 2;
+                stillTimer = .5f;
 
                 StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
             }
@@ -575,21 +561,20 @@ public partial class WadeMachine : Actor
         // ddown = 12,2 dup = 12, 22 airdown = 0,0 up = 0, 27 forward = 17, 13 crouch 8, 13
     }
 
-    public void HookShotStart(RaycastHit2D hitInfo)
+    public void HookshotStart(Hit hitInfo)
     {
 
-        float angle = Vector2.SignedAngle(hitInfo.normal, Speed);
-
-        print(MathHelper.BalancedAngle(angle));
-
-        Point pointToAdd = Instantiate(PointObject, hitInfo.point, Quaternion.identity).GetComponent<Point>();
+        Point pointToAdd = Instantiate(PointObject, hitInfo.point + hitInfo.normal * 3, Quaternion.identity).GetComponent<Point>();
 
         pointToAdd.normal = hitInfo.normal;
 
         CurrentHookshotRoot = Instantiate(HookshotRootObject, transform.position + Vector3.up * 9, transform.rotation);
 
         root = CurrentHookshotRoot.GetComponent<HookshotRoot>();
+
         root.startPoint = pointToAdd.gameObject;
+        root.GetStartingStats();
+        TransitionToState(StSwing);
 
     }
 

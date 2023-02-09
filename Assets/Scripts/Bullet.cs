@@ -103,12 +103,6 @@ public class Bullet : MonoBehaviour
             if (hitInfo.collider.gameObject.layer == 0)
             {
                 Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
-
-                if(hookshot)
-                {
-                    FindObjectOfType<WadeMachine>().HookShotStart(hitInfo);
-                }
-
                 Destroy(gameObject);
             }
 

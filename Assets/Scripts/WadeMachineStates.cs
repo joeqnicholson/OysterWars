@@ -52,6 +52,14 @@ public partial class WadeMachine : Actor
             Speed.y = 0;
         }
 
+        if (toState == StSwing)
+        {
+            Speed.x = 0;
+            Speed.y = 0;
+            currentSwingForce = 0;
+        }
+
+
     }
 
     void OnStateExit(WadeState fromState, WadeState toState)
