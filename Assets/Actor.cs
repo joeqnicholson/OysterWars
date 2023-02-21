@@ -9,6 +9,8 @@ public class Actor : AABB
     public bool hitRight;
     public bool hitUp;
     public bool hitDown;
+    public bool inTrigger;
+    public Trigger currentTrigger;
 
     public void Start()
     {
@@ -47,7 +49,9 @@ public class Actor : AABB
             int sign = Mathf.RoundToInt(Mathf.Sign(move)); 
             while (move != 0) 
             { 
-                if (!CollideAtSolid(transform.position + new Vector3(sign , 0,0))) 
+                Solid solidToHit = CollideAtSolid(transform.position + new Vector3(sign , 0  ,0));
+                CheckTrigger(transform.position + new Vector3(sign , 0  ,0));
+                if (!solidToHit) 
                 { 
                     //There is no Solid immediately beside us 
                     transform.Translate(Vector3.right * sign); 
@@ -55,12 +59,12 @@ public class Actor : AABB
                 } 
                 else 
                 { 
-
+                    OnCollisionHit(solidToHit);
                     break; 
                 } 
+                
             } 
         } 
-
     } 
 
     float yRemainder;
@@ -79,7 +83,9 @@ public class Actor : AABB
             int sign = Mathf.RoundToInt(Mathf.Sign(move)); 
             while (move != 0) 
             { 
-                if (!CollideAtSolid(transform.position + new Vector3(0, sign  ,0))) 
+                Solid solidToHit = CollideAtSolid(transform.position + new Vector3(0, sign  ,0));
+                CheckTrigger(transform.position + new Vector3(0, sign  ,0));
+                if(!solidToHit) 
                 { 
                     //There is no Solid immediately beside us 
                     transform.Translate(Vector3.up * sign); 
@@ -96,6 +102,8 @@ public class Actor : AABB
                         OnGroundHit();
                     }
 
+                    OnCollisionHit(solidToHit);
+
                     break; 
                 } 
             } 
@@ -110,14 +118,74 @@ public class Actor : AABB
             if(!hitDown)
             {
                 onGround = false;
+                OnNoGroundHit();
             }
         }
+    }
+
+    public void CheckTrigger(Vector3 pos)
+    {
+
+        Trigger insideTrigger = CollideAtTrigger(pos);   
+
+        if(!inTrigger)
+        {
+           if(insideTrigger)
+           {
+                OnTriggerHit(insideTrigger);
+                currentTrigger = insideTrigger;
+                inTrigger = true;
+           }
+
+        }
+        else
+        {
+
+            if(!insideTrigger)
+            {
+                OnNoTriggerHit(currentTrigger);
+                inTrigger = false;
+                currentTrigger = null;
+            }
+            else
+            {
+                WhileInTrigger(insideTrigger);
+            }
+        }
+
+    }
+
+
+
+    public virtual void OnNoGroundHit()
+    {
+        // print("GroundHit");
     }
 
 
     public virtual void OnGroundHit()
     {
-        print("groundHit");
+        // print("GroundHit");
+    }
+
+    public virtual void OnTriggerHit(Trigger trigger)
+    {
+        // print("TriggerHit");
+    }
+
+    public virtual void OnNoTriggerHit(Trigger trigger)
+    {
+        // print("TriggerLeave");
+    }
+
+    public virtual void WhileInTrigger(Trigger trigger)
+    {
+        // print("InTrigger");
+    }
+
+    public virtual void OnCollisionHit(Solid solid)
+    {
+        // print("Collision");
     }
 
 }

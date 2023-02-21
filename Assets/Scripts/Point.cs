@@ -6,6 +6,7 @@ public class Point : MonoBehaviour
 {
     public float createdAngle;
     public float createdForce;
+    public AABB aabb;
     public Vector3 normal;
 }
  

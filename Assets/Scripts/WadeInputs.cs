@@ -17,6 +17,7 @@ public class WadeInputs : MonoBehaviour
     public bool item1Press;
     public bool item1Held;
     public bool triggerHeld;
+    public Vector2 trigger;
 
 
     // Use this for initialization
@@ -55,6 +56,7 @@ public class WadeInputs : MonoBehaviour
     void Update()
     {
         moveInput = controls.Inputs.Movement.ReadValue<Vector2>();
+        // trigger = controls.Inputs.Trigger.ReadValue<Vector2>();
         if (Mathf.Abs(moveInput.x) > 0.2) { moveInput.x = Mathf.Sign(moveInput.x); } else { moveInput.x = 0; }
         if (Mathf.Abs(moveInput.y) > 0.2) { moveInput.y = Mathf.Sign(moveInput.y); } else { moveInput.y = 0; }
 
@@ -82,7 +84,7 @@ public class WadeInputs : MonoBehaviour
             shootPress = gamepad.buttonWest.wasPressedThisFrame;
             item1Held = gamepad.buttonNorth.isPressed;
             item1Press = gamepad.buttonNorth.wasPressedThisFrame;
-            triggerHeld = gamepad.rightTrigger.isPressed;
+            triggerHeld = gamepad.leftTrigger.isPressed || gamepad.leftShoulder.isPressed || gamepad.rightShoulder.isPressed;
         }
         else
         {
@@ -92,7 +94,7 @@ public class WadeInputs : MonoBehaviour
             shootPress = gamepad.buttonWest.wasPressedThisFrame || keyboard.kKey.wasPressedThisFrame;
             item1Held = keyboard.nKey.isPressed || gamepad.buttonNorth.isPressed;
             item1Press = keyboard.nKey.wasPressedThisFrame || gamepad.buttonNorth.wasPressedThisFrame;
-            triggerHeld = gamepad.rightTrigger.isPressed || keyboard.lKey.isPressed;
+            triggerHeld = gamepad.leftTrigger.isPressed || keyboard.lKey.isPressed || gamepad.leftShoulder.isPressed || gamepad.rightShoulder.isPressed;
         }
 
     }

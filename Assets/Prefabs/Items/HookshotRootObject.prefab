@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8682844615266473485}
   - component: {fileID: 8682844615266473484}
   - component: {fileID: 8682844615266473487}
+  - component: {fileID: 5645221171445484654}
   m_Layer: 0
   m_Name: HookshotRootObject
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
   verticalty: 0
   gravity: 2000
   currentForce: 0
-  moveTowardsSpeed: 250
+  moveTowardsSpeed: 10000
   zTurn: 0
   points: []
   lerpedDistanceModifier: 0
@@ -113,3 +114,19 @@ MonoBehaviour:
   maxedOut: 0
   distanceToLast: 0
   previousPositions: []
+--- !u!114 &5645221171445484654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682844615266473486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56f08038b66e4e1caeaea9b0577cd74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createdAngle: 0
+  createdForce: 0
+  solid: {fileID: 0}
+  normal: {x: 0, y: 0, z: 0}

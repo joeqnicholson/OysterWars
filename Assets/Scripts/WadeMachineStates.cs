@@ -7,20 +7,24 @@ public partial class WadeMachine : Actor
 {
     public class WadeState
     {
-        public bool canGetHit;
+        public bool canGetHit = true;
         public bool canFlip = true;
+        public string name = "Generic Name";
     }
 
     public WadeState CurrentWadeState;
 
-    private WadeState StNormal = new WadeState { canGetHit = true };
+    private WadeState StNormal = new WadeState { canGetHit = true, name = "Normal" };
 
     private WadeState StChest = new WadeState { canGetHit = false };
 
     private WadeState StHit = new WadeState { canGetHit = false, canFlip = false };
 
-    private WadeState StSwing = new WadeState { canGetHit = true };
+    private WadeState StSwing = new WadeState { canGetHit = true, name = "Swing" };
 
+    private WadeState StClimb = new WadeState { canGetHit = true };
+
+    private WadeState StLaunch = new WadeState { name = "Launch" };
 
     public void TransitionToState(WadeState newState)
     {
@@ -32,9 +36,10 @@ public partial class WadeMachine : Actor
 
     void OnStateEnter(WadeState toState, WadeState fromState)
     {
+        stateTimer = 0;
         if(toState == StNormal)
         {
-
+            print(Speed);
         }
 
         if(toState == StHit)
@@ -56,10 +61,8 @@ public partial class WadeMachine : Actor
         {
             Speed.x = 0;
             Speed.y = 0;
-            currentSwingForce = 0;
+            stillTimer = 0;
         }
-
-
     }
 
     void OnStateExit(WadeState fromState, WadeState toState)

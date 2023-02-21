@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     public GameObject explosionPrefab;
     public bool enemyBullet;
     [SerializeField] private float damage;
-    private float speed = 250;
+    private float speed = 550;
     private bool hookshot;
 
 

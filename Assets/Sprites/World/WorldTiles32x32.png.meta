@@ -287,7 +287,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
+  spritePixelsToUnits: 2
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -330,6 +330,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2039,14 +2051,14 @@ TextureImporter:
       WorldTiles32x32_58: 5596961009784011479
       WorldTiles32x32_20: -5289295126631934770
       WorldTiles32x32_52: -7729156631407502751
-      WorldTiles32x32_15: 3246604478633404193
+      WorldTiles32x32_68: 968156534665919154
       WorldTiles32x32_5: -4385123458066967280
       WorldTiles32x32_48: -7098621549222717395
       WorldTiles32x32_77: 4078289080740275318
       WorldTiles32x32_14: -8822273935778795020
       WorldTiles32x32_31: -5393673514206907790
       WorldTiles32x32_36: -3880374895571426898
-      WorldTiles32x32_12: -3225500733120964142
+      WorldTiles32x32_72: -7888084123164668887
       WorldTiles32x32_8: -5368454059100949484
       WorldTiles32x32_54: -5971524399626103458
       WorldTiles32x32_34: -900962118053944837
@@ -2112,8 +2124,8 @@ TextureImporter:
       WorldTiles32x32_59: 6774646473112150714
       WorldTiles32x32_32: 7871667697527569313
       WorldTiles32x32_50: 4075354306695086697
-      WorldTiles32x32_68: 968156534665919154
-      WorldTiles32x32_72: -7888084123164668887
+      WorldTiles32x32_15: 3246604478633404193
+      WorldTiles32x32_12: -3225500733120964142
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

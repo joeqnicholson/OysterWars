@@ -4,27 +4,17 @@ using UnityEngine;
 
 public class HookshotRoot : MonoBehaviour
 {
-    public float distance;
-    public float verticalty;
-    public float gravity = 1500;
-    public float currentForce;
-    public float moveTowardsSpeed;
+    public float currentDistance;
     public float zTurn;
     public List<Point> points = new List<Point>();
     private bool lookAtLast;
-    public float lerpedDistanceModifier;
-    public GameObject startPoint;
     public GameObject PointObject;
-    public float currentDistance;
     public Point currentPoint;
-    public float pointsDistance;
     private float maxDistance = 600;
     public bool maxedOut;
-    private float pointsTotalDistance;
-    public float distanceToLast;
-    Colliders colliders;
-    public List<Vector2> previousPositions = new List<Vector2>();
-
+    public float pointsTotalDistance;
+    private Colliders colliders;
+    public bool active;
 
     void Start()
     {
@@ -34,129 +24,99 @@ public class HookshotRoot : MonoBehaviour
     void Update()
     {
 
-        if(lookAtLast)
+        if(active)
         {
-
-
-            for(int i = 1; i < points.Count; i++)
+            if(lookAtLast)
             {
-                Debug.DrawLine(points[i-1].transform.position, points[i].transform.position);
+                CheckForNoWalls();
+                CheckForNoWallsPoints();
+                CheckForWallsPoints();
             }
+            
 
-            CheckForNoWalls();
+            Vector3 relativePos = points[0].transform.position - transform.position;
+            float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
+            zTurn = angle;
+
+            CheckForWalls();
         }
+
         
 
-        Vector3 relativePos = points[points.Count-1].transform.position - transform.position;
-        float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-        zTurn = angle;
-
-        CheckForWalls();
-
-
-
-        // currentDistance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
-
-        // Vector2 lookAtVector = points[points.Count-1].transform.position;
-        // Vector2 myPosition = transform.position;
-        // Vector2 difference = (myPosition - lookAtVector).normalized;
-        // Vector2 perp = Vector2.Perpendicular(difference);
-        // Vector2 annoyingConversion = perp;
-        // float addition = 1/distance;
-
-        // verticalty = -difference.normalized.x;
-
-        // currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
-
-        // Vector2 distanceHelper = Vector2.zero;
-
-        // if(currentDistance != distance)
-        // {
-        //     Vector2 dienow = -difference;
-        //     distanceHelper = (dienow * (currentDistance - distance));
-        // }
-
-        // Move((annoyingConversion * currentForce) + distanceHelper);
-
-        // previousPositions.Add(myPosition);
-        // if(previousPositions.Count > 1000)
-        // {
-        //     previousPositions.RemoveAt(0);
-        // }
-
-        // for(int i = 1; i < previousPositions.Count; i++)
-        // {
-        //     Debug.DrawLine(previousPositions[i-1],previousPositions[i]);
-        // }
 
     }
 
-    
-
-
-
-    public void GetStartingStats()
+    public void Reset()
     {
+        active = false;
 
-
-        Point startingPoint = startPoint.GetComponent<Point>();
-
-
-        if(startingPoint.createdForce == 0)
+        for(int i = 0; i < points.Count; i++ )
         {
-            currentForce = startingPoint.transform.position.x > transform.position.x ? 1 : -1;
-        }
-        else
-        {
-            currentForce = startingPoint.createdForce;  
+            Destroy(points[i].gameObject);
         }
 
-        Vector3 relativePos = startingPoint.transform.position - transform.position;
+        points.Clear();
+        lookAtLast = false;
+        currentDistance = 0;
+        currentPoint = null;
+        pointsTotalDistance = 0;
+    }
+
+
+    public void GetStartingStats(Point newPoint, Hit hitInfo)
+    {
+        Vector3 relativePos = newPoint.transform.position - transform.position;
         float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
         zTurn = angle;
-        startingPoint.createdAngle = angle;
+        newPoint.createdAngle = angle;
 
-        AddPoint(startingPoint);
+        if(hitInfo.aabb)
+        {
+            newPoint.aabb = hitInfo.aabb;
 
+        }
+        
+        newPoint.transform.parent = hitInfo.aabb.transform;
+        AddPoint(newPoint);
+        active = true;
     }
     
 
-    public void AddPoint(Point newPoint)
+    public void AddPoint(Point newPoint, int index = 0)
     {
-        points.Add(newPoint);
-        distance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
+        points.Insert(index, newPoint);
         lookAtLast = points.Count != 1; 
-        currentPoint = points[points.Count-1];
+        currentPoint = points[0];
         CalculateDistance();
     }
 
     public Point CreatePoint(Hit hitInfo)
     {
         Vector3 positionToCreate;
-        hitInfo.normal = hitInfo.solid.CornerNormal(hitInfo.solid.ClosestCorner(hitInfo.point));
-        positionToCreate = hitInfo.solid.ClosestCorner(hitInfo.point);
+        hitInfo.normal = hitInfo.aabb.CornerNormal(hitInfo.aabb.ClosestCorner(hitInfo.point));
+        positionToCreate = hitInfo.aabb.ClosestCorner(hitInfo.point);
         Point newPoint = Instantiate(PointObject, positionToCreate + hitInfo.normal * 3, Quaternion.identity).GetComponent<Point>();
-        newPoint.createdForce = currentForce;
         newPoint.createdAngle = zTurn;
         newPoint.normal = hitInfo.normal;
-
-
+        newPoint.aabb = hitInfo.aabb;
+        newPoint.transform.parent = hitInfo.aabb.transform;
         return newPoint;
     }
 
-    void RemovePoint()
+    void RemovePoint(int index = 8000)
     { 
-        Destroy(points[points.Count-1].gameObject);
-        points.RemoveAt(points.Count - 1);
-        distance = Vector2.Distance(transform.position, points[points.Count-1].transform.position);
+        if(index == 8000) index = points.Count - 1;
+        Destroy(points[index].gameObject);
+        points.RemoveAt(index);
         lookAtLast = points.Count != 1; 
-        currentPoint = points[points.Count-1];
+        currentPoint = points[0];
         CalculateDistance();
         print("removed");
     }
 
     private void CalculateDistance()
     {
+        currentDistance = Vector3.Distance(transform.position, points[0].transform.position);
         float total = 0;
         for(int i = 1; i < points.Count; i++)
         {
@@ -168,64 +128,63 @@ public class HookshotRoot : MonoBehaviour
             total += thisDistance;
         }
 
-        pointsTotalDistance = total;
+        pointsTotalDistance = total + currentDistance;;
     }   
 
     void CheckForWalls()
     {
 
         Vector2 iPos = transform.position;
-        Vector2 iMinusPos = points[points.Count-1].transform.position;
-        Vector2 difference = (iPos - iMinusPos).normalized * 5; 
+        Vector2 iPlusPos = points[0].transform.position;
+        Vector2 difference = (iPos - iPlusPos).normalized * 5; 
 
-        float distance = Vector2.Distance(iPos - difference, iMinusPos + difference) - 5;
-        distanceToLast = Mathf.Abs(distance);
+        Hit hit = Ray.CastTo(iPos - difference, iPlusPos + difference, colliders);
 
-        Hit hit = Ray.CastTo(iPos - difference, iMinusPos + difference, colliders);
+        
 
         if(hit != null)
         {
             AddPoint(CreatePoint(hit));
         }
 
-        Debug.DrawLine(iPos - difference, iMinusPos + difference, Color.green);
+        Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
 
     }
+
+
 
     void CheckForNoWalls()
     {
 
         Vector2 myPos = transform.position;
-        Vector2 iMinus2Pos = points[points.Count-2].transform.position;
-        Vector2 difference = (myPos - iMinus2Pos).normalized * 5; 
-
-        float distance = Vector2.Distance(myPos - difference, iMinus2Pos + difference) - 5;
+        Vector2 iPlus2Pos = points[1].transform.position;
+        Vector2 difference = (myPos - iPlus2Pos).normalized * 5; 
         
-        Hit hit = Ray.CastTo(myPos - difference, iMinus2Pos + difference, colliders);
+        Hit hit = Ray.CastTo(myPos - difference, iPlus2Pos + difference, colliders);
 
         if(hit != null)
         {
-            Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.blue);
+            Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.blue);
         }
         else
         {
         
             bool higherThanPoint;
 
-            if(points[points.Count - 2].transform.position.x < points[points.Count - 1].transform.position.x)
+            if(points[1].transform.position.x < points[0].transform.position.x)
             {
-                Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.red);
-                higherThanPoint = zTurn > points[points.Count - 1].createdAngle;
+                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.cyan);
+                higherThanPoint = zTurn > points[0].createdAngle;
             }
             else
             {
-                Debug.DrawLine(myPos - difference, iMinus2Pos + difference, Color.white);
-                higherThanPoint = zTurn < points[points.Count - 1].createdAngle;
+                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.yellow);
+                higherThanPoint = zTurn < points[0].createdAngle;
             }
 
-            if(higherThanPoint || Mathf.Abs(distanceToLast) < 20)
+            if(higherThanPoint || currentDistance < 20)
             {
-                RemovePoint();
+                RemovePoint(0);
             }
 
         }
@@ -233,316 +192,77 @@ public class HookshotRoot : MonoBehaviour
         
     }
 
+    void CheckForWallsPoints()
+    {
+        if(points.Count > 1)
+        {
+            for(int i = 0; i < points.Count - 1; i++ )
+            {
+                Vector2 iPos = points[i].transform.position;
+                Vector2 iPlusPos = points[i+1].transform.position;
+                Vector2 difference = (iPos - iPlusPos).normalized * 5; 
+
+                Hit hit = Ray.CastTo(iPos - difference, iPlusPos + difference, colliders);
+
+                if(hit != null)
+                {
+                    print(i - 1);
+                    AddPoint(CreatePoint(hit), i + 1);
+                    break;
+                }
+
+                Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
+
+            }
+        }
+    }
+
+
+    void CheckForNoWallsPoints()
+    {
+        if(points.Count > 2)
+        {
+            for(int i = 0; i < points.Count - 2; i++ )
+            {
+                Vector2 iPos = points[i].transform.position;
+                Vector2 iPlus2Pos = points[i+2].transform.position;
+                Vector2 difference = (iPos - iPlus2Pos).normalized * 5; 
+
+                Hit hit = Ray.CastTo(iPos - difference, iPlus2Pos + difference, colliders);
+
+                if(hit != null)
+                {
+                    Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.blue);
+                }
+                else
+                {
+                    
+
+                     bool higherThanPoint;
+
+                    if(points[i+2].transform.position.x < points[i + 1].transform.position.x)
+                    {
+                        Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.cyan);
+                        higherThanPoint = points[i].createdAngle > points[i + 1].createdAngle;
+                    }
+                    else
+                    {
+                        Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.yellow);
+                        higherThanPoint = points[i].createdAngle < points[i + 1].createdAngle;
+                    }
+
+                    if(higherThanPoint)
+                    {
+                        RemovePoint(i+1);
+                    }
+
+                }
+            }
+        }
+        
+    }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-
-// public class HookshotRoot : Point
-// {
-//     public float distance;
-//     public float verticalty;
-//     public float gravity;
-//     public float currentForce;
-//     public float moveTowardsSpeed;
-//     float zTurn;
-//     public LayerMask layerMask;
-//     public List<Point> points = new List<Point>();
-//     private bool lookAtLast;
-//     public float maxDistance;
-//     public float closeMod;
-//     public float farMod;
-//     private Vector3 lastPosition;
-//     public Vector3 currentVelocity;
-//     public float lerpedDistanceModifier;
-//     public GameObject startPoint;
-//     public GameObject PointObject;
-//     public float checkTime;
-//     public bool bouncy = false;
-//     public float bounciness = .75f;
-//     private bool stopped;
-
-
-
-//     void Start()
-//     {
-
-
-//         Vector2 vec = new Vector2(-1,-2);
-//         print(vec.normalized);
-
-//         GetStartingStats(startPoint.GetComponent<Point>());
-//     }
-
-//     void Update()
-//     {
-//         if(!stopped)
-//         {
-
-
-//             Vector3 relativePos = points[points.Count-2].transform.position - transform.position;
-//             float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-//             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-//             CheckForWalls();
-//             CheckForNoWalls();
-//             CheckCollision();
-
-
-//             verticalty = transform.right.x;
-
-//             currentForce = Mathf.MoveTowards(currentForce, verticalty * gravity, moveTowardsSpeed * Mathf.Abs(verticalty) * Time.deltaTime);
-//         }
-
-//     }
-
-
-
-//     public void GetStartingStats(Point startingPoint)
-//     {
-//         if(startingPoint.createdForce == 0)
-//         {
-//             currentForce = startingPoint.transform.position.x > transform.position.x ? 1 : -1;
-//         }
-//         else
-//         {
-//             currentForce = startingPoint.createdForce;  
-//         }
-
-//         Vector3 relativePos = startingPoint.transform.position - transform.position;
-//         float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
-//         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-//         zTurn = transform.eulerAngles.z;
-
-//         print(startingPoint.transform.position);
-//         print(startingPoint.normal);
-
-//         AddPoint(startingPoint);
-//         AddPoint(this);
-
-
-//     }
-    
-
-//     public void AddPoint(Point newPoint, int index = 900)
-//     {
-
-//         if(index == 900)
-//         {
-//             points.Add(newPoint);
-//         }
-//         else
-//         {
-//             points.Insert(index, newPoint);
-//         }
-
-//         distance = Vector2.Distance(transform.position, points[points.Count - 1].transform.position);
-
-//         lookAtLast = points.Count != 1; 
-
-//     }
-
-//     public Point CreatePoint(Hit hitInfo)
-//     {
-//         Vector3 hitNormal = hitInfo.normal * 5;
-//         Point newPoint = Instantiate(PointObject, Vector3Int.RoundToInt(hitInfo.point) + hitNormal, Quaternion.identity).GetComponent<Point>();
-//         newPoint.createdForce = currentForce;
-//         newPoint.createdAngle = transform.eulerAngles.z;
-//         newPoint.normal = hitInfo.normal;
-//         newPoint.transform.parent = hitInfo.collider.gameObject.transform;
-//         return newPoint;
-//     }
-
-//     void RemovePoint(int index)
-//     { 
-//         Destroy(points[index].gameObject);
-//         points.RemoveAt(index);
-//         distance = Vector2.Distance(transform.position, points[points.Count-1].transform.position);
-//         lookAtLast = points.Count != 1; 
-//         print("removed");
-//     }   
-
-//     void CheckForWalls()
-//     {
-//         if(points.Count > 1)
-//         {
-//             for(int i = 1; i < points.Count; i++ )
-//             {
-//                 Vector2 iPos = points[i].transform.position;
-//                 Vector2 iMinusPos = points[i-1].transform.position;
-//                 Vector2 difference = (iPos - iMinusPos).normalized * 5; 
-
-//                 float distance = Vector2.Distance(iPos - difference, iMinusPos + difference) - 5;
-
-//                 Hit hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
-
-//                 if(hit)
-//                 {
-//                     AddPoint(CreatePoint(hit), i);
-//                     break;
-//                 }
-//                 else
-//                 {
-                    
-//                 }
-
-//                 Debug.DrawLine(iPos - difference, iMinusPos + difference, Color.green);
-
-//             }
-//         }
-//     }
-
-//     void CheckForNoWalls()
-//     {
-//         for(int i = 2; i < points.Count; i++ )
-//         {
-//             Vector2 iPos = points[i].transform.position;
-//             Vector2 iMinus2Pos = points[i-2].transform.position;
-//             Vector2 difference = (iPos - iMinus2Pos).normalized * 5; 
-
-//             float distance = Vector2.Distance(iPos - difference, iMinus2Pos + difference) - 5;
-
-//             Hit hit = Physics2D.Raycast(iPos - difference, -difference, distance,  layerMask);
-
-//             if(hit)
-//             {
-//                 Debug.DrawLine(transform.position, points[i - 2].transform.position, Color.blue);
-//             }
-//             else
-//             {
-//                 Debug.DrawLine(transform.position, points[i - 2].transform.position, Color.yellow);
-
-//                 bool higherThanPoint;
-
-//                 if(points[i - 1].createdForce >= 0)
-//                 {
-//                     higherThanPoint = transform.eulerAngles.z < points[i - 1].createdAngle;
-//                 }
-//                 else
-//                 {
-//                     higherThanPoint = zTurn > points[i - 1].createdAngle;
-//                 }
-
-//                 if(higherThanPoint)
-//                 {
-//                     RemovePoint(i-1);
-//                     break;
-//                 }
-
-//             }
-//         }
-//     }
-
-    
-
-//     void CheckCollision()
-//     {
-//         if(checkTime > -1)
-//         {
-//             checkTime -= Time.deltaTime;
-//         }
-
-
-//         Hit hit = Physics2D.CircleCast(transform.position, 16, transform.right, Mathf.Sign(currentForce), layerMask);
-
-//         if(hit && checkTime < 0)
-//         {
-
-//             if(hit.normal.y < -0.8f || bouncy)
-//             {
-//                 currentForce *= -1 * bounciness;
-//             }
-//             else
-//             {
-//                 currentForce = 0;
-//             }
-            
-//             checkTime = 0.5f;
-//         }
-//     }
-
-//     public void Stop()
-//     {
-//         stopped = true;
-//     }
-
-//     public void Restart()
-//     {
-//         stopped = false;
-//     }
-
-// }
 

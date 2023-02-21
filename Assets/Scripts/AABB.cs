@@ -5,32 +5,52 @@ using UnityEngine;
 public class AABB : MonoBehaviour
 {
     public Vector3 size;
-    public Solid[] solids = new Solid[0];
-    public Actor[] actors = new Actor[0];
-
+    public Colliders colliders;
+    public Solid currentSolid;
 
     public void Start()
     {
+        colliders = FindObjectOfType<Colliders>();
         if(size == Vector3.zero)
         {
-            size = transform.localScale;
+            Vector3 scale = transform.localScale;
+            size = new Vector3(Mathf.Abs(scale.x), Mathf.Abs(scale.y),0);
         }   
     }
 
-    public bool CollideAtSolid(Vector3 position)
+    public Solid CollideAtSolid(Vector3 position)
     {
 
-        foreach(Solid solid in solids)
+        foreach(Solid solid in colliders.solids)
         {
             if(CollidesWith(solid, position))
             {
-                return true;
+                currentSolid = solid;
+                return solid;
             }
         }
 
-        return false;
+        return null;
 
     }
+
+
+    public Trigger CollideAtTrigger(Vector3 position)
+    {
+
+        foreach(Trigger trigger in colliders.triggers)
+        {
+            if(CollidesWith(trigger, position))
+            {
+                return trigger;
+            }
+        }
+
+        return null;
+    }
+
+
+
 
     public bool Contains(Vector3 position)
     {
@@ -38,6 +58,11 @@ public class AABB : MonoBehaviour
         bool yTouching = (position.y > yMin() && position.y < yMax());
 
         return xTouching && yTouching;
+    }
+
+    public bool ContainsY(float yPos)
+    {
+        return (yPos > yMin() && yPos < yMax());
     }
 
     public bool CollidesWith(AABB box, Vector3 position)

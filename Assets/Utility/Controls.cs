@@ -35,6 +35,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Trigger"",
+                    ""type"": ""Value"",
+                    ""id"": ""248c0091-c63c-41d1-80c4-a95efc968724"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cdd0260-9eb4-4bf8-adee-d8094730745d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -123,6 +143,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // Inputs
         m_Inputs = asset.FindActionMap("Inputs", throwIfNotFound: true);
         m_Inputs_Movement = m_Inputs.FindAction("Movement", throwIfNotFound: true);
+        m_Inputs_Trigger = m_Inputs.FindAction("Trigger", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,11 +204,13 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Inputs;
     private IInputsActions m_InputsActionsCallbackInterface;
     private readonly InputAction m_Inputs_Movement;
+    private readonly InputAction m_Inputs_Trigger;
     public struct InputsActions
     {
         private @Controls m_Wrapper;
         public InputsActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Inputs_Movement;
+        public InputAction @Trigger => m_Wrapper.m_Inputs_Trigger;
         public InputActionMap Get() { return m_Wrapper.m_Inputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -200,6 +223,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnMovement;
+                @Trigger.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnTrigger;
+                @Trigger.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnTrigger;
+                @Trigger.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnTrigger;
             }
             m_Wrapper.m_InputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -207,6 +233,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Trigger.started += instance.OnTrigger;
+                @Trigger.performed += instance.OnTrigger;
+                @Trigger.canceled += instance.OnTrigger;
             }
         }
     }
@@ -214,5 +243,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IInputsActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnTrigger(InputAction.CallbackContext context);
     }
 }
