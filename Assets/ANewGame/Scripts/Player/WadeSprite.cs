@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WadeSprite : SpriteAnimationController
+{
+    
+    public SpriteAnimation Idle;
+    public SpriteAnimation IdleShoot;
+    public SpriteAnimation RunRegular;
+    public SpriteAnimation RunAimForward;
+    public SpriteAnimation RunAimUp;
+    public SpriteAnimation RunAimDown;
+    public SpriteAnimation Crouch;
+    public SpriteAnimation AimUp;
+    public SpriteAnimation JumpRegular;
+    public SpriteAnimation JumpAimDDown;
+    public SpriteAnimation JumpAimDown;
+    public SpriteAnimation JumpAimDUp;
+    public SpriteAnimation JumpAimUp;
+    public SpriteAnimation JumpAimForward;
+    public SpriteAnimation Hit;
+    public SpriteAnimation SmallChest;
+
+    private void Start()
+    {
+        currentSprite = Idle;
+        direction = Mathf.Sign(transform.localScale.x);
+    }
+
+}

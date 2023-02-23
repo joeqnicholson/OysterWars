@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440bda427f2b466abe694cce6a2ce01, type: 3}
+  m_Name: Wade_RunAimForward
+  m_EditorClassIdentifier: 
+  keyframes:
+  - {fileID: 21300000, guid: f416c5103815b46cdba3e4b9acb6c979, type: 3}
+  - {fileID: 21300000, guid: da1ab009356344f0fa57478500fb1f2c, type: 3}
+  - {fileID: 21300000, guid: 6b28f04647edf4e248361b0fdd1a72f8, type: 3}
+  - {fileID: 21300000, guid: e3c6a876b0ce44971bd0ea8233091ac9, type: 3}
+  - {fileID: 21300000, guid: f4902def5eb6c49afb3bb66d8c4355e5, type: 3}
+  - {fileID: 21300000, guid: 80ef7060861c241829cb1ca2fd173f73, type: 3}
+  - {fileID: 21300000, guid: de6cdd506b33243b6b1ebe0c89398fb1, type: 3}
+  - {fileID: 21300000, guid: 6cba44bb86344428ea2c011ff7818bf1, type: 3}
+  - {fileID: 21300000, guid: e4f3d702d6d4e4352b94eb14249be5ff, type: 3}
+  - {fileID: 21300000, guid: 843a95b51a99d47f7a37e608a8f4f6b7, type: 3}
+  - {fileID: 21300000, guid: 3afdd72bde58647c298d0c02a15138bd, type: 3}
+  - {fileID: 21300000, guid: e2225dca33f9340ea916919fc05644c8, type: 3}
+  - {fileID: 21300000, guid: b0cb98153bd2b40ef9268a25950eaa12, type: 3}
+  imageIndex: 0
+  framesPerSecond: 24
+  loop: 1
+  totalFrames: 13
+  destroyOnEnd: 0
