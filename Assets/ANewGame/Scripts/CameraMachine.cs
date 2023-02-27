@@ -40,8 +40,8 @@ public class CameraMachine : MonoBehaviour
         nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
         nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
         machine = FindObjectOfType<WadeMachine>();
-        size.x = GetComponent<PixelPerfectCamera>().refResolutionX;
-        size.y = GetComponent<PixelPerfectCamera>().refResolutionY;
+        size.x = 320;
+        size.y = 180;
 
     }
 
@@ -50,12 +50,6 @@ public class CameraMachine : MonoBehaviour
     {
 
         UpdateBounds();
-
-        if (currentCameraBox.spawnEnemies && spawnEnemies)
-        {
-            SpawnEnemies();
-        }
-        
 
         boxTransform = currentCameraBox.transform;
 
@@ -86,11 +80,6 @@ public class CameraMachine : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, Vector3Int.RoundToInt(Target), ref velocity, ChangeTargetSpeed) + shakeVector;
-
-        
-
-        // transform.position = Vector3Int.CeilToInt(transform.position);
-        // transform.position = Target;
 
     }
 

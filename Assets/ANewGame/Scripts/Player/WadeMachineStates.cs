@@ -20,7 +20,7 @@ public partial class WadeMachine : Actor
 
     private WadeState StHit = new WadeState { canGetHit = false, canFlip = false };
 
-    private WadeState StSwing = new WadeState { canGetHit = true, name = "Swing" };
+    private WadeState StSwing = new WadeState { canGetHit = true, name = "Swing", canFlip = false };
 
     private WadeState StClimb = new WadeState { canGetHit = true };
 
@@ -62,6 +62,7 @@ public partial class WadeMachine : Actor
             Speed.x = 0;
             Speed.y = 0;
             stillTimer = 0;
+
         }
     }
 
@@ -91,6 +92,13 @@ public partial class WadeMachine : Actor
         {
             canInteract = false;
         }
+
+
+        if (fromState == StSwing)
+        {
+            sprite.PlayNothing();
+        }
+
     }
 
 }

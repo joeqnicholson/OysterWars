@@ -21,6 +21,10 @@ public class WadeSprite : SpriteAnimationController
     public SpriteAnimation JumpAimForward;
     public SpriteAnimation Hit;
     public SpriteAnimation SmallChest;
+    public SpriteAnimation SwingTurn;
+    public SpriteAnimation SwingSlow;
+    public SpriteAnimation SwingMedium;
+    public SpriteAnimation SwingFast;
 
     private void Start()
     {

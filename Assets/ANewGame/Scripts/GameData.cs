@@ -62,6 +62,13 @@ public class GameData : MonoBehaviour
         return Vector2.SignedAngle(Vector3.right * -directionInt, relativeWadePosition);
     }
 
+    public float WadeVerticalAngle(Vector3 position)
+    {
+        Vector3 relativeWadePosition = wadePosition - position;
+        return Vector2.SignedAngle(-Vector3.up, relativeWadePosition);
+    }
+
+
 
 
     public float RegulatedWadeAngle(Vector3 position, float directionInt, float[] typeOfAngles)

@@ -8,11 +8,11 @@ public class SpriteAnimationController : MonoBehaviour
 {
     public float direction = 1;
     public Vector2 scale = Vector2.one;
-    [SerializeField] public int imageIndex = 0;
-    [SerializeField] public Sprite currentImage;
-    [SerializeField] float frameTimer;
-    [SerializeField] public bool stopped = false;
-    [SerializeField] public SpriteAnimation currentSprite;
+    public int imageIndex = 0;
+    public Sprite currentImage;
+    float frameTimer;
+    public bool stopped = false;
+    public SpriteAnimation currentSprite;
     private SpriteRenderer spriteRenderer;
     public bool frameTriggerNow;
 

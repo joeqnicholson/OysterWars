@@ -9,16 +9,16 @@ public partial class WadeMachine : Actor
 {
     public WadeInventory Inventory;
     public WadeSound Sound;
-    private float walkSpeed = 120f;
+    private float walkSpeed = 95f;
     private float HalfGravThreshold = 40;
     private float walkAccel = 1000f;
     private float walkReduce = 400;
-    private float jumpSpeed = 150f;
+    private float jumpSpeed = 120f;
     private bool hasShortHopped;
     private float wallJumpHSpeed = 60;
     private float conveyerJumpHSpeed = 250;
     private float maxFall = -200f;
-    private float gravity = 700f;
+    private float gravity = 840f;
     private float swingSpeed = 300;
     private float swingAcceleration = 100;
     private float swingTimer;
@@ -26,7 +26,7 @@ public partial class WadeMachine : Actor
     private float moveY;
     private float aimX;
     public Vector2 Speed;
-    private float varJumpTime = .2f;
+    private float varJumpTime = .22f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private WadeSprite sprite;
@@ -89,6 +89,9 @@ public partial class WadeMachine : Actor
     private bool onSpinWheel;
     private float spinWheelDirection = 1;
     private float varJumpSpeed;
+    private float swingSpeedTurnThreshold = 40;
+    private bool swingTurning;
+    private bool swingFalling;
 
 
 
@@ -438,33 +441,6 @@ public partial class WadeMachine : Actor
     }
 
 
-    public void HookshotStart(Hit hitInfo, bool spinWheel = false)
-    {
-        onSpinWheel = spinWheel;
-
-        Vector3 addedPosition = onSpinWheel ? hitInfo.aabb.Center() : hitInfo.point + hitInfo.normal * 3;
-
-        Point pointToAdd = Instantiate(PointObject, addedPosition, Quaternion.identity).GetComponent<Point>();
-
-        pointToAdd.normal = hitInfo.normal;
-
-
-        shotTimer = 1;
-
-        Root.GetStartingStats(pointToAdd.GetComponent<Point>(), hitInfo);
-
-        List<Point> points = Root.points;
-        Vector2 lookAtVector = points[0].transform.position;
-        Vector2 myPosition = transform.position;
-        Vector2 difference = (myPosition - lookAtVector).normalized;
-
-        if(!onGround)
-        {
-            currentSwingSpeed = swingSpeed/1.25f * -difference.normalized.x;
-            spinWheelDirection = Mathf.Sign(currentSwingSpeed);
-            TransitionToState(StSwing);
-        }
-    }
 
 
     void ClimbUpdate()
@@ -495,6 +471,41 @@ public partial class WadeMachine : Actor
     }
 
 
+    public void HookshotStart(Hit hitInfo, bool spinWheel = false)
+    {
+        onSpinWheel = spinWheel;
+
+        Vector3 addedPosition = onSpinWheel ? hitInfo.aabb.Center() : hitInfo.point + hitInfo.normal * 3;
+
+        Point pointToAdd = Instantiate(PointObject, addedPosition, Quaternion.identity).GetComponent<Point>();
+
+        pointToAdd.normal = hitInfo.normal;
+
+
+
+        shotTimer = 1;
+
+        Root.GetStartingStats(pointToAdd.GetComponent<Point>(), hitInfo);
+
+        List<Point> points = Root.points;
+        Vector2 lookAtVector = points[0].transform.position;
+        Vector2 myPosition = transform.position;
+        Vector2 difference = (myPosition - lookAtVector).normalized;
+        
+        if(hitInfo.normal.y > 0)
+        {
+            swingFalling = true;
+        }
+
+        if(!onGround)
+        {
+            currentSwingSpeed = swingSpeed/1.25f * -difference.normalized.x;
+            spinWheelDirection = Mathf.Sign(currentSwingSpeed);
+            TransitionToState(StSwing);
+        }
+    }
+
+
 
     void SwingUpdate()
     {
@@ -508,34 +519,58 @@ public partial class WadeMachine : Actor
         Vector2 difference = (myPosition - lookAtVector).normalized;
         Vector2 perp = Vector2.Perpendicular(difference);
 
+        sprite.transform.localPosition = difference * -15;
+
         float verticalty = -difference.normalized.x;
 
         float mult = transform.position.y > points[0].transform.position.y ? 4 : 1;
 
-        if(onSpinWheel)
+
+        if(swingFalling)
         {
-            currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, spinWheelDirection * swingSpeed, swingAcceleration * 2 * Time.deltaTime);
+            Speed.y = MathHelper.Approach(Speed.y, - swingSpeed, gravity * Time.deltaTime);
+            currentSwingSpeed = Speed.y * -verticalty;
+
+            if(lookAtVector.y > myPosition.y)
+            {
+                swingFalling = false;
+            }
+
         }
         else
         {
-            currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * swingSpeed, swingAcceleration * Mathf.Abs(2 * verticalty) * mult * Time.deltaTime);
+
+            if(onSpinWheel)
+            {
+                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, spinWheelDirection * swingSpeed, swingAcceleration * 2 * Time.deltaTime);
+            }
+            else
+            {
+                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * swingSpeed, swingAcceleration * Mathf.Abs(2 * verticalty) * mult * Time.deltaTime);
+            }
+
+            if(moveY < 0)
+            {
+                Root.currentDistance -= moveY * 60 * Time.deltaTime;
+            }
+
+            currentSwingSpeed = Mathf.Clamp(currentSwingSpeed, -swingSpeed, swingSpeed);
+
+            Vector2 distanceHelper = Vector2.zero;
+
+            
+
+            if(Mathf.Abs(currentDistance - Root.currentDistance) > 5)
+            {
+                distanceHelper = (-difference * 4 * (currentDistance - Root.currentDistance));
+            }
+
+            Speed = (perp * currentSwingSpeed) + distanceHelper;
+
         }
 
-        Root.currentDistance -= moveY * 60 * Time.deltaTime;
 
         
-        currentSwingSpeed = Mathf.Clamp(currentSwingSpeed, -swingSpeed, swingSpeed);
-
-        Vector2 distanceHelper = Vector2.zero;
-
-        if(currentDistance != Root.currentDistance)
-        {
-            distanceHelper = (-difference * 2 * (currentDistance - Root.currentDistance));
-        }
-
-        
-
-        Speed = (perp * currentSwingSpeed) + distanceHelper;
         
 
         if((hitLeft || hitRight))
@@ -957,6 +992,52 @@ public partial class WadeMachine : Actor
 
                 }
             }
+
+            sprite.transform.localPosition = new Vector3(0,-10,0);
+            sprite.transform.localEulerAngles = new Vector3(0,0,0);
+
+        }
+
+        if(CurrentWadeState == StSwing)
+        {
+
+            if(sprite.currentSprite == sprite.SwingTurn)
+            {
+                if(sprite.stopped)
+                {
+                    sprite.Flip();
+                    swingTurning = false;
+                }
+            }
+
+            Vector2 lookAtVector = Root.points[0].transform.position;
+            float vertAngle = GameData.Instance.WadeVerticalAngle(lookAtVector);
+
+            sprite.transform.localEulerAngles = new Vector3(0,0,vertAngle);
+
+            if(Mathf.Abs(currentSwingSpeed) < swingSpeedTurnThreshold && Mathf.Abs(vertAngle) > 45 && Mathf.Sign(currentSwingSpeed) != directionInt)
+            {
+                sprite.Play(sprite.SwingTurn, true);
+                swingTurning = true;
+
+            }
+            else if (!swingTurning)
+            {
+                if(Mathf.Abs(currentSwingSpeed) < 80)
+                {
+                    sprite.Play(sprite.SwingSlow, true);
+                }
+                else if(Mathf.Abs(currentSwingSpeed) < 200)
+                {
+                    sprite.Play(sprite.SwingMedium, true);
+                }
+                else
+                {
+                    sprite.Play(sprite.SwingFast, true);
+                }
+            }
+
+            
         }
 
         if (CurrentWadeState == StHit)
