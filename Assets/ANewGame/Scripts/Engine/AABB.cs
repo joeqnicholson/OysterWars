@@ -67,9 +67,11 @@ public class AABB : MonoBehaviour
 
     public bool CollidesWith(AABB box, Vector3 position)
     {
-        bool xTouching = (xMaxAt(position) > box.xMin() && xMaxAt(position) < box.xMax()) || (xMinAt(position) > box.xMin() && xMinAt(position) < box.xMax());
-        bool yTouching = (yMaxAt(position) > box.yMin() && yMaxAt(position) < box.yMax()) || (yMinAt(position) > box.yMin() && yMinAt(position) < box.yMax());
-        return xTouching && yTouching;
+        bool xTouchingThem = (xMaxAt(position) >= box.xMin() && xMaxAt(position) <= box.xMax()) || (xMinAt(position) >= box.xMin() && xMinAt(position) <= box.xMax());
+        bool yTouchingThem = (yMaxAt(position) >= box.yMin() && yMaxAt(position) <= box.yMax()) || (yMinAt(position) >= box.yMin() && yMinAt(position) <= box.yMax());
+        bool xTouchingMe = (box.xMax() >= xMinAt(position) && box.xMax() <= xMaxAt(position) || box.xMin() >= xMinAt(position) && box.xMin() <= xMaxAt(position));
+        bool yTouchingMe = (box.yMax() >= yMinAt(position) && box.yMax() <= yMaxAt(position) || box.yMin() >= yMinAt(position) && box.yMin() <= yMaxAt(position));
+        return (xTouchingThem && yTouchingThem) || (xTouchingMe && yTouchingMe);
     }
 
     public Vector3[] Corners()

@@ -993,7 +993,7 @@ public partial class WadeMachine : Actor
                 }
             }
 
-            sprite.transform.localPosition = new Vector3(0,-10,0);
+            sprite.transform.localPosition = new Vector3(0,-8,0);
             sprite.transform.localEulerAngles = new Vector3(0,0,0);
 
         }

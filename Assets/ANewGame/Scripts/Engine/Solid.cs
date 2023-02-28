@@ -14,4 +14,12 @@ public class Solid : AABB
     {
         
     }
+
+    void OnDrawGizmos()
+    {
+        Debug.DrawLine(TopRight(), TopLeft(), Color.green);
+        Debug.DrawLine(TopRight(), BottomRight(), Color.green);
+        Debug.DrawLine(TopLeft(), BottomLeft(), Color.green);
+        Debug.DrawLine(BottomLeft(), BottomRight(), Color.green);
+    }
 }

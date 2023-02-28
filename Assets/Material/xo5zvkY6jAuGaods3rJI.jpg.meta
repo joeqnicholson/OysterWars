@@ -1,25 +1,7 @@
 fileFormatVersion: 2
-guid: 64ffc483be64d4b729d67e0784253ae0
+guid: 7d19c635263df4b91b320560080a4922
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -2671460228953875570
-    second: Overworld_0
-  - first:
-      213: -2689026045669087484
-    second: Overworld_1
-  - first:
-      213: -7179496123588461096
-    second: Overworld_2
-  - first:
-      213: 5358339777047750641
-    second: Overworld_3
-  - first:
-      213: 136357672767500387
-    second: Overworld_4
-  - first:
-      213: 8004674553903682165
-    second: Overworld_5
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -65,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -99,19 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,274 +104,337 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WadeIdle_0
+      name: xo5zvkY6jAuGaods3rJI_0
       rect:
         serializedVersion: 2
-        x: 199
-        y: 501
-        width: 32
-        height: 65
-      alignment: 9
-      pivot: {x: 0.5, y: 0.43076923}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ceb33e4f0d6f6c6d0800000000000000
-      internalID: -2970415526882100244
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeIdle_1
-      rect:
-        serializedVersion: 2
-        x: 133
-        y: 258
-        width: 32
-        height: 64
+        x: 0
+        y: 471.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2f46148f13b409b0800000000000000
-      internalID: -5114766328844628182
+      spriteID: 35457ac2a896b449995dd9d1738e26d8
+      internalID: 16327223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WadeIdle_2
+      name: xo5zvkY6jAuGaods3rJI_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 258
-        width: 32
-        height: 64
+        x: 159
+        y: 471.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7265b70fc11062950800000000000000
-      internalID: 6423823142295918119
+      spriteID: 3de6cd529580b491bb043a312daf6ad5
+      internalID: -1265254885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WadeIdle_3
+      name: xo5zvkY6jAuGaods3rJI_2
       rect:
         serializedVersion: 2
-        x: 314
-        y: 273
-        width: 64
-        height: 54
+        x: 318
+        y: 471.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c95a4b4518f3b46c0800000000000000
-      internalID: -4158160006242064996
+      spriteID: 2b0608d6e4383427a9b06ea06cbf3982
+      internalID: -1624301616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WadeIdle_4
+      name: xo5zvkY6jAuGaods3rJI_3
       rect:
         serializedVersion: 2
-        x: 379
-        y: 273
-        width: 59
-        height: 54
-      alignment: 9
-      pivot: {x: 0.4915254, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7cdb62ca8a0d90260800000000000000
-      internalID: 7064406913368636871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeIdle_5
-      rect:
-        serializedVersion: 2
-        x: 254
-        y: 273
-        width: 59
-        height: 54
-      alignment: 9
-      pivot: {x: 0.5084746, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 596811213ffc7a9d0800000000000000
-      internalID: -2763011203481368939
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WadeIdle_6
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 60
-        height: 60
+        x: 477
+        y: 471.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 917d876b3753c2070800000000000000
-      internalID: 8082894202322081561
+      spriteID: ad8cb7b214e444f70960a3b8140c2a01
+      internalID: 1476605498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_0
+      name: xo5zvkY6jAuGaods3rJI_4
       rect:
         serializedVersion: 2
-        x: 68
-        y: 258
-        width: 32
-        height: 64
+        x: 0
+        y: 314.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8bde9563111dead0800000000000000
-      internalID: -2671460228953875570
+      spriteID: 065e13fd85de64088b282ee1dc68001f
+      internalID: 423002285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_1
+      name: xo5zvkY6jAuGaods3rJI_5
       rect:
         serializedVersion: 2
-        x: 100
-        y: 258
-        width: 32
-        height: 64
+        x: 159
+        y: 314.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 407ee1cfe09aeaad0800000000000000
-      internalID: -2689026045669087484
+      spriteID: 36d484b31f3bc41dd931d9b5ee7b5e1d
+      internalID: -50753943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_2
+      name: xo5zvkY6jAuGaods3rJI_6
       rect:
         serializedVersion: 2
-        x: 35
-        y: 194
-        width: 32
-        height: 64
+        x: 318
+        y: 314.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dd373f605e4d5c90800000000000000
-      internalID: -7179496123588461096
+      spriteID: 694e3d4ab8e964c858356139f188067c
+      internalID: 1389517851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_3
+      name: xo5zvkY6jAuGaods3rJI_7
       rect:
         serializedVersion: 2
-        x: 68
-        y: 194
-        width: 32
-        height: 64
+        x: 477
+        y: 314.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f7e6c433a5ac5a40800000000000000
-      internalID: 5358339777047750641
+      spriteID: 86ceb89bec4e849e5a5ace37be23b3ef
+      internalID: -513085436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_4
+      name: xo5zvkY6jAuGaods3rJI_8
       rect:
         serializedVersion: 2
-        x: 100
-        y: 194
-        width: 32
-        height: 64
+        x: 0
+        y: 157.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 360b4b7b49074e100800000000000000
-      internalID: 136357672767500387
+      spriteID: 98e96f1f55bfe4cc1bd7166c682d8368
+      internalID: -381176869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_5
+      name: xo5zvkY6jAuGaods3rJI_9
       rect:
         serializedVersion: 2
-        x: 133
-        y: 194
-        width: 32
-        height: 64
+        x: 159
+        y: 157.75
+        width: 159
+        height: 157.25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5729900a811561f60800000000000000
-      internalID: 8004674553903682165
+      spriteID: b154263245d8247e5ab0df77681f600d
+      internalID: 376518564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_10
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 157.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01052909321ae4ca18a5f8c788f1719f
+      internalID: 684806102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_11
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 157.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e05fbfddf5d4f28a7aa3fc2bee4aaf
+      internalID: -1707844549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1796db32a518d4f069f1cdaeefff7d3f
+      internalID: -1235368137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_13
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 0.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f2879ce09e04b1985c36e06bcda2f6
+      internalID: 107251429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_14
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49237439a8d5246e8a30ade7d567d155
+      internalID: -1275237157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xo5zvkY6jAuGaods3rJI_15
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 0.75
+        width: 159
+        height: 157.25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf35e1c747a343c7a73fe899aafb745
+      internalID: -139099237
       vertices: []
       indices: 
       edges: []
@@ -415,23 +448,24 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: ed9fdeca44dfa4c2a9fe5ba2740bb29b, type: 3}
-      name: _NormalMap
+    secondaryTextures: []
     nameFileIdTable:
-      WadeIdle_3: -4158160006242064996
-      WadeIdle_4: 7064406913368636871
-      WadeIdle_0: -2970415526882100244
-      WadeIdle_1: -5114766328844628182
-      WadeIdle_2: 6423823142295918119
-      Overworld_0: -2671460228953875570
-      Overworld_4: 136357672767500387
-      WadeIdle_6: 8082894202322081561
-      WadeIdle_5: -2763011203481368939
-      Overworld_5: 8004674553903682165
-      Overworld_3: 5358339777047750641
-      Overworld_1: -2689026045669087484
-      Overworld_2: -7179496123588461096
+      xo5zvkY6jAuGaods3rJI_15: -139099237
+      xo5zvkY6jAuGaods3rJI_9: 376518564
+      xo5zvkY6jAuGaods3rJI_1: -1265254885
+      xo5zvkY6jAuGaods3rJI_3: 1476605498
+      xo5zvkY6jAuGaods3rJI_0: 16327223
+      xo5zvkY6jAuGaods3rJI_11: -1707844549
+      xo5zvkY6jAuGaods3rJI_13: 107251429
+      xo5zvkY6jAuGaods3rJI_8: -381176869
+      xo5zvkY6jAuGaods3rJI_6: 1389517851
+      xo5zvkY6jAuGaods3rJI_7: -513085436
+      xo5zvkY6jAuGaods3rJI_14: -1275237157
+      xo5zvkY6jAuGaods3rJI_12: -1235368137
+      xo5zvkY6jAuGaods3rJI_10: 684806102
+      xo5zvkY6jAuGaods3rJI_2: -1624301616
+      xo5zvkY6jAuGaods3rJI_5: -50753943
+      xo5zvkY6jAuGaods3rJI_4: 423002285
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

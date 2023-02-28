@@ -17,6 +17,7 @@ public class CameraBox : AABB
     public List<EnemySpawn> spawns = new List<EnemySpawn>();
     public BoundsInt area;
     public Tilemap tileMap;
+    public GameObject square;
 
 
     private void Start()
@@ -46,7 +47,7 @@ public class CameraBox : AABB
             WadeEnters();
         }
 
-        GetColliders();
+        // GetColliders();
 
     }
 
@@ -92,15 +93,19 @@ public class CameraBox : AABB
                 Vector3Int tilePos = tileMap.WorldToCell(pos);
 
                 var tile = tileMap.GetTile<Tile>(tilePos);
-                GameObject newTile = Instantiate(new GameObject("solid"), tile.transform.position, tile.transform.rotation);
-                newTile.AddComponent<Solid>();
-                Solid solid = newTile.GetComponent<Solid>();
-                solid.size = new Vector2(8,8);
+
+                if(tile)
+                {
+                    Instantiate(square, pos + Vector3.up * 4, Quaternion.identity);
+                }
+
                 x += 8;
             }
             x = transform.position.x - xSize + 4;
             y += 8;
         }
+
+        // FindObjectOfType<Colliders>().CheckForSolids();
 
     }
 
