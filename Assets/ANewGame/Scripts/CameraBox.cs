@@ -1,9 +1,10 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class CameraBox : AABB
+public class CameraBox : MonoBehaviour
 {
     private bool isWadesBox;
     private float xSize;
@@ -15,16 +16,12 @@ public class CameraBox : AABB
     public bool spawnEnemies = true;
     public LayerMask LayerMask;
     public List<EnemySpawn> spawns = new List<EnemySpawn>();
-    public BoundsInt area;
-    public Tilemap tileMap;
-    public GameObject square;
+    
 
 
     private void Start()
     {
-        tileMap = FindObjectOfType<Tilemap>();
-        area.position = Vector3Int.RoundToInt(transform.position);
-        area.size = Vector3Int.RoundToInt(transform.localScale);
+
         isWadesBox = false;
         GetComponent<MeshRenderer>().enabled = false;
         xSize = transform.localScale.x / 2;
@@ -38,6 +35,32 @@ public class CameraBox : AABB
             isWadesBox = true;
         }
 
+        List<Collider2D> hitInfos = new List<Collider2D>();
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        GetComponent<Collider2D>().OverlapCollider(contactFilter, hitInfos);
+        for (int i = 0; i < hitInfos.Count; i++)
+        {
+            EnemySpawn spawn = hitInfos[i].GetComponent<EnemySpawn>();
+            if (spawn)
+            {
+                spawn.GetComponent<BoxCollider2D>().enabled = false;
+                spawn.cameraBox = this;
+                spawn.GetComponent<SpriteRenderer>().enabled = false;
+                spawns.Add(spawn);
+
+            }
+
+            Enemy enemy = hitInfos[i].GetComponent<Enemy>();
+            if (enemy)
+            {
+                enemy.cameraBox = this;
+            }
+            
+        }
+        GetComponent<Collider2D>().enabled = false;
+
+
+
         if (!isWadesBox)
         {
             WadeLeaves();
@@ -46,8 +69,6 @@ public class CameraBox : AABB
         {
             WadeEnters();
         }
-
-        // GetColliders();
 
     }
 
@@ -74,39 +95,10 @@ public class CameraBox : AABB
     {
         
         isWadesBox = true;
-
-    }
-
-    public void GetColliders()
-    {
-
-        float x = transform.position.x - xSize + 4;
-        float y = transform.position.y - ySize + 4;
-        
-        while( y < transform.position.y + ySize)
+        foreach(EnemySpawn spawn in spawns)
         {
-            while(x < transform.position.x + ySize)
-            {
-                Vector3 pos = new Vector3(x,y,0);
-
-
-                Vector3Int tilePos = tileMap.WorldToCell(pos);
-
-                var tile = tileMap.GetTile<Tile>(tilePos);
-
-                if(tile)
-                {
-                    Instantiate(square, pos + Vector3.up * 4, Quaternion.identity);
-                }
-
-                x += 8;
-            }
-            x = transform.position.x - xSize + 4;
-            y += 8;
+            spawn.Spawn();
         }
-
-        // FindObjectOfType<Colliders>().CheckForSolids();
-
     }
 
     public void WadeLeaves()

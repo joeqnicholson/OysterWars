@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lightbug.Kinematic2D.Core;
 using UnityEngine.SceneManagement;
 using System;
 
@@ -35,7 +34,7 @@ public partial class WadeMachine : Actor
     private float shotAnimationCooldown = 4;
     private bool crouching;
     private Vector2 shootDirection;
-    private Vector2 shootPoint;
+    private Vector3 shootPoint;
     [SerializeField] GameObject currentBullet; 
     private float airTimer = 0;
     private float jumpGraceTimer = 0;
@@ -92,6 +91,9 @@ public partial class WadeMachine : Actor
     private float swingSpeedTurnThreshold = 40;
     private bool swingTurning;
     private bool swingFalling;
+
+
+
 
 
 
@@ -300,12 +302,6 @@ public partial class WadeMachine : Actor
                 
             }
 
-
-            // if(!hasShortHopped && !inputs.jumpHeld && varJumpTimer > .08f)
-            // {
-            //     varJumpTimer = .08f;
-            //     hasShortHopped = true;
-            // }
         }
 
         float lastSpeed = Speed.x;
@@ -320,7 +316,7 @@ public partial class WadeMachine : Actor
         {
             if(Mathf.Sign(moveX) == Mathf.Sign(transform.position.x - Root.currentPoint.transform.position.x))
             {
-                ropeMult = .1f;
+                ropeMult = .4f;
             }
             else
             {
@@ -510,6 +506,7 @@ public partial class WadeMachine : Actor
     void SwingUpdate()
     {
 
+
         List<Point> points = Root.points;
 
         float currentDistance = Vector2.Distance(transform.position, points[0].transform.position);
@@ -518,8 +515,6 @@ public partial class WadeMachine : Actor
         Vector2 myPosition = transform.position;
         Vector2 difference = (myPosition - lookAtVector).normalized;
         Vector2 perp = Vector2.Perpendicular(difference);
-
-        sprite.transform.localPosition = difference * -15;
 
         float verticalty = -difference.normalized.x;
 
@@ -568,10 +563,6 @@ public partial class WadeMachine : Actor
             Speed = (perp * currentSwingSpeed) + distanceHelper;
 
         }
-
-
-        
-        
 
         if((hitLeft || hitRight))
         {
@@ -742,7 +733,7 @@ public partial class WadeMachine : Actor
             else if (moveY < 0)
             {
                 x = 16;
-                y = 2 * directionInt;
+                y = 2;
                 shootDirection = Vector2.right * directionInt + Vector2.down;
             }
             else
@@ -787,7 +778,8 @@ public partial class WadeMachine : Actor
 
         x *= directionInt;
 
-        shootPoint = new Vector2(x, y);
+        shootPoint = new Vector3(x, y, 0);
+
 
         if(shotTimer > shotCoolDown)
         {
@@ -799,7 +791,7 @@ public partial class WadeMachine : Actor
                 }
                 else
                 {
-                    HookshotKnife newBullet = Instantiate(hookshotKnife, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0) + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
+                    HookshotKnife newBullet = Instantiate(hookshotKnife, transform.position + shootPoint + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
                     newBullet.GetComponent<HookshotKnife>().ChangeMoveDirection(shootDirection);
                     shotTimer = 0;
                     stillTimer = .5f;
@@ -812,7 +804,7 @@ public partial class WadeMachine : Actor
             {
                 Sound.PlayGunShot();
                 Debug.Log("youshot");
-                Bullet newBullet = Instantiate(currentBullet, transform.position + new Vector3(shootPoint.x, shootPoint.y, 0) + yOffset, Quaternion.identity).GetComponent<Bullet>();
+                Bullet newBullet = Instantiate(currentBullet, transform.position + shootPoint + yOffset, Quaternion.identity).GetComponent<Bullet>();
                 newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
                 stillTimer = .5f;
                 StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
@@ -854,46 +846,6 @@ public partial class WadeMachine : Actor
 
     }
 
-    public bool Hooked()
-    {
-        if(!Root.active)
-        {
-            return false;
-
-        }
-        else
-        {
-
-            if((!Root.maxedOut && !inputs.triggerHeld))
-            {
-                return false;
-            }
-
-
-            if(onGround)
-            {
-                if(moveX == 0)
-                {
-                    return false;
-
-                }
-
-                float pointsDifference = Mathf.Sign(Root.currentPoint.transform.position.x - transform.position.x);
-                bool oppositeDirection = Mathf.Sign(moveX) != pointsDifference;
-
-
-                if(!oppositeDirection)
-                {
-                    return false;
-
-                }
-            }
-
-        }
-
-        return true;
-    }
-    
     public void Reset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -993,49 +945,63 @@ public partial class WadeMachine : Actor
                 }
             }
 
-            sprite.transform.localPosition = new Vector3(0,-8,0);
-            sprite.transform.localEulerAngles = new Vector3(0,0,0);
+
+
 
         }
 
         if(CurrentWadeState == StSwing)
         {
 
-            if(sprite.currentSprite == sprite.SwingTurn)
-            {
-                if(sprite.stopped)
-                {
-                    sprite.Flip();
-                    swingTurning = false;
-                }
-            }
+            
 
             Vector2 lookAtVector = Root.points[0].transform.position;
-            float vertAngle = GameData.Instance.WadeVerticalAngle(lookAtVector);
+            float vertAngle = MathHelper.RegulateAngle(GameData.Instance.WadeVerticalAngle(lookAtVector), MathHelper.SignedAngles45);
 
-            sprite.transform.localEulerAngles = new Vector3(0,0,vertAngle);
+            sprite.direction = Mathf.Sign(lookAtVector.x - transform.position.x);
 
-            if(Mathf.Abs(currentSwingSpeed) < swingSpeedTurnThreshold && Mathf.Abs(vertAngle) > 45 && Mathf.Sign(currentSwingSpeed) != directionInt)
+            float absVert = Mathf.Abs(vertAngle);
+
+            float x;
+            float y;
+
+            if(absVert == 0)
             {
-                sprite.Play(sprite.SwingTurn, true);
-                swingTurning = true;
-
+                x = 0;
+                y = 27;
+                sprite.Play(sprite.JumpAimUp);
             }
-            else if (!swingTurning)
+            else if( absVert == 45)
             {
-                if(Mathf.Abs(currentSwingSpeed) < 80)
-                {
-                    sprite.Play(sprite.SwingSlow, true);
-                }
-                else if(Mathf.Abs(currentSwingSpeed) < 200)
-                {
-                    sprite.Play(sprite.SwingMedium, true);
-                }
-                else
-                {
-                    sprite.Play(sprite.SwingFast, true);
-                }
+                x = 12;
+                y = 20;
+                sprite.Play(sprite.JumpAimDUp);
             }
+            else if( absVert == 90)
+            {
+                x = 14;
+                y = 14;
+                sprite.Play(sprite.JumpAimForward);
+            }
+            else if(absVert == 135)
+            {
+                x = 16;
+                y = 2;
+                sprite.Play(sprite.JumpAimDDown);
+            }
+            else
+            {
+                x = 0;
+                y = -5;
+                sprite.Play(sprite.JumpAimDown);
+            }
+
+            x *= sprite.direction;
+
+            shootPoint = new Vector3(x,y,0);
+
+            Root.RenderRope(shootPoint + transform.position + yOffset);
+
 
             
         }
@@ -1128,9 +1094,6 @@ public partial class WadeMachine : Actor
         // {
         //     return 0;
         // }
-
         return 0;
-
-
     }
 }

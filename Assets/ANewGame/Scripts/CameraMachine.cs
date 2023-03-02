@@ -40,8 +40,8 @@ public class CameraMachine : MonoBehaviour
         nextEnemyTimeRight = Random.Range(spawnTimeMin, spawnTimeMax);
         nextEnemyTimeLeft = Random.Range(spawnTimeMin, spawnTimeMax);
         machine = FindObjectOfType<WadeMachine>();
-        size.x = 320;
-        size.y = 180;
+        size.x = 480;
+        size.y = 270;
 
     }
 

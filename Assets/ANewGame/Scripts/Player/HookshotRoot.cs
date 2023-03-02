@@ -16,9 +16,16 @@ public class HookshotRoot : MonoBehaviour
     private Colliders colliders;
     public bool active;
 
+    private Vector3 shootPoint;
+
+    private LineRenderer rope;
+
+
+
     void Start()
     {
         colliders = FindObjectOfType<Colliders>();
+        rope = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -56,6 +63,7 @@ public class HookshotRoot : MonoBehaviour
         }
 
         points.Clear();
+
         lookAtLast = false;
         currentDistance = 0;
         currentPoint = null;
@@ -77,6 +85,7 @@ public class HookshotRoot : MonoBehaviour
         }
         
         newPoint.transform.parent = hitInfo.aabb.transform;
+
         AddPoint(newPoint);
         active = true;
     }
@@ -85,6 +94,7 @@ public class HookshotRoot : MonoBehaviour
     public void AddPoint(Point newPoint, int index = 0)
     {
         points.Insert(index, newPoint);
+
         lookAtLast = points.Count != 1; 
         currentPoint = points[0];
         CalculateDistance();
@@ -108,11 +118,13 @@ public class HookshotRoot : MonoBehaviour
         if(index == 8000) index = points.Count - 1;
         Destroy(points[index].gameObject);
         points.RemoveAt(index);
+
         lookAtLast = points.Count != 1; 
         currentPoint = points[0];
         CalculateDistance();
         print("removed");
     }
+
 
     private void CalculateDistance()
     {
@@ -260,6 +272,26 @@ public class HookshotRoot : MonoBehaviour
             }
         }
         
+    }
+
+    public void RenderRope(Vector3 newPoint)
+    {
+
+        Vector3[] positions = new Vector3[points.Count+1];
+        int x = points.Count - 1;
+
+        for(int i = 0; i < points.Count; i++ )
+        {
+            positions[x] = points[i].transform.position;
+
+            x-=1;
+        }
+
+        positions[points.Count] = newPoint;
+        rope.positionCount = positions.Length;
+        
+
+        rope.SetPositions(positions);
     }
 }
 
