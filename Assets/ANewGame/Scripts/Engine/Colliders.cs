@@ -9,7 +9,7 @@ public class Colliders : MonoBehaviour
     public Trigger[] triggers = new Trigger[0];
 
 
-    void Awake()
+    void Start()
     {
         solids = FindObjectsOfType<Solid>();
         actors = FindObjectsOfType<Actor>();

@@ -8,18 +8,18 @@ public partial class WadeMachine : Actor
 {
     public WadeInventory Inventory;
     public WadeSound Sound;
-    private float walkSpeed = 95f;
+    private float walkSpeed = 120f;
     private float HalfGravThreshold = 40;
-    private float walkAccel = 1000f;
-    private float walkReduce = 400;
-    private float jumpSpeed = 120f;
+    private float walkAccel = 1250f;
+    private float walkReduce = 500;
+    private float jumpSpeed = 150f;
     private bool hasShortHopped;
-    private float wallJumpHSpeed = 60;
+    private float wallJumpHSpeed = 75;
     private float conveyerJumpHSpeed = 250;
-    private float maxFall = -200f;
-    private float gravity = 840f;
-    private float swingSpeed = 300;
-    private float swingAcceleration = 100;
+    private float maxFall = -250f;
+    private float gravity = 1050f;
+    private float swingSpeed = 375;
+    private float swingAcceleration = 125;
     private float swingTimer;
     private float moveX;
     private float moveY;
@@ -78,8 +78,8 @@ public partial class WadeMachine : Actor
     private float shotCoolDown = 1f;
     private float swingSpeedYJumpThreshold = -150;
     private Trigger currentLauncher;
-    private const float LaunchAccel = 25; 
-    private const float LaunchSpeed = 350; 
+    private const float LaunchAccel = 35; 
+    private const float LaunchSpeed = 425; 
     private const float EndLaunchSpeed = 190;
     private const float EndLaunchUpMult = .75f;
     private const float LaunchDistanceThreshold = 25; 
@@ -119,6 +119,11 @@ public partial class WadeMachine : Actor
     // Update is called once per frame
     private void Update()
     {
+        if(inputs.startPress)
+        {
+            transform.position = startPos;
+            TransitionToState(StNormal);
+        }
         canHopDown = CanHopDown();
         aimX = inputs.moveInput.x;
 
@@ -570,7 +575,10 @@ public partial class WadeMachine : Actor
             float differenceX = points[0].transform.position.x - transform.position.x;
 
             bool below = transform.position.y < points[0].transform.position.y;
-            bool inFront = Mathf.Sign(Speed.x) == Mathf.Sign(differenceX);
+
+
+
+            bool inFront = hitLeft ? differenceX <= 0 : differenceX >= 0;
 
             if(below && inFront)
             {
@@ -579,6 +587,7 @@ public partial class WadeMachine : Actor
                 if(!bothCorners)
                 {
                     bool atTop = currentSolid.ContainsY(Bottom().y);
+
                     float distance;
 
                     if(atTop)
@@ -587,9 +596,26 @@ public partial class WadeMachine : Actor
 
                         if(distance > 10)
                         {
+                            
+                            TransitionToState(StClimb);
+                        }
+                        else
+                        {
+                            transform.position += Vector3.up * distance;
+                        }
+                    }
+                    else
+                    {
+                        bool atBottom = currentSolid.ContainsY(Top().y);
+
+                        if(atBottom)
+                        {
+                            distance = Mathf.Abs(currentSolid.Bottom().y - Bottom().y);
+                            transform.position += Vector3.up * distance;
                             TransitionToState(StClimb);
                         }
                     }
+
 
                 }
                 else

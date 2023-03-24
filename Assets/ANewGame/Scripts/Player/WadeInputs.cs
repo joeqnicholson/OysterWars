@@ -19,6 +19,8 @@ public class WadeInputs : MonoBehaviour
     public bool triggerHeld;
     public Vector2 trigger;
 
+    public bool startPress;
+
 
     // Use this for initialization
     void Start()
@@ -75,6 +77,7 @@ public class WadeInputs : MonoBehaviour
             item1Held = keyboard.nKey.isPressed;
             item1Press = keyboard.nKey.wasPressedThisFrame;
             triggerHeld = keyboard.lKey.isPressed;
+            startPress = keyboard.oKey.wasPressedThisFrame;
         }
         else if (keyboard == null && gamepad != null)
         {
@@ -85,6 +88,7 @@ public class WadeInputs : MonoBehaviour
             item1Held = gamepad.buttonNorth.isPressed;
             item1Press = gamepad.buttonNorth.wasPressedThisFrame;
             triggerHeld = gamepad.leftTrigger.isPressed || gamepad.leftShoulder.isPressed || gamepad.rightShoulder.isPressed;
+            startPress = gamepad.startButton.wasPressedThisFrame;
         }
         else
         {
@@ -95,6 +99,7 @@ public class WadeInputs : MonoBehaviour
             item1Held = keyboard.nKey.isPressed || gamepad.buttonNorth.isPressed;
             item1Press = keyboard.nKey.wasPressedThisFrame || gamepad.buttonNorth.wasPressedThisFrame;
             triggerHeld = gamepad.leftTrigger.isPressed || keyboard.lKey.isPressed || gamepad.leftShoulder.isPressed || gamepad.rightShoulder.isPressed;
+            startPress = keyboard.oKey.wasPressedThisFrame || gamepad.startButton.wasPressedThisFrame;
         }
 
     }
