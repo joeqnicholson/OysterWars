@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Overworld.unity
+    path: Assets/AnOldGame/Scenes/Overworld.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
-    path: Assets/Scenes/Dungeon-1.unity
+    path: Assets/AnOldGame/Scenes/Dungeon-1.unity
     guid: fe662704dda694a6aabd5241bb7103c4
   - enabled: 0
-    path: Assets/Scenes/One.unity
+    path: Assets/AnOldGame/Scenes/One.unity
     guid: 77810432171b84f359299683c7267ed2
   m_configObjects: {}

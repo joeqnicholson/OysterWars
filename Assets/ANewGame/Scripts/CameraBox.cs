@@ -15,7 +15,7 @@ public class CameraBox : MonoBehaviour
     public bool onTrackY;
     public bool spawnEnemies = true;
     public LayerMask LayerMask;
-    public List<EnemySpawn> spawns = new List<EnemySpawn>();
+
     
 
 
@@ -35,29 +35,9 @@ public class CameraBox : MonoBehaviour
             isWadesBox = true;
         }
 
-        List<Collider2D> hitInfos = new List<Collider2D>();
-        ContactFilter2D contactFilter = new ContactFilter2D();
-        GetComponent<Collider2D>().OverlapCollider(contactFilter, hitInfos);
-        for (int i = 0; i < hitInfos.Count; i++)
-        {
-            EnemySpawn spawn = hitInfos[i].GetComponent<EnemySpawn>();
-            if (spawn)
-            {
-                spawn.GetComponent<BoxCollider2D>().enabled = false;
-                spawn.cameraBox = this;
-                spawn.GetComponent<SpriteRenderer>().enabled = false;
-                spawns.Add(spawn);
 
-            }
 
-            Enemy enemy = hitInfos[i].GetComponent<Enemy>();
-            if (enemy)
-            {
-                enemy.cameraBox = this;
-            }
-            
-        }
-        GetComponent<Collider2D>().enabled = false;
+
 
 
 
@@ -95,19 +75,13 @@ public class CameraBox : MonoBehaviour
     {
         
         isWadesBox = true;
-        foreach(EnemySpawn spawn in spawns)
-        {
-            spawn.Spawn();
-        }
+
     }
 
     public void WadeLeaves()
     {
         isWadesBox = false;
-        foreach (EnemySpawn spawn in spawns)
-        {
-            spawn.UnSpawn();
-        }
+
     }
 
     private void OnDrawGizmos()
