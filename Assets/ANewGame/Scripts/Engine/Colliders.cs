@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class Colliders : MonoBehaviour
 {
-    public Solid[] solids = new Solid[0];
-    public Actor[] actors = new Actor[0];
-    public Trigger[] triggers = new Trigger[0];
+    public List<Solid> solids = new List<Solid>(0);
+    public List<Actor> actors = new List<Actor>(0);
+    public List<Trigger> triggers = new List<Trigger>(0);
 
-
-    void Start()
+    void Awake()
     {
-        solids = FindObjectsOfType<Solid>();
-        actors = FindObjectsOfType<Actor>();
-        triggers = FindObjectsOfType<Trigger>();
+        solids = new List<Solid>(FindObjectsOfType<Solid>());
+        actors = new List<Actor>(FindObjectsOfType<Actor>());
+        triggers = new List<Trigger>(FindObjectsOfType<Trigger>());
+    }
+
+    public void UpdateSolids(List<Solid> newSolids)
+    {
+        foreach(Solid solid in newSolids)
+        {
+            solid.active = true;
+        }
+
+        foreach(Solid solid in solids)
+        {
+            solid.active = false;
+        }
+
+        solids = newSolids;
+
     }
 
 }

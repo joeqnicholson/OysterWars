@@ -12,13 +12,13 @@ public partial class WadeMachine : Actor
     private float HalfGravThreshold = 40;
     private float walkAccel = 1250f;
     private float walkReduce = 500;
-    private float jumpSpeed = 150f;
+    private float jumpSpeed = 120f;
     private bool hasShortHopped;
     private float wallJumpHSpeed = 75;
     private float conveyerJumpHSpeed = 250;
-    private float maxFall = -250f;
-    private float gravity = 1050f;
-    private float swingSpeed = 375;
+    private float maxFall = -200f;
+    private float gravity = 900f;
+    private float swingSpeed = 500;
     private float swingAcceleration = 125;
     private float swingTimer;
     private float moveX;
@@ -70,7 +70,7 @@ public partial class WadeMachine : Actor
     private Vector3 yOffset;
     private float currentSwingSpeed;
     private float swingYRemainder;
-    private float climbSpeed = 60;
+    private float climbSpeed = 45;
     private float kickOffSpeed = 150;
     private float climbAcceleration = 1000;
     float hookSpeed = 4;
@@ -121,8 +121,8 @@ public partial class WadeMachine : Actor
     {
         if(inputs.startPress)
         {
-            transform.position = startPos;
-            TransitionToState(StNormal);
+            Reset();
+
         }
         canHopDown = CanHopDown();
         aimX = inputs.moveInput.x;
@@ -437,7 +437,7 @@ public partial class WadeMachine : Actor
         Time.timeScale = MathHelper.Approach(Time.timeScale, 1, Time.timeScale * 15 * Time.deltaTime);
         Speed.x = MathHelper.Approach(Speed.x, 0, 400 * Time.deltaTime);
         Speed.y = MathHelper.Approach(Speed.y, 0, 400 * Time.deltaTime);
-        if (Time.timeScale >= .7) { TransitionToState(StNormal); }
+        if (Time.timeScale >= .7) { Time.timeScale = 1; Reset(); }
         invincibiltyTimer = 0;
     }
 
@@ -847,34 +847,16 @@ public partial class WadeMachine : Actor
     }
 
 
-    public void TakeDamage(float recoilDirection, GameObject projectile = null)
+    public void TakeDamage(float recoilDirection = 0, GameObject projectile = null)
     {
-        if(!invincible)
-        {
-            if (invincibiltyTimer >= invincibiltyTime)
-            {
-                if (projectile) { Destroy(projectile); }
-                directionInt = -recoilDirection;
-                health -= 1;
-
-                if (health <= 0)
-                {
-                    FindObjectOfType<DungeonManager>().SaveToJson();
-                    Reset();
-                }
-                else
-                {
-                    TransitionToState(StHit);
-                    Debug.Log("wadeIsHit");
-                }
-            }
-        }
-
+        TransitionToState(StHit);
     }
 
     public void Reset()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Root.Reset();
+        transform.position = startPos;
+        TransitionToState(StNormal);
     }
 
     void UpdateSprite()
@@ -1050,11 +1032,11 @@ public partial class WadeMachine : Actor
 
     public override void OnTriggerHit(Trigger trigger)
     {
-        // print("triggerhit");
+
 
         if(trigger.gameObject.layer == 10)
         {
-            transform.position = spawnPoint;
+            TakeDamage();
         }
     }
 

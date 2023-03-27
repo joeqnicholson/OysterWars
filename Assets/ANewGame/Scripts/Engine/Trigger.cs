@@ -11,8 +11,13 @@ public class Trigger : AABB
     }
 
     // Update is called once per frame
-    void Update()
+    void OnDrawGizmos()
     {
-        
+
+        Debug.DrawLine(TopRight(), TopLeft(), Color.blue);
+        Debug.DrawLine(TopRight(), BottomRight(), Color.blue);
+        Debug.DrawLine(TopLeft(), BottomLeft(), Color.blue);
+        Debug.DrawLine(BottomLeft(), BottomRight(), Color.blue);
+
     }
 }

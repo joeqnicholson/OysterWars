@@ -64,6 +64,10 @@ public class HookshotRoot : MonoBehaviour
 
         points.Clear();
 
+        Vector3[] positions = new Vector3[0];
+        rope.positionCount = 0;
+        rope.SetPositions(positions);
+
         lookAtLast = false;
         currentDistance = 0;
         currentPoint = null;

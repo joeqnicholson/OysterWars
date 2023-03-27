@@ -1,10 +1,9 @@
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraBox : MonoBehaviour
+public class CameraBox : AABB
 {
     private bool isWadesBox;
     private float xSize;
@@ -16,12 +15,12 @@ public class CameraBox : MonoBehaviour
     public bool spawnEnemies = true;
     public LayerMask LayerMask;
 
-    
-
+    public List<Solid> localSolids = new List<Solid>(0);
 
     private void Start()
     {
-
+        base.Start();
+        GetLocalColliders();
         isWadesBox = false;
         GetComponent<MeshRenderer>().enabled = false;
         xSize = transform.localScale.x / 2;
@@ -35,12 +34,6 @@ public class CameraBox : MonoBehaviour
             isWadesBox = true;
         }
 
-
-
-
-
-
-
         if (!isWadesBox)
         {
             WadeLeaves();
@@ -50,6 +43,17 @@ public class CameraBox : MonoBehaviour
             WadeEnters();
         }
 
+    }
+
+    public void GetLocalColliders()
+    {
+        foreach(Solid solid in colliders.solids)
+        {
+            if(CollidesWith(solid, transform.position))
+            {
+                localSolids.Add(solid);
+            }
+        }
     }
 
     private void Update()
@@ -73,15 +77,13 @@ public class CameraBox : MonoBehaviour
 
     public void WadeEnters()
     {
-        
+        colliders.UpdateSolids(localSolids);
         isWadesBox = true;
-
     }
 
     public void WadeLeaves()
     {
         isWadesBox = false;
-
     }
 
     private void OnDrawGizmos()
