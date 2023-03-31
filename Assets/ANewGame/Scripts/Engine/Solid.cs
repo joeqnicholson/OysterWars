@@ -5,6 +5,7 @@ using UnityEngine;
 public class Solid : AABB
 {
     public bool active = false;
+    public bool  metal;
     
     public void Start()
     {

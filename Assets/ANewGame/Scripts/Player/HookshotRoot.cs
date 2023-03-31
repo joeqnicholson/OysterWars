@@ -163,7 +163,7 @@ public class HookshotRoot : MonoBehaviour
             AddPoint(CreatePoint(hit));
         }
 
-        Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
+        // Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
 
     }
 
@@ -180,7 +180,7 @@ public class HookshotRoot : MonoBehaviour
 
         if(hit != null)
         {
-            Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.blue);
+            // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.blue);
         }
         else
         {
@@ -189,12 +189,12 @@ public class HookshotRoot : MonoBehaviour
 
             if(points[1].transform.position.x < points[0].transform.position.x)
             {
-                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.cyan);
+                // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.cyan);
                 higherThanPoint = zTurn > points[0].createdAngle;
             }
             else
             {
-                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.yellow);
+                // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.yellow);
                 higherThanPoint = zTurn < points[0].createdAngle;
             }
 
@@ -227,7 +227,7 @@ public class HookshotRoot : MonoBehaviour
                     break;
                 }
 
-                Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
+                // Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
 
             }
         }
@@ -248,7 +248,7 @@ public class HookshotRoot : MonoBehaviour
 
                 if(hit != null)
                 {
-                    Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.blue);
+                    // Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.blue);
                 }
                 else
                 {
@@ -258,12 +258,12 @@ public class HookshotRoot : MonoBehaviour
 
                     if(points[i+2].transform.position.x < points[i + 1].transform.position.x)
                     {
-                        Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.cyan);
+                        // Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.cyan);
                         higherThanPoint = points[i].createdAngle > points[i + 1].createdAngle;
                     }
                     else
                     {
-                        Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.yellow);
+                        // Debug.DrawLine(iPos - difference, iPlus2Pos + difference, Color.yellow);
                         higherThanPoint = points[i].createdAngle < points[i + 1].createdAngle;
                     }
 

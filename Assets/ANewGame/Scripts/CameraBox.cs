@@ -14,6 +14,7 @@ public class CameraBox : AABB
     public bool onTrackY;
     public bool spawnEnemies = true;
     public LayerMask LayerMask;
+    public Transform startPos;
 
     public List<Solid> localSolids = new List<Solid>(0);
 

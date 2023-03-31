@@ -26,7 +26,7 @@ public class CameraMachine : MonoBehaviour
     [SerializeField] private bool ySpawnGoingUp;
     private float spawnTimeMin = 3f;
     private float spawnTimeMax = 8f;
-    private float ChangeTargetSpeed = .25f;
+    private float ChangeTargetSpeed = .125f;
     private float timeVariable = 1;
     [SerializeField] LayerMask layerMask;
     public Transform thingsR;

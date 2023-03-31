@@ -37,10 +37,7 @@ public partial class WadeMachine : Actor
     void OnStateEnter(WadeState toState, WadeState fromState)
     {
         stateTimer = 0;
-        if(toState == StNormal)
-        {
-            print(Speed);
-        }
+
 
         if(toState == StHit)
         {

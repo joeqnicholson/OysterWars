@@ -7,63 +7,76 @@ public static class Ray
     public static Hit CastTo(Vector3 startPos, Vector3 endPos, Colliders colliders, bool triggers = false)
     {
 
-        Vector3 direction = endPos - startPos;
-        bool oneTimeOnly = direction.magnitude < 2;
-        direction = Vector3.ClampMagnitude(direction, 1f);
-        Vector3 checkPos = startPos;
+        Vector3 vRayStart = startPos;
+		Vector3 vRayDir = (endPos - startPos).normalized;
 
-        if(Vector3.Distance(checkPos,endPos) > 2)
-        {
-            while(Vector3.Distance(checkPos,endPos) > 2)
+        Vector3 vRayUnitStepSize = new Vector3(Mathf.Sqrt(1 + (vRayDir.y / vRayDir.x) * (vRayDir.y / vRayDir.x)), Mathf.Sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y)), 0);
+		Vector3 vMapCheck = vRayStart;
+		Vector3 vRayLength1D;
+		Vector3 vStep;
+
+		// Establish Starting Conditions
+		if (vRayDir.x < 0)
+		{
+			vStep.x = -1;
+			vRayLength1D.x = (vRayStart.x - vMapCheck.x) * vRayUnitStepSize.x;
+		}
+		else
+		{
+			vStep.x = 1;
+			vRayLength1D.x = ((vMapCheck.x + 1) - vRayStart.x) * vRayUnitStepSize.x;
+		}
+
+		if (vRayDir.y < 0)
+		{
+			vStep.y = -1;
+			vRayLength1D.y = (vRayStart.y - vMapCheck.y) * vRayUnitStepSize.y;
+		}
+		else
+		{
+			vStep.y = 1;
+			vRayLength1D.y = (vMapCheck.y + 1 - vRayStart.y) * vRayUnitStepSize.y;
+		}
+
+        bool bTileFound = false;
+		float fMaxDistance = Vector3.Distance(startPos, endPos);
+		float fDistance = 0.0f;
+
+		while (!bTileFound && fDistance < fMaxDistance)
+		{
+			// Walk along shortest path
+			if (vRayLength1D.x < vRayLength1D.y)
+			{
+				vMapCheck.x += vStep.x;
+				fDistance = vRayLength1D.x;
+				vRayLength1D.x += vRayUnitStepSize.x;
+			}
+			else
+			{
+				vMapCheck.y += vStep.y;
+				fDistance = vRayLength1D.y;
+				vRayLength1D.y += vRayUnitStepSize.y;
+			}
+
+			// Test tile at new test point
+			foreach(Solid solid in colliders.solids)
             {
-
-                foreach(Solid solidBox in colliders.solids)
+                if(solid.Contains(vMapCheck))
                 {
+                    Hit hit = new Hit();
+                    hit.normal = vRayDir;
+                    hit.point = vMapCheck;
+                    hit.aabb = solid;
+                    return hit;
 
-                    if(solidBox.Contains(checkPos))
-                    {
 
-                        Hit hit = new Hit()
-                        {
-                            point = checkPos,
-                            normal = -direction,
-                            aabb = solidBox
-                        };
-
-                        return hit;          
-                    } 
                 }
-
-                if(triggers)
-                {
-                    foreach(Trigger triggerBox in colliders.triggers)
-                    {
-
-                        if(triggerBox.Contains(checkPos))
-                        {
-
-                            Hit hit = new Hit()
-                            {
-                                point = checkPos,
-                                normal = -direction,
-                                aabb = triggerBox
-                            };
-
-                            return hit;          
-                        }
-
-                        
-                    }
-                }
-
-                checkPos += direction;
-
             }
-        }
 
-
+		}
 
         return null;
+    
     }
 }
 

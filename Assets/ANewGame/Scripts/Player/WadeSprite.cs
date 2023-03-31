@@ -26,6 +26,9 @@ public class WadeSprite : SpriteAnimationController
     public SpriteAnimation SwingMedium;
     public SpriteAnimation SwingFast;
 
+    public SpriteAnimation WallClimb;
+    public SpriteAnimation WallSlide;
+
     private void Start()
     {
         currentSprite = Idle;

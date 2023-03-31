@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SiblingTest
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: d2721dc9ba3cd4b27b9127e962adb81f, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 3955739595241239032, guid: ed670efcde9d3489b82bcdc2cc3a24d1, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
-  sibings: []
+  siblings: []

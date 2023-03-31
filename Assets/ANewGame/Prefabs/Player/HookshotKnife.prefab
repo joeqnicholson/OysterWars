@@ -108,5 +108,6 @@ MonoBehaviour:
   inTrigger: 0
   currentTrigger: {fileID: 0}
   explosionPrefab: {fileID: 7451746226589151205, guid: 2cfdb57a328484ba3814e95adc867c52, type: 3}
+  sparkPrefab: {fileID: 7451746226589151205, guid: 47bdb9e00f7694129b061d5c4c90c70f, type: 3}
   enemyBullet: 0
   damage: 0

@@ -55,6 +55,9 @@ public class AABB : MonoBehaviour
     public bool Contains(Vector3 position)
     {
         bool xTouching = (position.x > xMin() && position.x < xMax());
+
+        if(!xTouching) return false;
+        
         bool yTouching = (position.y > yMin() && position.y < yMax());
 
         return xTouching && yTouching;
@@ -65,13 +68,20 @@ public class AABB : MonoBehaviour
         return (yPos > yMin() && yPos < yMax());
     }
 
-    public bool CollidesWith(AABB box, Vector3 position)
+    public bool CollidesWithPoop(AABB box, Vector3 position)
     {
         bool xTouchingThem = (xMaxAt(position) >= box.xMin() && xMaxAt(position) <= box.xMax()) || (xMinAt(position) >= box.xMin() && xMinAt(position) <= box.xMax());
         bool yTouchingThem = (yMaxAt(position) >= box.yMin() && yMaxAt(position) <= box.yMax()) || (yMinAt(position) >= box.yMin() && yMinAt(position) <= box.yMax());
         bool xTouchingMe = (box.xMax() >= xMinAt(position) && box.xMax() <= xMaxAt(position) || box.xMin() >= xMinAt(position) && box.xMin() <= xMaxAt(position));
         bool yTouchingMe = (box.yMax() >= yMinAt(position) && box.yMax() <= yMaxAt(position) || box.yMin() >= yMinAt(position) && box.yMin() <= yMaxAt(position));
         return (xTouchingThem && yTouchingThem) || (xTouchingMe && yTouchingMe);
+    }
+
+    public bool CollidesWith(AABB box, Vector3 position)
+    {
+        bool xTouching = (xMinAt(position) < box.xMax()) &&  (xMaxAt(position) > box.xMin());
+        bool yTouching = (yMinAt(position) < box.yMax()) &&  (yMaxAt(position) > box.yMin());
+        return(xTouching && yTouching);
     }
 
     public Vector3[] Corners()

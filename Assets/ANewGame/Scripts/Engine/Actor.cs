@@ -123,6 +123,7 @@ public class Actor : AABB
         }
     }
 
+
     public void CheckTrigger(Vector3 pos)
     {
 

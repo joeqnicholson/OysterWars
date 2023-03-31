@@ -8,24 +8,30 @@ public partial class WadeMachine : Actor
 {
     public WadeInventory Inventory;
     public WadeSound Sound;
-    private float walkSpeed = 120f;
-    private float HalfGravThreshold = 40;
-    private float walkAccel = 1250f;
-    private float walkReduce = 500;
-    private float jumpSpeed = 120f;
-    private bool hasShortHopped;
-    private float wallJumpHSpeed = 75;
-    private float conveyerJumpHSpeed = 250;
-    private float maxFall = -200f;
-    private float gravity = 900f;
-    private float swingSpeed = 500;
-    private float swingAcceleration = 125;
+    private const float WalkSpeed = 120f;
+    private const float HalfGravThreshold = 40;
+    private const float WalkAccel = 1250f;
+    private const float walkReduce = 500;
+    private const float JumpSpeed = 125f;
+    private const float VarJumpTime = .22f;
+    private const float VarWallJumpTime = .22f;
+    private const float WallJumpHSpeed = 75;
+    private const float conveyerJumpHSpeed = 250;
+    private const float MaxFall = -200f;
+    private const float Gravity = 900f;
+    private const float SwingSpeed = 385;
+    private const float SwingAccel = 125;
+
+    private const float WallSlideSpeed = -20;
+    private const float WallSlideAccel = 100;
+    private const float WallSlideTime = 1.2f;
     private float swingTimer;
     private float moveX;
+    private float wallSlideTimer;
+    private int wallSlideDir;
     private float moveY;
     private float aimX;
     public Vector2 Speed;
-    private float varJumpTime = .22f;
     private float varJumpTimer = 0;
     private float spriteLerp;
     private WadeSprite sprite;
@@ -76,7 +82,7 @@ public partial class WadeMachine : Actor
     float hookSpeed = 4;
     private float stateTimer;
     private float shotCoolDown = 1f;
-    private float swingSpeedYJumpThreshold = -150;
+    private float SwingSpeedYJumpThreshold = -150;
     private Trigger currentLauncher;
     private const float LaunchAccel = 35; 
     private const float LaunchSpeed = 425; 
@@ -88,7 +94,7 @@ public partial class WadeMachine : Actor
     private bool onSpinWheel;
     private float spinWheelDirection = 1;
     private float varJumpSpeed;
-    private float swingSpeedTurnThreshold = 40;
+    private float SwingSpeedTurnThreshold = 40;
     private bool swingTurning;
     private bool swingFalling;
 
@@ -102,7 +108,6 @@ public partial class WadeMachine : Actor
     public void Start()
     {
         base.Start();
-        Application.targetFrameRate = 60;
         startPos = transform.position;
         spawnPoint = startPos;
         Inventory = GetComponent<WadeInventory>();
@@ -214,6 +219,12 @@ public partial class WadeMachine : Actor
             ChestUpdate();
         }
 
+        if (wallSlideDir != 0)
+        {
+            wallSlideTimer = Mathf.Max(wallSlideTimer - Time.deltaTime, 0);
+            wallSlideDir = 0;
+        }
+
 
 
 
@@ -279,8 +290,16 @@ public partial class WadeMachine : Actor
         if (!onGround)
         {
 
-            if (hitUp) { varJumpTimer = 0; }
+            float max = MaxFall;
 
+            if( (hitLeft || hitRight) && Speed.y <= 0 && moveX == sprite.direction)
+            {
+                wallSlideDir = hitLeft ? -1 : 1;
+                max = Mathf.Lerp(max, WallSlideSpeed, wallSlideTimer / WallSlideTime);
+            }  
+
+            if (hitUp) { varJumpTimer = 0; }
+ 
             conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
 
             if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
@@ -292,21 +311,19 @@ public partial class WadeMachine : Actor
 
             float mult = (Math.Abs(Speed.y) < HalfGravThreshold && (inputs.jumpHeld)) ? .5f : 1f;
 
-            Speed.y = MathHelper.Approach(Speed.y, maxFall, gravity * mult * Time.deltaTime);
+            Speed.y = MathHelper.Approach(Speed.y, max, Gravity * mult * Time.deltaTime);
 
             if (varJumpTimer > 0)
             {
                 if(inputs.jumpHeld)
                 {
-                    Speed.y = jumpSpeed + swingYRemainder;
+                    Speed.y = varJumpSpeed;
                 }
                 else
                 {
                     varJumpTimer = 0;
                 }
-                
             }
-
         }
 
         float lastSpeed = Speed.x;
@@ -331,15 +348,15 @@ public partial class WadeMachine : Actor
 
         float airMult = onGround ? 1 : .65f;
 
-        if (Mathf.Abs(Speed.x) > walkSpeed && Mathf.Sign(Speed.x) == moveX)
+        if (Mathf.Abs(Speed.x) > WalkSpeed && Mathf.Sign(Speed.x) == moveX)
         {
             //from walk speed
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed , walkReduce * airMult * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed , walkReduce * airMult * Time.deltaTime);
         }
         else
         {
             //to walk speed
-            Speed.x = MathHelper.Approach(Speed.x, moveX * walkSpeed * ropeMult, walkAccel * airMult * Time.deltaTime);
+            Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed * ropeMult, WalkAccel * airMult * Time.deltaTime);
         }
 
         if(stillTimer > 0)
@@ -368,21 +385,19 @@ public partial class WadeMachine : Actor
         particle.GetComponent<SpriteAnimationController>().Play(JumpParticle);
         Sound.PlayJumpUp();
         Sound.PlayFootStep();
-        hasShortHopped = false;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
         jumpGraceTimer = Mathf.Infinity;
-        varJumpTimer = varJumpTime;
-        varJumpSpeed = Speed.y;
+        varJumpTimer = VarJumpTime;
         
         if (Mathf.Sign(moveX) == Mathf.Sign(conveyerAddition) && conveyerAddition != 0 && moveX != 0)
         {
-            Speed.x = (walkSpeed + conveyerJumpHSpeed) * sprite.direction;
-            varJumpTimer = varJumpTime * .5f;
+            Speed.x = (WalkSpeed + conveyerJumpHSpeed) * sprite.direction;
+            varJumpTimer = VarJumpTime* .5f;
         }
 
-        if(Speed.y > jumpSpeed)
+        if(Speed.y > JumpSpeed)
         {
-            swingYRemainder = Speed.y - jumpSpeed;
+            swingYRemainder = Speed.y - JumpSpeed;
         }
         else
         {
@@ -390,7 +405,7 @@ public partial class WadeMachine : Actor
         }
 
         {
-            Speed.y = jumpSpeed ;
+            Speed.y = JumpSpeed + swingYRemainder;
         }
 
         varJumpSpeed = Speed.y;
@@ -419,17 +434,20 @@ public partial class WadeMachine : Actor
 
         particle.GetComponent<SpriteAnimationController>().Play(WallJumpParticle);
         particle.GetComponent<SpriteAnimationController>().direction = -directionInt;
-
+        print(Speed.y < JumpSpeed);
+        if(Speed.y < JumpSpeed){ swingYRemainder = 0; }
         float moveDirection = rightCollision ? -1 : 1;
         Sound.PlayJumpUp();
         Sound.PlayFootStep();
         jumpGraceTimer = Mathf.Infinity;
         sprite.scale = new Vector3(0.6f, 1.4f, 1);
-        varJumpTimer = varJumpTime /1.5f;
+        varJumpTimer = VarJumpTime/1.5f;
         forceMoveXDirection = moveDirection;
         forceMoveXTimer = WallJumpForceTime;
-        Speed.x = (walkSpeed + wallJumpHSpeed) * forceMoveXDirection;
-        Speed.y = jumpSpeed;
+        Speed.x = (WalkSpeed + WallJumpHSpeed) * forceMoveXDirection;
+        Speed.y = JumpSpeed + swingYRemainder;
+        varJumpSpeed = JumpSpeed + swingYRemainder;
+        
     }
 
     void HitUpdate()
@@ -500,7 +518,7 @@ public partial class WadeMachine : Actor
 
         if(!onGround)
         {
-            currentSwingSpeed = swingSpeed/1.25f * -difference.normalized.x;
+            currentSwingSpeed = SwingSpeed/1.25f * -difference.normalized.x;
             spinWheelDirection = Mathf.Sign(currentSwingSpeed);
             TransitionToState(StSwing);
         }
@@ -528,7 +546,7 @@ public partial class WadeMachine : Actor
 
         if(swingFalling)
         {
-            Speed.y = MathHelper.Approach(Speed.y, - swingSpeed, gravity * Time.deltaTime);
+            Speed.y = MathHelper.Approach(Speed.y, - SwingSpeed, Gravity * Time.deltaTime);
             currentSwingSpeed = Speed.y * -verticalty;
 
             if(lookAtVector.y > myPosition.y)
@@ -542,19 +560,19 @@ public partial class WadeMachine : Actor
 
             if(onSpinWheel)
             {
-                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, spinWheelDirection * swingSpeed, swingAcceleration * 2 * Time.deltaTime);
+                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, spinWheelDirection * SwingSpeed, SwingAccel * 2 * Time.deltaTime);
             }
             else
             {
-                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * swingSpeed, swingAcceleration * Mathf.Abs(2 * verticalty) * mult * Time.deltaTime);
+                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * SwingSpeed + (moveX * 100), SwingAccel * Mathf.Abs(2 * verticalty + 2) * mult * Time.deltaTime);
             }
 
-            if(moveY < 0)
+            if(moveY != 0)
             {
-                Root.currentDistance -= moveY * 60 * Time.deltaTime;
+                Root.currentDistance -= moveY * 160 * Time.deltaTime;
             }
 
-            currentSwingSpeed = Mathf.Clamp(currentSwingSpeed, -swingSpeed, swingSpeed);
+            currentSwingSpeed = Mathf.Clamp(currentSwingSpeed, -SwingSpeed, SwingSpeed);
 
             Vector2 distanceHelper = Vector2.zero;
 
@@ -582,7 +600,10 @@ public partial class WadeMachine : Actor
 
             if(below && inFront)
             {
+
+                //FIX
                 bool bothCorners = currentSolid.ContainsY(Top().y) && currentSolid.ContainsY(Bottom().y);
+                //FIX
 
                 if(!bothCorners)
                 {
@@ -638,7 +659,7 @@ public partial class WadeMachine : Actor
             {
                 forceMoveXDirection = Mathf.Sign(Speed.x);
 
-                float forceXTime = Mathf.Lerp(0.2f, 0.4f, Mathf.Abs(Speed.x)/ swingSpeed);
+                float forceXTime = Mathf.Lerp(0.2f, 0.4f, Mathf.Abs(Speed.x)/ SwingSpeed);
 
                 forceMoveXTimer = forceXTime;
             }
@@ -717,7 +738,7 @@ public partial class WadeMachine : Actor
         if (sprite.imageIndex == sprite.SmallChest.totalFrames - 1)
         {
             OnGroundHit();
-            float squish = Mathf.Min(maxFall / maxFall, 1);
+            float squish = Mathf.Min(MaxFall / MaxFall, 1);
             sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
             sprite.scale.y = MathHelper.Approach(1, .6f, squish);
             TransitionToState(StNormal);
@@ -855,7 +876,7 @@ public partial class WadeMachine : Actor
     public void Reset()
     {
         Root.Reset();
-        transform.position = startPos;
+        transform.position = GameData.Instance.cameraMachine.currentCameraBox.startPos.position;
         TransitionToState(StNormal);
     }
 
@@ -865,7 +886,11 @@ public partial class WadeMachine : Actor
         {
             if (!onGround)
             {
-                if (moveY > 0)
+                if(wallSlideTimer != 0)
+                {
+                    sprite.Play(sprite.WallSlide);
+                }
+                else if (moveY > 0)
                 {
                     if (Mathf.Abs(aimX) > 0)
                     {
@@ -952,10 +977,11 @@ public partial class WadeMachine : Actor
 
                 }
             }
+        }
 
-
-
-
+        if(CurrentWadeState == StClimb)
+        {
+            sprite.Play(sprite.WallClimb);
         }
 
         if(CurrentWadeState == StSwing)
@@ -1032,11 +1058,26 @@ public partial class WadeMachine : Actor
 
     public override void OnTriggerHit(Trigger trigger)
     {
-
-
-        if(trigger.gameObject.layer == 10)
+        if(trigger is Spike)
         {
-            TakeDamage();
+            Spike spike = trigger as Spike;
+            print(spike.direction);
+            if(spike.direction.x == 0)
+            {
+                if(Mathf.Sign(Speed.y) == spike.direction.y)
+                {
+                    TakeDamage();
+                }
+            }
+            else
+            {
+                if(Mathf.Sign(Speed.x) == spike.direction.x)
+                {
+                    TakeDamage();
+                }
+            }
+            
+            
         }
     }
 
@@ -1046,12 +1087,12 @@ public partial class WadeMachine : Actor
         Sound.PlayJumpLand();
         airTimer = 0;
         forceMoveXTimer = 0;
-        float squish = Mathf.Min(Speed.y / maxFall, 1);
+        float squish = Mathf.Min(Speed.y / MaxFall, 1);
         sprite.scale.x = MathHelper.Approach(1, 1.4f, squish);
         sprite.scale.y = MathHelper.Approach(1, .6f, squish);
         Speed.y = 0;
         TransitionToState(StNormal);
-       
+        wallSlideTimer = WallSlideTime;
         
         // if (!LeftBottomHit(20)) { yPoint = RightBottomHit(20).point.y; }
         // else if (!RightBottomHit(20)) { yPoint = LeftBottomHit(20).point.y; }

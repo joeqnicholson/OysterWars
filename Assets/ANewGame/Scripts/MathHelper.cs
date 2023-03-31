@@ -52,6 +52,21 @@ public class MathHelper : MonoBehaviour
         }
     }
 
+    public static int RoundToSmallest(int value, int roundTo) 
+    {   
+        if(value < 0)
+        {
+            return (value - ((value % roundTo) + roundTo));
+        }
+        else
+        {
+            return (value - (value % roundTo));
+        }
+        
+        
+    }
+    
+
 
     
 }

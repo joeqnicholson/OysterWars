@@ -9,6 +9,7 @@ public class HookshotKnife : Actor
     private float grav = 0;
     private const float Gravity = 500;
     public GameObject explosionPrefab;
+    public GameObject sparkPrefab;
     public bool enemyBullet;
     [SerializeField] private float damage;
     private float speed = 701;
@@ -78,27 +79,37 @@ public class HookshotKnife : Actor
 
     public override void OnCollisionHit(Solid solid)
     {
-        print("good");
-        Vector3 speedConversion = Speed.normalized * 6;
-
-        Hit hitInfo = new Hit();
-        hitInfo.point = transform.position + speedConversion.normalized * 4;
-        hitInfo.normal = -speedConversion.normalized;
-        hitInfo.aabb = solid;
-
-        SecretFade secretFade = hitInfo.aabb.gameObject.GetComponent<SecretFade>();
-
-        if (secretFade)
+        if(solid.metal)
         {
-            secretFade.StartFade();
+            Instantiate(sparkPrefab, transform.position, Quaternion.identity);
+
+        }   
+        else
+        {
+            print("good");
+            Vector3 speedConversion = Speed.normalized * 6;
+
+            Hit hitInfo = new Hit();
+            hitInfo.point = transform.position + speedConversion.normalized * 4;
+            hitInfo.normal = -speedConversion.normalized;
+            hitInfo.aabb = solid;
+
+            SecretFade secretFade = hitInfo.aabb.gameObject.GetComponent<SecretFade>();
+
+            if (secretFade)
+            {
+                secretFade.StartFade();
+            }
+
+            Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
+
+
+            FindObjectOfType<WadeMachine>().HookshotStart(hitInfo);
+                    
+           
         }
-
-        Instantiate(explosionPrefab, hitInfo.point, Quaternion.identity);
-
-
-        FindObjectOfType<WadeMachine>().HookshotStart(hitInfo);
-                
-        Destroy(gameObject);
+        
+         Destroy(gameObject);
 
     }
 
