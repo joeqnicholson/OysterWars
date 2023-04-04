@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1c1d4ede4904757988e29b20b047aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 3, y: 12, z: 0}
+  size: {x: 3, y: 10, z: 0}
   colliders: {fileID: 0}
   currentSolid: {fileID: 0}
   direction: {x: 1, y: 0}

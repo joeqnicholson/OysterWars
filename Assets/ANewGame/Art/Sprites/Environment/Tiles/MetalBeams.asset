@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20480f3376df1478fa307608f6c20866, type: 3}
-  m_Name: MetalBeamsNeighbour
+  m_Name: MetalBeams
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 454215054, guid: b3c4f05ee48744d438baf391f05229df, type: 3}
   m_DefaultGameObject: {fileID: 3955739595241239032, guid: 882a3914572054b2c83a8815b54010f6, type: 3}

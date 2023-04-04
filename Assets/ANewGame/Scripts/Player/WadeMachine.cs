@@ -22,6 +22,7 @@ public partial class WadeMachine : Actor
     private const float SwingSpeed = 385;
     private const float SwingAccel = 125;
 
+    private const float SwingTurnAroundTime = 0.1f;
     private const float WallSlideSpeed = -20;
     private const float WallSlideAccel = 100;
     private const float WallSlideTime = 1.2f;
@@ -29,6 +30,7 @@ public partial class WadeMachine : Actor
     private float moveX;
     private float wallSlideTimer;
     private int wallSlideDir;
+    private float turnAroundTimer;
     private float moveY;
     private float aimX;
     public Vector2 Speed;
@@ -71,6 +73,7 @@ public partial class WadeMachine : Actor
     private Vector3 startPos;
     private HookshotRoot Root;
     public GameObject hookshotKnife;
+    private HookshotKnife currentHookshotKnife;
     public GameObject PointObject;
     private float stillTimer;
     private Vector3 yOffset;
@@ -83,12 +86,13 @@ public partial class WadeMachine : Actor
     private float stateTimer;
     private float shotCoolDown = 1f;
     private float SwingSpeedYJumpThreshold = -150;
-    private Trigger currentLauncher;
-    private const float LaunchAccel = 35; 
+    private Vector3 ropeRenderPos;
+    private const float LaunchAccel = 1100; 
     private const float LaunchSpeed = 425; 
     private const float EndLaunchSpeed = 190;
     private const float EndLaunchUpMult = .75f;
-    private const float LaunchDistanceThreshold = 25; 
+    private float launchDistance; 
+    private Vector3 launchStartPos; 
     private Vector2 launchDir;
     private bool launching;
     private bool onSpinWheel;
@@ -158,9 +162,10 @@ public partial class WadeMachine : Actor
         if (varJumpTimer >= 0) { varJumpTimer -= Time.deltaTime; }
         if (stillTimer >= 0) { stillTimer -= Time.deltaTime; }
         if (swingTimer >= 0) { swingTimer -= Time.deltaTime; }
+        if (turnAroundTimer >= 0) { turnAroundTimer -= Time.deltaTime; }
         stateTimer += Time.deltaTime;
 
-        UpdateSprite();
+       
 
         float lastDirection = directionInt;
 
@@ -219,11 +224,14 @@ public partial class WadeMachine : Actor
             ChestUpdate();
         }
 
+        UpdateSprite();
+
         if (wallSlideDir != 0)
         {
             wallSlideTimer = Mathf.Max(wallSlideTimer - Time.deltaTime, 0);
             wallSlideDir = 0;
         }
+      
 
 
 
@@ -244,133 +252,139 @@ public partial class WadeMachine : Actor
 
         ShootStuff();
 
-        if (onGround)
+        if(stillTimer < 0)
         {
-
-            if (jumpGraceTimer > jumpGraceTime)
+            if (onGround)
             {
-                conveyerAddition = TakeConveyerSpeed();
-            }
 
-            if (!crouching)
-            {
-                if (moveY == -1 && moveX == 0)
+                if (jumpGraceTimer > jumpGraceTime)
                 {
-                    sprite.scale = new Vector3(1.3f, .7f, 1);
+                    conveyerAddition = TakeConveyerSpeed();
+                }
+
+                if (!crouching)
+                {
+                    if (moveY == -1 && moveX == 0)
+                    {
+                        sprite.scale = new Vector3(1.3f, .7f, 1);
+                    }
+                }
+
+                if (moveY == -1 && moveX == 0) { crouching = true; }
+
+                if(Mathf.Abs(moveX) > 0)
+                {
+                    if (sprite.frameTriggerNow)
+                    {
+                        if(sprite.imageIndex == 1 || sprite.imageIndex == 4)
+                        {
+                            Sound.PlayFootStep();
+                        }
+                    }
+                }
+
+                if (crouching && (moveX != 0 || moveY != -1))
+                {
+                    sprite.scale = new Vector3(.7f, 1.3f, 1);
+                    crouching = false;
                 }
             }
 
-            if (moveY == -1 && moveX == 0) { crouching = true; }
-
-            if(Mathf.Abs(moveX) > 0)
+            if ((onGround && jumpGraceTimer < jumpGraceTime || !onGround && airTimer < jumpGraceTime && jumpGraceTimer < jumpGraceTime) && !canInteract)
             {
-                if (sprite.frameTriggerNow)
+
+                Jump();
+                
+            }
+
+            if (!onGround)
+            {
+
+                float max = MaxFall;
+
+                if( (hitLeft || hitRight) && Speed.y <= 0 && moveX == sprite.direction)
                 {
-                    if(sprite.imageIndex == 1 || sprite.imageIndex == 4)
+                    wallSlideDir = hitLeft ? -1 : 1;
+                    max = Mathf.Lerp(max, WallSlideSpeed, wallSlideTimer / WallSlideTime);
+                }  
+
+                if (hitUp) { varJumpTimer = 0; }
+    
+                conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
+
+                if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
+                {
+                    WallJump(hitRight);
+                }
+
+                airTimer += Time.deltaTime;
+
+                float mult = (Math.Abs(Speed.y) < HalfGravThreshold && (inputs.jumpHeld)) ? .5f : 1f;
+
+                Speed.y = MathHelper.Approach(Speed.y, max, Gravity * mult * Time.deltaTime);
+
+                if (varJumpTimer > 0)
+                {
+                    if(inputs.jumpHeld)
                     {
-                        Sound.PlayFootStep();
+                        Speed.y = varJumpSpeed;
+                    }
+                    else
+                    {
+                        varJumpTimer = 0;
                     }
                 }
             }
 
-            if (crouching && (moveX != 0 || moveY != -1))
+            float lastSpeed = Speed.x;
+
+            float ropeMult;
+
+            if(!Root.active)
             {
-                sprite.scale = new Vector3(.7f, 1.3f, 1);
-                crouching = false;
-            }
-        }
-
-        if ((onGround && jumpGraceTimer < jumpGraceTime || !onGround && airTimer < jumpGraceTime && jumpGraceTimer < jumpGraceTime) && !canInteract)
-        {
-
-            Jump();
-            
-        }
-
-        if (!onGround)
-        {
-
-            float max = MaxFall;
-
-            if( (hitLeft || hitRight) && Speed.y <= 0 && moveX == sprite.direction)
-            {
-                wallSlideDir = hitLeft ? -1 : 1;
-                max = Mathf.Lerp(max, WallSlideSpeed, wallSlideTimer / WallSlideTime);
-            }  
-
-            if (hitUp) { varJumpTimer = 0; }
- 
-            conveyerAddition = MathHelper.Approach(conveyerAddition, 0, 55 * Time.deltaTime);
-
-            if ((hitLeft || hitRight) && jumpGraceTimer < jumpGraceTime)
-            {
-                WallJump(hitRight);
-            }
-
-            airTimer += Time.deltaTime;
-
-            float mult = (Math.Abs(Speed.y) < HalfGravThreshold && (inputs.jumpHeld)) ? .5f : 1f;
-
-            Speed.y = MathHelper.Approach(Speed.y, max, Gravity * mult * Time.deltaTime);
-
-            if (varJumpTimer > 0)
-            {
-                if(inputs.jumpHeld)
-                {
-                    Speed.y = varJumpSpeed;
-                }
-                else
-                {
-                    varJumpTimer = 0;
-                }
-            }
-        }
-
-        float lastSpeed = Speed.x;
-
-        float ropeMult;
-
-        if(!Root.active)
-        {
-            ropeMult = 1;
-        }
-        else
-        {
-            if(Mathf.Sign(moveX) == Mathf.Sign(transform.position.x - Root.currentPoint.transform.position.x))
-            {
-                ropeMult = .4f;
+                ropeMult = 1;
             }
             else
             {
-                ropeMult = 1f;
+                if(Mathf.Sign(moveX) == Mathf.Sign(transform.position.x - Root.currentPoint.transform.position.x))
+                {
+                    ropeMult = .4f;
+                }
+                else
+                {
+                    ropeMult = 1f;
+                }
             }
-        }
 
-        float airMult = onGround ? 1 : .65f;
+            float airMult = onGround ? 1 : .65f;
 
-        if (Mathf.Abs(Speed.x) > WalkSpeed && Mathf.Sign(Speed.x) == moveX)
-        {
-            //from walk speed
-            Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed , walkReduce * airMult * Time.deltaTime);
+            if (Mathf.Abs(Speed.x) > WalkSpeed && Mathf.Sign(Speed.x) == moveX)
+            {
+                //from walk speed
+                Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed , walkReduce * airMult * Time.deltaTime);
+            }
+            else
+            {
+                //to walk speed
+                Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed * ropeMult, WalkAccel * airMult * Time.deltaTime);
+            }
+
+            if(Mathf.Abs(lastSpeed) < 5f && Mathf.Abs(moveX) > 0.2f && onGround && CurrentWadeState == StNormal)
+            {
+                GameObject particle = Instantiate(particleSpawn, transform.position + yOffset, Quaternion.identity);
+                particle.GetComponent<SpriteAnimationController>().direction = directionInt;
+                particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
+            }
+
         }
         else
         {
-            //to walk speed
-            Speed.x = MathHelper.Approach(Speed.x, moveX * WalkSpeed * ropeMult, WalkAccel * airMult * Time.deltaTime);
+            Speed = Vector2.Lerp(Speed,Vector2.zero, 15 * Time.deltaTime);
         }
 
-        if(stillTimer > 0)
-        {
-            print("still");
-            Speed = Vector2.zero;
-        }
 
-        if(Mathf.Abs(lastSpeed) < 5f && Mathf.Abs(moveX) > 0.2f && onGround && CurrentWadeState == StNormal)
-        {
-            GameObject particle = Instantiate(particleSpawn, transform.position + yOffset, Quaternion.identity);
-            particle.GetComponent<SpriteAnimationController>().direction = directionInt;
-            particle.GetComponent<SpriteAnimationController>().Play(StartRunParticle);
-        }
+
+        
     }
 
 
@@ -434,7 +448,7 @@ public partial class WadeMachine : Actor
 
         particle.GetComponent<SpriteAnimationController>().Play(WallJumpParticle);
         particle.GetComponent<SpriteAnimationController>().direction = -directionInt;
-        print(Speed.y < JumpSpeed);
+
         if(Speed.y < JumpSpeed){ swingYRemainder = 0; }
         float moveDirection = rightCollision ? -1 : 1;
         Sound.PlayJumpUp();
@@ -464,13 +478,25 @@ public partial class WadeMachine : Actor
 
     void ClimbUpdate()
     {
+        List<Point> points = Root.points;
+        bool below = transform.position.y < points[0].transform.position.y;
 
-        // bool below = transform.position.y < points[0].transform.position.y;
+        if(below)
+        {
 
-        // if(below)
-        // {
-
-        // }
+            Speed.y = MathHelper.Approach(Speed.y, climbSpeed * moveY, climbAcceleration * Time.deltaTime);
+        }
+        else
+        {
+            if(moveY < 0)
+            {
+                Speed.y = MathHelper.Approach(Speed.y, climbSpeed * moveY, climbAcceleration * Time.deltaTime);
+            }
+            else
+            {
+                Speed.y = MathHelper.Approach(Speed.y, 0, climbAcceleration * Time.deltaTime);
+            }
+        }
 
         if(!hitRight && !hitLeft)
         {
@@ -478,7 +504,7 @@ public partial class WadeMachine : Actor
         }
 
 
-        Speed.y = MathHelper.Approach(Speed.y, climbSpeed * moveY, climbAcceleration * Time.deltaTime);
+
         Speed.x = 0;
 
         if(inputs.jumpPress)
@@ -564,12 +590,12 @@ public partial class WadeMachine : Actor
             }
             else
             {
-                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * SwingSpeed + (moveX * 100), SwingAccel * Mathf.Abs(2 * verticalty + 2) * mult * Time.deltaTime);
+                currentSwingSpeed = Mathf.MoveTowards(currentSwingSpeed, verticalty * SwingSpeed + (moveX * 100), SwingAccel * Mathf.Abs(2 * verticalty) * mult * Time.deltaTime);
             }
 
-            if(moveY != 0)
+            if(moveY <= 0)
             {
-                Root.currentDistance -= moveY * 160 * Time.deltaTime;
+                Root.currentDistance -= moveY * 100 * (1-verticalty) * Time.deltaTime;
             }
 
             currentSwingSpeed = Mathf.Clamp(currentSwingSpeed, -SwingSpeed, SwingSpeed);
@@ -587,7 +613,9 @@ public partial class WadeMachine : Actor
 
         }
 
-        if((hitLeft || hitRight))
+        float signMove = Mathf.Sign(currentSwingSpeed);
+
+        if((hitLeft && signMove == -1) || (hitRight && signMove == 1))
         {
 
             float differenceX = points[0].transform.position.x - transform.position.x;
@@ -595,61 +623,27 @@ public partial class WadeMachine : Actor
             bool below = transform.position.y < points[0].transform.position.y;
 
 
-
             bool inFront = hitLeft ? differenceX <= 0 : differenceX >= 0;
 
             if(below && inFront)
             {
-
-                //FIX
-                bool bothCorners = currentSolid.ContainsY(Top().y) && currentSolid.ContainsY(Bottom().y);
-                //FIX
-
-                if(!bothCorners)
+                TransitionToState(StClimb);
+            }
+            else
+            {
+                if(turnAroundTimer < 0)
                 {
-                    bool atTop = currentSolid.ContainsY(Bottom().y);
-
-                    float distance;
-
-                    if(atTop)
-                    {
-                        distance = Mathf.Abs(currentSolid.Top().y - Bottom().y);
-
-                        if(distance > 10)
-                        {
-                            
-                            TransitionToState(StClimb);
-                        }
-                        else
-                        {
-                            transform.position += Vector3.up * distance;
-                        }
-                    }
-                    else
-                    {
-                        bool atBottom = currentSolid.ContainsY(Top().y);
-
-                        if(atBottom)
-                        {
-                            distance = Mathf.Abs(currentSolid.Bottom().y - Bottom().y);
-                            transform.position += Vector3.up * distance;
-                            TransitionToState(StClimb);
-                        }
-                    }
-
-
+                    currentSwingSpeed *= -1;
+                    turnAroundTimer = SwingTurnAroundTime;
                 }
-                else
-                {
-                    TransitionToState(StClimb);
-                }
+                
             }
         }
 
-        if(hitUp)
-        {
-            currentSwingSpeed = 0;
-        }
+        // if(hitUp)
+        // {
+        //     currentSwingSpeed *= -1;
+        // }
 
         if(jumpGraceTimer < jumpGraceTime)
         {
@@ -672,7 +666,7 @@ public partial class WadeMachine : Actor
             }
             else
             {
-                print(Speed.x);
+
                 Root.Reset();
                 TransitionToState(StNormal);
             }
@@ -688,9 +682,12 @@ public partial class WadeMachine : Actor
         stillTimer = 0;
         launching = false;
         launchDir = direction;
-        currentLauncher = trigger;
+        ropeRenderPos = trigger.Center();
+        launchDistance = Vector2.Distance(transform.position, trigger.Center());
+        launchStartPos = transform.position;
         TransitionToState(StLaunch);
-        print("launchstart");
+        Speed = Vector2.zero;
+
     }
 
 
@@ -700,13 +697,14 @@ public partial class WadeMachine : Actor
 
         if(!launching)
         {
-            Speed = Vector2.Lerp(Speed, launchDir * LaunchSpeed, LaunchAccel * Time.deltaTime);
+            Speed = Vector2.MoveTowards(Speed, launchDir * LaunchSpeed, LaunchAccel * Time.deltaTime);
             
-            if(Vector2.Distance(currentLauncher.Center(), transform.position) < LaunchDistanceThreshold)
+            if(Vector2.Distance(launchStartPos, transform.position) > launchDistance)
             {
                 launching = true;
                 stateTimer = 0;
             }
+            
         }
         else
         {
@@ -726,8 +724,14 @@ public partial class WadeMachine : Actor
                 
                 TransitionToState(StNormal);
             }
+
+            
             
         }
+
+
+        RenderRope(shootPoint + transform.position + yOffset, ropeRenderPos, launching);
+
     }
 
     void ChestUpdate()
@@ -838,23 +842,21 @@ public partial class WadeMachine : Actor
                 }
                 else
                 {
-                    HookshotKnife newBullet = Instantiate(hookshotKnife, transform.position + shootPoint + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
-                    newBullet.GetComponent<HookshotKnife>().ChangeMoveDirection(shootDirection);
+                    currentHookshotKnife = Instantiate(hookshotKnife, transform.position + shootPoint + yOffset, Quaternion.identity).GetComponent<HookshotKnife>();
+                    currentHookshotKnife.ChangeMoveDirection(shootDirection);
                     shotTimer = 0;
                     stillTimer = .5f;
 
-                    StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
+                    StartCoroutine(GameData.Instance.cameraMachine.CameraShake(.5f, .1f));
                 }
             }
 
             if(inputs.item1Press)
             {
                 Sound.PlayGunShot();
-                Debug.Log("youshot");
                 Bullet newBullet = Instantiate(currentBullet, transform.position + shootPoint + yOffset, Quaternion.identity).GetComponent<Bullet>();
                 newBullet.GetComponent<Bullet>().ChangeMoveDirection(shootDirection);
-                stillTimer = .5f;
-                StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
+                // StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
                 shotTimer = 0;
             }
         }
@@ -886,7 +888,8 @@ public partial class WadeMachine : Actor
         {
             if (!onGround)
             {
-                if(wallSlideTimer != 0)
+
+                if(wallSlideDir != 0)
                 {
                     sprite.Play(sprite.WallSlide);
                 }
@@ -1034,7 +1037,7 @@ public partial class WadeMachine : Actor
 
             shootPoint = new Vector3(x,y,0);
 
-            Root.RenderRope(shootPoint + transform.position + yOffset);
+           
 
 
             
@@ -1044,6 +1047,20 @@ public partial class WadeMachine : Actor
         {
             sprite.Play(sprite.Hit, true);
         }
+
+        if(Root.active)
+        {
+            Root.RenderRope(shootPoint + transform.position + yOffset);
+        }
+        else if(currentHookshotKnife)
+        {
+            RenderRope(shootPoint + transform.position + yOffset, currentHookshotKnife.transform.position);
+        }
+        
+
+
+
+        
 
         sprite.scale.x = MathHelper.Approach(sprite.scale.x, 1f, 2.75f * Time.deltaTime);
         sprite.scale.y = MathHelper.Approach(sprite.scale.y, 1f, 2.75f * Time.deltaTime);
@@ -1055,13 +1072,33 @@ public partial class WadeMachine : Actor
         spawnPoint = newPoint;
     }
 
+    public void RenderRope(Vector3 startPoint, Vector3 endPoint, bool zero = false)
+    {
+        if(zero)
+        {
+            Root.rope.positionCount = 0;
+        }
+        else
+        {
+            Vector3[] positions = new Vector3[2];
+            positions[1] = startPoint;
+            positions[0] = endPoint;
+            Root.rope.positionCount = 2;
+            Root.rope.SetPositions(positions);
+        }
+    }
+
 
     public override void OnTriggerHit(Trigger trigger)
     {
         if(trigger is Spike)
         {
+            if(onGround)
+            {
+                TakeDamage();
+            }
             Spike spike = trigger as Spike;
-            print(spike.direction);
+
             if(spike.direction.x == 0)
             {
                 if(Mathf.Sign(Speed.y) == spike.direction.y)

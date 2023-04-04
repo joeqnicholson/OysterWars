@@ -18,7 +18,7 @@ public class HookshotRoot : MonoBehaviour
 
     private Vector3 shootPoint;
 
-    private LineRenderer rope;
+    [System.NonSerialized] public LineRenderer rope;
 
 
 
@@ -36,21 +36,16 @@ public class HookshotRoot : MonoBehaviour
             if(lookAtLast)
             {
                 CheckForNoWalls();
-                CheckForNoWallsPoints();
-                CheckForWallsPoints();
+                // CheckForNoWallsPoints();
+                // CheckForWallsPoints();
             }
             
-
             Vector3 relativePos = points[0].transform.position - transform.position;
             float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
             zTurn = angle;
 
             CheckForWalls();
         }
-
-        
-
-
     }
 
     public void Reset()
@@ -67,7 +62,6 @@ public class HookshotRoot : MonoBehaviour
         Vector3[] positions = new Vector3[0];
         rope.positionCount = 0;
         rope.SetPositions(positions);
-
         lookAtLast = false;
         currentDistance = 0;
         currentPoint = null;
@@ -85,7 +79,6 @@ public class HookshotRoot : MonoBehaviour
         if(hitInfo.aabb)
         {
             newPoint.aabb = hitInfo.aabb;
-
         }
         
         newPoint.transform.parent = hitInfo.aabb.transform;
@@ -163,7 +156,7 @@ public class HookshotRoot : MonoBehaviour
             AddPoint(CreatePoint(hit));
         }
 
-        // Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
+        Debug.DrawLine(iPos - difference, iPlusPos + difference, Color.green);
 
     }
 
@@ -180,7 +173,7 @@ public class HookshotRoot : MonoBehaviour
 
         if(hit != null)
         {
-            // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.blue);
+            Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.blue);
         }
         else
         {
@@ -189,16 +182,16 @@ public class HookshotRoot : MonoBehaviour
 
             if(points[1].transform.position.x < points[0].transform.position.x)
             {
-                // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.cyan);
+                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.cyan);
                 higherThanPoint = zTurn > points[0].createdAngle;
             }
             else
             {
-                // Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.yellow);
+                Debug.DrawLine(myPos - difference, iPlus2Pos + difference, Color.yellow);
                 higherThanPoint = zTurn < points[0].createdAngle;
             }
 
-            if(higherThanPoint || currentDistance < 20)
+            if(higherThanPoint)
             {
                 RemovePoint(0);
             }
@@ -293,8 +286,7 @@ public class HookshotRoot : MonoBehaviour
 
         positions[points.Count] = newPoint;
         rope.positionCount = positions.Length;
-        
-
+    
         rope.SetPositions(positions);
     }
 }

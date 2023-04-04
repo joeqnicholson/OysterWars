@@ -42,7 +42,7 @@ public partial class WadeMachine : Actor
         if(toState == StHit)
         {
             Sound.PlayWadeHit();
-            StartCoroutine(GameData.Instance.cameraMachine.CameraShake(2, .2f));
+            StartCoroutine(GameData.Instance.cameraMachine.CameraShake(.2f, .1f));
             Speed.x = 100 * -directionInt;
             Speed.y = 70;
             Time.timeScale = .1f;
